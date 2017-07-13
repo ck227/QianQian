@@ -3,4 +3,29 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--底部菜单-->
+    <color name="btm_text_select">#266fdf</color>
+    <color name="btm_text_no_select">#a6a6a6</color>
+
+    <!--基础色-->
+    <color name="white">#FFF</color>
+    <color name="white_press">#F4F4F4</color>
+    <color name="black">#000</color>
+
+    <!--字体颜色-->
+    <color name="base_bg_color">#F1F5F4</color>
+    <color name="base_text_color">#6B6B6B</color>
+    <color name="text_blue">#266fdf</color>
+    <color name="text_blue_unable">#80266fdf</color>
+    <color name="text_cyan">#959cb7</color>
+
+
+
+    <color name="light_green">#4ECFA6</color>
+    <color name="divider">#DEDFE3</color>
+    <color name="orange">#F86A3A</color>
+
+    <color name="second_text_color">#646464</color>
+    <color name="third_text_color">#979797</color>
 </resources>
