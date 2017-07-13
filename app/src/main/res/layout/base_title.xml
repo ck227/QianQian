@@ -13,4 +13,10 @@
         android:textColor="@color/text_blue"
         android:textSize="@dimen/TitleTextSize"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

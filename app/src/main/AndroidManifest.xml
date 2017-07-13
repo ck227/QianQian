@@ -28,6 +28,8 @@
         </activity>
         <activity android:name=".FindPwdActivity">
         </activity>
+        <activity android:name=".CheckCenterActivity">
+        </activity>
     </application>
 
 </manifest>
