@@ -3,12 +3,9 @@
     <!-- Non focused states -->
     <item android:color="@color/btm_text_no_select" android:state_focused="false" android:state_pressed="false" android:state_selected="false"/>
     <item android:color="@color/btm_text_select" android:state_focused="false" android:state_pressed="false" android:state_selected="true"/>
-
     <!-- Focused states -->
     <item android:color="@color/btm_text_no_select" android:state_focused="true" android:state_pressed="false" android:state_selected="false"/>
     <item android:color="@color/btm_text_select" android:state_focused="true" android:state_pressed="false" android:state_selected="true"/>
-
     <!-- Pressed -->
     <item android:color="@color/btm_text_select" android:state_pressed="true"/>
-
 </selector>
