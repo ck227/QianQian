@@ -1,8 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.ck.fragment.MyFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/base_background"
+              tools:context="com.ck.fragment.HomeFragment">
+
+    <include layout="@layout/base_title"/>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -10,4 +13,4 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"/>
 
-</FrameLayout>
+</LinearLayout>

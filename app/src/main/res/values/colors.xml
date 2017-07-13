@@ -8,6 +8,8 @@
     <color name="btm_text_select">#266fdf</color>
     <color name="btm_text_no_select">#a6a6a6</color>
 
+    <color name="base_background">#ebf1f9</color>
+
     <!--基础色-->
     <color name="white">#FFF</color>
     <color name="white_press">#F4F4F4</color>
