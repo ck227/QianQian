@@ -62,11 +62,12 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_phone_ll:
                 intent = new Intent(this, CheckPhoneActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.check_msg_ll:
                 break;
             case R.id.check_id_ll:
+                intent = new Intent(this, CheckIdActivity.class);
+                startActivity(intent);
                 break;
             case R.id.check_card_ll:
                 break;
