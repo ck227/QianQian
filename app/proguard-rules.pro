@@ -34,3 +34,6 @@
 
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+#superrecyclerview
+-dontwarn com.malinskiy.superrecyclerview.SwipeDismissRecyclerViewTouchListener*

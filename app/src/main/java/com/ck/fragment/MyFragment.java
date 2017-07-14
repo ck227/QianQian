@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.ck.qianqian.CheckCenterActivity;
 import com.ck.qianqian.R;
+import com.ck.qianqian.credit.CreditHistoryActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,6 +77,8 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.credit_rel:
+                intent = new Intent(getActivity(), CreditHistoryActivity.class);
+                startActivity(intent);
                 break;
             case R.id.feedback_rel:
                 break;

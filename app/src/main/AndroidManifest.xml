@@ -38,6 +38,10 @@
         </activity>
         <activity android:name=".CheckContactActivity">
         </activity>
+        <activity android:name=".credit.CreditHistoryActivity">
+        </activity>
+        <activity android:name=".credit.CreditDetailActivity">
+        </activity>
     </application>
 
 </manifest>
