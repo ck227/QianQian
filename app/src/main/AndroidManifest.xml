@@ -30,6 +30,10 @@
         </activity>
         <activity android:name=".CheckCenterActivity">
         </activity>
+        <activity android:name=".CheckPhoneActivity">
+        </activity>
+        <activity android:name=".CheckIdActivity">
+        </activity>
     </application>
 
 </manifest>

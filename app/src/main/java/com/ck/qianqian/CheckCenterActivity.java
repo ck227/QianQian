@@ -1,6 +1,7 @@
 package com.ck.qianqian;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -56,8 +57,12 @@ public class CheckCenterActivity extends BaseActivity {
 
     @OnClick({R.id.check_phone_ll, R.id.check_msg_ll, R.id.check_id_ll, R.id.check_card_ll, R.id.check_contact_ll})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.check_phone_ll:
+                intent = new Intent(this, CheckPhoneActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.check_msg_ll:
                 break;
