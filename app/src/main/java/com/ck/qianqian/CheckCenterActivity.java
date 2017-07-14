@@ -70,8 +70,12 @@ public class CheckCenterActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.check_card_ll:
+                intent = new Intent(this, CheckCardActivity.class);
+                startActivity(intent);
                 break;
             case R.id.check_contact_ll:
+                intent = new Intent(this, CheckContactActivity.class);
+                startActivity(intent);
                 break;
         }
     }

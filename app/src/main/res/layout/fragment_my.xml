@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/base_back"/>
+                android:src="@mipmap/my_arrow_right"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/base_back"/>
+            android:src="@mipmap/my_arrow_right"/>
     </RelativeLayout>
 
     <View
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/base_back"/>
+            android:src="@mipmap/my_arrow_right"/>
     </RelativeLayout>
 
 
@@ -194,7 +194,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/base_back"/>
+            android:src="@mipmap/my_arrow_right"/>
     </RelativeLayout>
 
 
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/base_back"/>
+            android:src="@mipmap/my_arrow_right"/>
     </RelativeLayout>
 
 
@@ -280,7 +280,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/base_back"/>
+            android:src="@mipmap/my_arrow_right"/>
     </RelativeLayout>
 
 

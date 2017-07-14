@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".CheckCardActivity">
         </activity>
+        <activity android:name=".CheckContactActivity">
+        </activity>
     </application>
 
 </manifest>
