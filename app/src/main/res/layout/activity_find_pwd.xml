@@ -161,8 +161,8 @@
             android:layout_marginTop="72dp"
             android:background="@drawable/login_btn"
             android:gravity="center"
-            android:paddingBottom="16dp"
-            android:paddingTop="16dp"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp"
             android:text="找回密码"
             android:textColor="@color/white"/>
 

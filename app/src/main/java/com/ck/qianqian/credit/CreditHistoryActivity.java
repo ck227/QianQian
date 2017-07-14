@@ -1,5 +1,6 @@
 package com.ck.qianqian.credit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -79,6 +80,8 @@ public class CreditHistoryActivity extends BaseActivity {
             public void onItemClick(View view) {
 //                int pos = recyclerView.getRecyclerView().getChildAdapterPosition(view);
 //                getOrderDetail(data.get(pos).getId());
+                Intent intent = new Intent(CreditHistoryActivity.this, CreditDetailActivity.class);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
