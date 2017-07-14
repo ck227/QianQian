@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ck.qianqian.CheckCenterActivity;
+import com.ck.qianqian.FeedbackActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.credit.CreditHistoryActivity;
 
@@ -81,6 +82,9 @@ public class MyFragment extends Fragment {
                 startActivity(intent);
                 break;
             case R.id.feedback_rel:
+                intent = new Intent(getActivity(), FeedbackActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.setting_rel:
                 break;

@@ -42,6 +42,8 @@
         </activity>
         <activity android:name=".credit.CreditDetailActivity">
         </activity>
+        <activity android:name=".FeedbackActivity">
+        </activity>
     </application>
 
 </manifest>
