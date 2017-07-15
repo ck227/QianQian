@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.findPwd)
     TextView findPwd;
 
-    //    private ProgressDialog dialog;
     private LoadingDialog dialog;
 
     @Override
@@ -75,13 +74,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-//        if (dialog == null) {
-//            dialog = new ProgressDialog(LoginActivity.this);
-//            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//            dialog.setCancelable(true);
-//            dialog.setMessage("正在登录");
-//        }
-//        dialog.show();
         dialog = new LoadingDialog(this, R.style.MyCustomDialog);
         dialog.show();
         Map<String, Object> map = new HashMap<>();
@@ -96,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable e) {
                 dialog.cancel();
-                Toast.makeText(getApplicationContext(), "请稍后再试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -114,15 +106,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private Boolean checkValue() {
         if (TextUtils.isEmpty(account.getText().toString())) {
-            Utils.showSnackBar(getApplicationContext(), login, "请输入手机号");
+            Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!Utils.isMobileNO(account.getText().toString())) {
-            Utils.showSnackBar(getApplicationContext(), login, "手机号错误");
+            Toast.makeText(getApplicationContext(), "手机号错误", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (TextUtils.isEmpty(password.getText().toString())) {
-            Utils.showSnackBar(getApplicationContext(), login, "请输入密码");
+            Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

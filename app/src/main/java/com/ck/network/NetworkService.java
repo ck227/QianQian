@@ -15,4 +15,12 @@ public interface NetworkService {
     //登录
     @GET("user/login.html")
     Observable<HttpResult.BaseResponse> login(@QueryMap Map<String, Object> options);
+
+    //发送验证码
+    @GET("smsverify/send.html")
+    Observable<HttpResult.BaseResponse> sendCode(@QueryMap Map<String, Object> options);
+
+    //注册
+    @GET("user/registere.html")
+    Observable<HttpResult.BaseResponse> register(@QueryMap Map<String, Object> options);
 }

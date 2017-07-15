@@ -55,9 +55,20 @@ public class HttpMethods {
     }
 
     //登录
-
     public void login(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.login(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //发送验证码
+    public void sendCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.sendCode(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //注册
+    public void register(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.register(options);
         toSubscribe(observable, subscriber);
     }
 

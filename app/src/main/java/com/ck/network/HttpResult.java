@@ -6,6 +6,9 @@ package com.ck.network;
 
 public class HttpResult {
 
+    /**
+     * 登录、发送验证码、注册
+     */
     public static class BaseResponse {
         public int code;
         public String msg;
