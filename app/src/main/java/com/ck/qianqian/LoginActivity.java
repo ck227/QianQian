@@ -1,7 +1,6 @@
 package com.ck.qianqian;
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.util.Utils;
+import com.ck.widget.LoadingDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.findPwd)
     TextView findPwd;
 
-    private ProgressDialog dialog;
+    //    private ProgressDialog dialog;
+    private LoadingDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         account.setText("15717174872");
-        password.setText("123456");
+        password.setText("111111");
     }
 
     @OnClick({R.id.login, R.id.register, R.id.findPwd})
@@ -74,12 +75,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        if (dialog == null) {
-            dialog = new ProgressDialog(LoginActivity.this);
-            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            dialog.setCancelable(true);
-            dialog.setMessage("正在登录");
-        }
+//        if (dialog == null) {
+//            dialog = new ProgressDialog(LoginActivity.this);
+//            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//            dialog.setCancelable(true);
+//            dialog.setMessage("正在登录");
+//        }
+//        dialog.show();
+        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
         dialog.show();
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", account.getText().toString());
@@ -87,12 +90,12 @@ public class LoginActivity extends AppCompatActivity {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.dismiss();
+                dialog.cancel();
             }
 
             @Override
             public void onError(Throwable e) {
-                dialog.dismiss();
+                dialog.cancel();
                 Toast.makeText(getApplicationContext(), "请稍后再试", Toast.LENGTH_SHORT).show();
             }
 
