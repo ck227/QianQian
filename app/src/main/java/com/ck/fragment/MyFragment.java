@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ck.qianqian.CheckCenterActivity;
 import com.ck.qianqian.FeedbackActivity;
 import com.ck.qianqian.R;
+import com.ck.qianqian.UpdatePwdActivity;
 import com.ck.qianqian.credit.CreditHistoryActivity;
 
 import butterknife.BindView;
@@ -86,9 +87,10 @@ public class MyFragment extends Fragment {
             case R.id.feedback_rel:
                 intent = new Intent(getActivity(), FeedbackActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.setting_rel:
+                intent = new Intent(getActivity(), UpdatePwdActivity.class);
+                startActivity(intent);
                 break;
             case R.id.logout_rel:
                 showDialog();

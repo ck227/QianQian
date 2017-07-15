@@ -27,4 +27,8 @@ public interface NetworkService {
     //找回密码
     @GET("user/retrievePassWord.html")
     Observable<HttpResult.BaseResponse> findPwd(@QueryMap Map<String, Object> options);
+
+    //修改密码
+    @GET("user/updatePassWord.html.html")
+    Observable<HttpResult.BaseResponse> updatePwd(@QueryMap Map<String, Object> options);
 }

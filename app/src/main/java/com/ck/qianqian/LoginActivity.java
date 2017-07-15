@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
+import com.ck.util.MyApplication;
 import com.ck.util.Utils;
 import com.ck.widget.LoadingDialog;
 
@@ -49,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        account.setText("15717174872");
-        password.setText("111111");
+        account.setText("18507104251");
+        password.setText("123456");
     }
 
     @OnClick({R.id.login, R.id.register, R.id.findPwd})
@@ -94,8 +95,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onNext(HttpResult.BaseResponse response) {
                 if (response.code == 0) {
+                    MyApplication.getInstance().setUserName(account.getText().toString());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 }

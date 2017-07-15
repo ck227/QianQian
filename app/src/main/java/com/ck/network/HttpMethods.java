@@ -78,4 +78,10 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //修改密码
+    public void updatePwd(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.updatePwd(options);
+        toSubscribe(observable, subscriber);
+    }
+
 }
