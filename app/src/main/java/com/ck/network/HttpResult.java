@@ -7,7 +7,7 @@ package com.ck.network;
 public class HttpResult {
 
     /**
-     * 登录、发送验证码、注册
+     * 登录、发送验证码、注册、找回密码
      */
     public static class BaseResponse {
         public int code;

@@ -23,4 +23,8 @@ public interface NetworkService {
     //注册
     @GET("user/registere.html")
     Observable<HttpResult.BaseResponse> register(@QueryMap Map<String, Object> options);
+
+    //找回密码
+    @GET("user/retrievePassWord.html")
+    Observable<HttpResult.BaseResponse> findPwd(@QueryMap Map<String, Object> options);
 }

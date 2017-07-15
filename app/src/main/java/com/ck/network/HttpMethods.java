@@ -72,4 +72,10 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //找回密码
+    public void findPwd(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.findPwd(options);
+        toSubscribe(observable, subscriber);
+    }
+
 }

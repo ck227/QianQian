@@ -116,6 +116,10 @@ public class RegisterActivity extends BaseActivity {
             Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (password.getText().toString().length() < 6) {
+            Toast.makeText(getApplicationContext(), "密码至少6位", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (!password.getText().toString().equals(password2.getText().toString())) {
             Toast.makeText(getApplicationContext(), "密码不一致", Toast.LENGTH_SHORT).show();
             return false;
