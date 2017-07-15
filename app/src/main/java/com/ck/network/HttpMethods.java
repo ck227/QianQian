@@ -18,7 +18,9 @@ import rx.schedulers.Schedulers;
 
 public class HttpMethods {
 
-    public static final String BASE_URL = "http://192.168.100.222:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.100.222:8080/lizhixinInterface/";
+    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
