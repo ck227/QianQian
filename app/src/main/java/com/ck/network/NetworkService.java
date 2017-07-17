@@ -72,4 +72,12 @@ public interface NetworkService {
     @POST("userBookPhone/add.html")
     Observable<HttpResult.BaseResponse> addCheckContact(@QueryMap Map<String, Object> options);
 
+    //获取信息认证的各种信息
+    @GET("systemType/userinfo.html")
+    Observable<HttpResult.InfoResponse> getInfos();
+
+    //添加个人信息认证
+    @GET("userInfo/add.html")
+    Observable<HttpResult.BaseResponse> addCheckInfo(@QueryMap Map<String, Object> options);
+
 }

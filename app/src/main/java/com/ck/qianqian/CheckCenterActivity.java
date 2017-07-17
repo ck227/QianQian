@@ -10,10 +10,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ck.bean.CheckStatus;
+import com.ck.network.HttpMethods;
+import com.ck.network.HttpResult;
+import com.ck.util.MyApplication;
+import com.ck.widget.LoadingDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
 
 public class CheckCenterActivity extends BaseActivity {
 
@@ -177,8 +185,7 @@ public class CheckCenterActivity extends BaseActivity {
                 break;
             case R.id.check_msg_ll:
                 if (hasCheckMsg == 0 || hasCheckMsg == 3) {
-                    intent = new Intent(this, CheckMsgActivity.class);
-                    startActivityForResult(intent, 2);
+                    getInfos();
                 } else if (hasCheckMsg == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckMsg == 2) {
@@ -226,6 +233,11 @@ public class CheckCenterActivity extends BaseActivity {
                 hasCheckPhone = 1;
                 checkPhoneText.setText("手机认证(待认证)");
             }
+        } else if (requestCode == 2 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckMsg = 1;
+                checkMsgText.setText("信息认证(待认证)");
+            }
         } else if (requestCode == 3 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckId = 1;
@@ -243,4 +255,39 @@ public class CheckCenterActivity extends BaseActivity {
             }
         }
     }
+
+    private LoadingDialog dialog;
+
+    private void getInfos() {
+        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+        dialog.show();
+        Subscriber subscriber = new Subscriber<HttpResult.InfoResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.InfoResponse response) {
+                if (response.code == 0) {
+                    Intent intent = new Intent(CheckCenterActivity.this, CheckMsgActivity.class);
+                    intent.putParcelableArrayListExtra("educations", response.obj.getListEducation());
+                    intent.putParcelableArrayListExtra("marriages", response.obj.getListMarriage());
+                    intent.putParcelableArrayListExtra("incomes", response.obj.getListIncome());
+                    intent.putParcelableArrayListExtra("contacts", response.obj.getListContacts());
+                    startActivityForResult(intent, 2);
+                } else {
+                    Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().getInfos(subscriber);
+    }
+
 }

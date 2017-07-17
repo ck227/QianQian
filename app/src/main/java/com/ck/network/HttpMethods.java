@@ -135,5 +135,18 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //获取各种认证信息
+    public void getInfos(Subscriber<HttpResult.InfoResponse> subscriber) {
+        Observable observable = networkService.getInfos();
+        toSubscribe(observable, subscriber);
+    }
+
+    //添加个人信息认证
+    public void addCheckInfo(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCheckInfo(options);
+        toSubscribe(observable, subscriber);
+    }
+
+
 
 }
