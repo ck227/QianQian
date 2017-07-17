@@ -236,6 +236,11 @@ public class CheckCenterActivity extends BaseActivity {
                 hasCheckCard = 1;
                 checkCardText.setText("银行卡认证(待认证)");
             }
+        } else if (requestCode == 5 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckContact = 1;
+                checkContactText.setText("通信认证(待认证)");
+            }
         }
     }
 }

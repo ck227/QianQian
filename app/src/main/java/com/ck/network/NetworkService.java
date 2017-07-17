@@ -68,4 +68,8 @@ public interface NetworkService {
     @GET("userBank/add.html")
     Observable<HttpResult.BaseResponse> addCheckBank(@QueryMap Map<String, Object> options);
 
+    //添加通讯录
+    @POST("userBookPhone/add.html")
+    Observable<HttpResult.BaseResponse> addCheckContact(@QueryMap Map<String, Object> options);
+
 }

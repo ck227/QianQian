@@ -129,5 +129,11 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //添加通讯录认证
+    public void addCheckContact(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCheckContact(options);
+        toSubscribe(observable, subscriber);
+    }
+
 
 }

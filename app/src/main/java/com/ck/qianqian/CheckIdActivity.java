@@ -288,18 +288,18 @@ public class CheckIdActivity extends BaseActivity {
             Toast.makeText(getApplicationContext(), "请输入身份证号", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (frontImgUrl.equals("")) {
-            Toast.makeText(getApplicationContext(), "请上传身份证正面", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (backImgUrl.equals("")) {
-            Toast.makeText(getApplicationContext(), "请上传身份证反面", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (totalImgUrl.equals("")) {
-            Toast.makeText(getApplicationContext(), "请上传手持身份证照片", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+//        if (frontImgUrl.equals("")) {
+//            Toast.makeText(getApplicationContext(), "请上传身份证正面", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (backImgUrl.equals("")) {
+//            Toast.makeText(getApplicationContext(), "请上传身份证反面", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
+//        if (totalImgUrl.equals("")) {
+//            Toast.makeText(getApplicationContext(), "请上传手持身份证照片", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
         return true;
     }
 
