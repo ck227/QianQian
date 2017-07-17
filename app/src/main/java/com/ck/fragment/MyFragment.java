@@ -12,17 +12,28 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ck.network.HttpMethods;
+import com.ck.network.HttpResult;
 import com.ck.qianqian.CheckCenterActivity;
 import com.ck.qianqian.FeedbackActivity;
+import com.ck.qianqian.LoginActivity;
+import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.UpdatePwdActivity;
 import com.ck.qianqian.credit.CreditHistoryActivity;
+import com.ck.util.MyApplication;
+import com.ck.widget.LoadingDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.Subscriber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +62,8 @@ public class MyFragment extends Fragment {
     @BindView(R.id.logout_rel)
     RelativeLayout logoutRel;
 
+    private LoadingDialog dialog;
+
     public MyFragment() {
         // Required empty public constructor
     }
@@ -77,8 +90,7 @@ public class MyFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.check_rel:
-                intent = new Intent(getActivity(), CheckCenterActivity.class);
-                startActivity(intent);
+                getStatus();
                 break;
             case R.id.credit_rel:
                 intent = new Intent(getActivity(), CreditHistoryActivity.class);
@@ -96,6 +108,37 @@ public class MyFragment extends Fragment {
                 showDialog();
                 break;
         }
+    }
+
+    private void getStatus() {
+        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.CheckResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.CheckResponse response) {
+                if (response.code == 0) {
+                    Intent intent = new Intent(getActivity(), CheckCenterActivity.class);
+                    intent.putExtra("status", response.obj);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().checkStatus(subscriber, map);
     }
 
     private void showDialog() {

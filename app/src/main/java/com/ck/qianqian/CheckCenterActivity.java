@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ck.bean.CheckStatus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,12 +50,115 @@ public class CheckCenterActivity extends BaseActivity {
     @BindView(R.id.check_contact_ll)
     LinearLayout checkContactLl;
 
+    private CheckStatus status;
+
+    private int hasCheckPhone, hasCheckMsg, hasCheckId, hasCheckCard, hasCheckContact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_center);
         ButterKnife.bind(this);
         titleName.setText("认证中心");
+
+        status = getIntent().getParcelableExtra("status");
+        hasCheckPhone = status.getUser_phone_service_audit();
+        hasCheckMsg = status.getUser_info_audit();
+        hasCheckId = status.getUser_card_audit();
+        hasCheckCard = status.getUser_bank_audit();
+        hasCheckContact = status.getUser_book_phone_audit();
+        setViews();
+    }
+
+    /**
+     * TODO: 设置图标和文字的颜色和点击事件
+     */
+    private void setViews() {
+        //手机认证
+        if (hasCheckPhone == 2) {
+            checkPhoneIc.setImageResource(R.mipmap.check_phone2);
+            checkPhoneText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkPhoneIc.setImageResource(R.mipmap.check_phone);
+            checkPhoneText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckPhone == 0) {
+            checkPhoneText.setText("手机认证(未认证)");
+        } else if (hasCheckPhone == 1) {
+            checkPhoneText.setText("手机认证(待认证)");
+        } else if (hasCheckPhone == 2) {
+            checkPhoneText.setText("手机认证(已认证)");
+        } else if (hasCheckPhone == 3) {
+            checkPhoneText.setText("手机认证(未通过)");
+        }
+        //信息认证
+        if (hasCheckMsg == 2) {
+            checkMsgIc.setImageResource(R.mipmap.check_msg2);
+            checkMsgText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkMsgIc.setImageResource(R.mipmap.check_msg);
+            checkMsgText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckMsg == 0) {
+            checkMsgText.setText("信息认证(未认证)");
+        } else if (hasCheckMsg == 1) {
+            checkMsgText.setText("信息认证(待认证)");
+        } else if (hasCheckMsg == 2) {
+            checkMsgText.setText("信息认证(已认证)");
+        } else if (hasCheckMsg == 3) {
+            checkMsgText.setText("信息认证(未通过)");
+        }
+        //身份认证
+        if (hasCheckId == 2) {
+            checkIdIc.setImageResource(R.mipmap.check_id2);
+            checkIdText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkIdIc.setImageResource(R.mipmap.check_id);
+            checkIdText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckId == 0) {
+            checkIdText.setText("身份认证(未认证)");
+        } else if (hasCheckId == 1) {
+            checkIdText.setText("身份认证(待认证)");
+        } else if (hasCheckId == 2) {
+            checkIdText.setText("身份认证(已认证)");
+        } else if (hasCheckId == 3) {
+            checkIdText.setText("身份认证(未通过)");
+        }
+        //银行卡认证
+        if (hasCheckCard == 2) {
+            checkCardIc.setImageResource(R.mipmap.check_card2);
+            checkCardText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkCardIc.setImageResource(R.mipmap.check_card);
+            checkCardText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckCard == 0) {
+            checkCardText.setText("银行卡认证(未认证)");
+        } else if (hasCheckCard == 1) {
+            checkCardText.setText("银行卡认证(待认证)");
+        } else if (hasCheckCard == 2) {
+            checkCardText.setText("银行卡认证(已认证)");
+        } else if (hasCheckCard == 3) {
+            checkCardText.setText("银行卡认证(未通过)");
+        }
+        //通信认证
+        if (hasCheckContact == 2) {
+            checkContactIc.setImageResource(R.mipmap.check_contact2);
+            checkContactText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkContactIc.setImageResource(R.mipmap.check_contact);
+            checkContactText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckContact == 0) {
+            checkContactText.setText("通信认证(未认证)");
+        } else if (hasCheckContact == 1) {
+            checkContactText.setText("通信认证(待认证)");
+        } else if (hasCheckContact == 2) {
+            checkContactText.setText("通信认证(已认证)");
+        } else if (hasCheckContact == 3) {
+            checkContactText.setText("通信认证(未通过)");
+        }
     }
 
     @OnClick({R.id.check_phone_ll, R.id.check_msg_ll, R.id.check_id_ll, R.id.check_card_ll, R.id.check_contact_ll})
@@ -60,24 +166,54 @@ public class CheckCenterActivity extends BaseActivity {
         Intent intent;
         switch (view.getId()) {
             case R.id.check_phone_ll:
-                intent = new Intent(this, CheckPhoneActivity.class);
-                startActivity(intent);
+                if (hasCheckPhone == 0 || hasCheckPhone == 3) {
+                    intent = new Intent(this, CheckPhoneActivity.class);
+                    startActivity(intent);
+                } else if (hasCheckPhone == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckPhone == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.check_msg_ll:
-                intent = new Intent(this, CheckMsgActivity.class);
-                startActivity(intent);
+                if (hasCheckMsg == 0 || hasCheckMsg == 3) {
+                    intent = new Intent(this, CheckMsgActivity.class);
+                    startActivity(intent);
+                } else if (hasCheckMsg == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckMsg == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.check_id_ll:
-                intent = new Intent(this, CheckIdActivity.class);
-                startActivity(intent);
+                if (hasCheckId == 0 || hasCheckId == 3) {
+                    intent = new Intent(this, CheckIdActivity.class);
+                    startActivity(intent);
+                } else if (hasCheckId == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckId == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.check_card_ll:
-                intent = new Intent(this, CheckCardActivity.class);
-                startActivity(intent);
+                if (hasCheckCard == 0 || hasCheckCard == 3) {
+                    intent = new Intent(this, CheckCardActivity.class);
+                    startActivity(intent);
+                } else if (hasCheckCard == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckCard == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.check_contact_ll:
-                intent = new Intent(this, CheckContactActivity.class);
-                startActivity(intent);
+                if (hasCheckContact == 0 || hasCheckContact == 3) {
+                    intent = new Intent(this, CheckContactActivity.class);
+                    startActivity(intent);
+                } else if (hasCheckContact == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckContact == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

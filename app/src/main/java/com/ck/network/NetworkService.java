@@ -31,4 +31,9 @@ public interface NetworkService {
     //修改密码
     @GET("user/updatePassWord.html.html")
     Observable<HttpResult.BaseResponse> updatePwd(@QueryMap Map<String, Object> options);
+
+
+    //认证状态
+    @GET("userAuthentication/authentication.html")
+    Observable<HttpResult.CheckResponse> checkStatus(@QueryMap Map<String, Object> options);
 }

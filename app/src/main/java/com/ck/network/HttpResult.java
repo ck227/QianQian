@@ -1,5 +1,7 @@
 package com.ck.network;
 
+import com.ck.bean.CheckStatus;
+
 /**
  * Created by cnbs5 on 2017/7/15.
  */
@@ -12,6 +14,10 @@ public class HttpResult {
     public static class BaseResponse {
         public int code;
         public String msg;
+    }
+
+    public static class CheckResponse extends BaseResponse {
+        public CheckStatus obj;
     }
 
 }

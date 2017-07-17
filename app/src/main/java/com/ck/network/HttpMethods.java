@@ -86,4 +86,10 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //认证状态
+    public void checkStatus(Subscriber<HttpResult.CheckResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkStatus(options);
+        toSubscribe(observable, subscriber);
+    }
+
 }

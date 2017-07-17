@@ -45,13 +45,14 @@ public class LoginActivity extends AppCompatActivity {
     private LoadingDialog dialog;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
         account.setText("18507104251");
         password.setText("123456");
+        account.setSelection(account.getText().toString().length());
     }
 
     @OnClick({R.id.login, R.id.register, R.id.findPwd})
