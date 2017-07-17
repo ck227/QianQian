@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,8 +19,8 @@ import rx.schedulers.Schedulers;
 
 public class HttpMethods {
 
-//    public static final String BASE_URL = "http://192.168.100.222:8080/lizhixinInterface/";
-    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+    public static final String BASE_URL = "http://192.168.1.114:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
 
     private static final int DEFAULT_TIMEOUT = 5;
@@ -91,5 +92,42 @@ public class HttpMethods {
         Observable observable = networkService.checkStatus(options);
         toSubscribe(observable, subscriber);
     }
+
+    //手机认证状态
+    public void checkPhone(Subscriber<HttpResult.CheckPhoneResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkPhone(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //添加手机认证
+    public void addCheckPhone(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCheckPhone(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //上传图片
+    public void uploadPic(Subscriber<HttpResult.UploadPicResponse> subscriber, RequestBody body, Map<String, Object> options) {
+        Observable observable = networkService.uploadPic(body, options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //添加身份证认证
+    public void addCheckId(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCheckId(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //获取银行卡列表
+    public void getBanks(Subscriber<HttpResult.BanksResponse> subscriber) {
+        Observable observable = networkService.getBanks();
+        toSubscribe(observable, subscriber);
+    }
+
+    //添加银行卡认证
+    public void addCheckBank(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCheckBank(options);
+        toSubscribe(observable, subscriber);
+    }
+
 
 }

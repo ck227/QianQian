@@ -1,6 +1,7 @@
 package com.ck.util;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
@@ -39,6 +40,29 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 检测Sdcard是否存在
+     *
+     * @return
+     */
+    public static boolean isExitsSdcard() {
+        if (android.os.Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED))
+            return true;
+        else
+            return false;
+    }
+
+    public static String getSDPath() {
+        String sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+        if (sdCardExist) {
+            sdDir = Environment.getExternalStorageDirectory().getAbsolutePath();// 获取跟目录
+        }
+        return sdDir.toString();
     }
 
 }

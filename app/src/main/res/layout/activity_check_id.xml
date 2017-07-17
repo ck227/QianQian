@@ -111,6 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -125,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/check_add_photo"/>
+                        android:src="@mipmap/check_id_front"/>
                 </LinearLayout>
 
                 <TextView
@@ -140,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -154,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/check_add_photo"/>
+                        android:src="@mipmap/check_id_back"/>
                 </LinearLayout>
 
                 <!--第三行-->
@@ -170,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -184,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/check_add_photo"/>
+                        android:src="@mipmap/check_id_total"/>
                 </LinearLayout>
 
                 <TextView
@@ -196,8 +199,8 @@
                     android:layout_marginTop="24dp"
                     android:background="@drawable/login_btn"
                     android:gravity="center"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="16dp"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
                     android:text="提交"
                     android:textColor="@color/white"/>
             </LinearLayout>

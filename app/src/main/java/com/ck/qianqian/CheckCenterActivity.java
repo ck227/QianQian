@@ -168,7 +168,7 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_phone_ll:
                 if (hasCheckPhone == 0 || hasCheckPhone == 3) {
                     intent = new Intent(this, CheckPhoneActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                 } else if (hasCheckPhone == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckPhone == 2) {
@@ -178,7 +178,7 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_msg_ll:
                 if (hasCheckMsg == 0 || hasCheckMsg == 3) {
                     intent = new Intent(this, CheckMsgActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 2);
                 } else if (hasCheckMsg == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckMsg == 2) {
@@ -188,7 +188,7 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_id_ll:
                 if (hasCheckId == 0 || hasCheckId == 3) {
                     intent = new Intent(this, CheckIdActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 3);
                 } else if (hasCheckId == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckId == 2) {
@@ -198,7 +198,7 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_card_ll:
                 if (hasCheckCard == 0 || hasCheckCard == 3) {
                     intent = new Intent(this, CheckCardActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 4);
                 } else if (hasCheckCard == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckCard == 2) {
@@ -208,13 +208,34 @@ public class CheckCenterActivity extends BaseActivity {
             case R.id.check_contact_ll:
                 if (hasCheckContact == 0 || hasCheckContact == 3) {
                     intent = new Intent(this, CheckContactActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 5);
                 } else if (hasCheckContact == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckContact == 2) {
                     Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckPhone = 1;
+                checkPhoneText.setText("手机认证(待认证)");
+            }
+        } else if (requestCode == 3 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckId = 1;
+                checkIdText.setText("身份认证(待认证)");
+            }
+        } else if (requestCode == 4 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckCard = 1;
+                checkCardText.setText("银行卡认证(待认证)");
+            }
         }
     }
 }

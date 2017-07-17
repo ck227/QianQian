@@ -1,8 +1,14 @@
 package com.ck.network;
 
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -36,4 +42,30 @@ public interface NetworkService {
     //认证状态
     @GET("userAuthentication/authentication.html")
     Observable<HttpResult.CheckResponse> checkStatus(@QueryMap Map<String, Object> options);
+
+    //手机认证状态
+    @GET("userPhoneService/user.html")
+    Observable<HttpResult.CheckPhoneResponse> checkPhone(@QueryMap Map<String, Object> options);
+
+    //添加手机认证
+    @GET("userPhoneService/add.html")
+    Observable<HttpResult.BaseResponse> addCheckPhone(@QueryMap Map<String, Object> options);
+
+    //上传图片
+    @Multipart
+    @POST("upload/uploadImg.html")
+    Observable<HttpResult.UploadPicResponse> uploadPic(@Part("dwrImgs\"; filename=\"ck.png") RequestBody body,@QueryMap Map<String, Object> options);
+
+    //添加身份证认证
+    @GET("userCard/add.html")
+    Observable<HttpResult.BaseResponse> addCheckId(@QueryMap Map<String, Object> options);
+
+    //获取银行列表
+    @GET("systemType/userbank.html")
+    Observable<HttpResult.BanksResponse> getBanks();
+
+    //添加银行卡认证
+    @GET("userBank/add.html")
+    Observable<HttpResult.BaseResponse> addCheckBank(@QueryMap Map<String, Object> options);
+
 }
