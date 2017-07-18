@@ -17,11 +17,10 @@
 
     <!--字体颜色-->
     <color name="base_bg_color">#F1F5F4</color>
-    <color name="base_text_color">#6B6B6B</color>
+    <color name="base_text_color">#2c2d30</color>
     <color name="text_blue">#266fdf</color>
     <color name="text_blue_unable">#80266fdf</color>
     <color name="text_cyan">#959cb7</color>
-
 
 
     <color name="light_green">#4ECFA6</color>

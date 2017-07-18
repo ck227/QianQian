@@ -1,12 +1,16 @@
 package com.ck.qianqian;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView findPwd;
 
     private LoadingDialog dialog;
+    private Transition explode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
