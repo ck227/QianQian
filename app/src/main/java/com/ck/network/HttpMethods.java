@@ -19,6 +19,12 @@ import rx.schedulers.Schedulers;
 
 public class HttpMethods {
 
+    /**
+     * TODO : 上传图片、调整UI、乱码问题、加过渡动画
+     *
+     * 支付宝、淘宝认证、首页
+     */
+
     public static final String BASE_URL = "http://192.168.1.114:8080/lizhixinInterface/";
 //    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
@@ -146,7 +152,6 @@ public class HttpMethods {
         Observable observable = networkService.addCheckInfo(options);
         toSubscribe(observable, subscriber);
     }
-
 
 
 }

@@ -53,8 +53,8 @@ public interface NetworkService {
 
     //上传图片
     @Multipart
-    @POST("upload/uploadImg.html")
-    Observable<HttpResult.UploadPicResponse> uploadPic(@Part("dwrImgs\"; filename=\"ck.png") RequestBody body,@QueryMap Map<String, Object> options);
+    @POST("upload/upload.html")
+    Observable<HttpResult.UploadPicResponse> uploadPic(@Part("file\"; filename=\"ck.png") RequestBody body,@QueryMap Map<String, Object> options);
 
     //添加身份证认证
     @GET("userCard/add.html")

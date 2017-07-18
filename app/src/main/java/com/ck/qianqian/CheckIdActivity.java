@@ -225,7 +225,7 @@ public class CheckIdActivity extends BaseActivity {
         dirFile.getParentFile().mkdirs();
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dirFile));
-            bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
         } catch (IOException e) {
@@ -262,13 +262,13 @@ public class CheckIdActivity extends BaseActivity {
                 if (response.code == 0) {
                     if (type == 1) {
                         frontImgUrl = response.obj;
-                        Glide.with(CheckIdActivity.this).load(frontImgUrl).into(frontImg);
+                        Glide.with(CheckIdActivity.this).load(HttpMethods.BASE_URL + frontImgUrl).into(frontImg);
                     } else if (type == 2) {
                         backImgUrl = response.obj;
-                        Glide.with(CheckIdActivity.this).load(backImgUrl).into(backImg);
+                        Glide.with(CheckIdActivity.this).load(HttpMethods.BASE_URL + backImgUrl).into(backImg);
                     } else if (type == 3) {
                         totalImgUrl = response.obj;
-                        Glide.with(CheckIdActivity.this).load(totalImgUrl).into(personImg);
+                        Glide.with(CheckIdActivity.this).load(HttpMethods.BASE_URL + totalImgUrl).into(personImg);
                     }
                 } else {
                     Utils.showSnackBar(CheckIdActivity.this, titleName, "上传失败");
@@ -288,18 +288,18 @@ public class CheckIdActivity extends BaseActivity {
             Toast.makeText(getApplicationContext(), "请输入身份证号", Toast.LENGTH_SHORT).show();
             return false;
         }
-//        if (frontImgUrl.equals("")) {
-//            Toast.makeText(getApplicationContext(), "请上传身份证正面", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        if (backImgUrl.equals("")) {
-//            Toast.makeText(getApplicationContext(), "请上传身份证反面", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        if (totalImgUrl.equals("")) {
-//            Toast.makeText(getApplicationContext(), "请上传手持身份证照片", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
+        if (frontImgUrl.equals("")) {
+            Toast.makeText(getApplicationContext(), "请上传身份证正面", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (backImgUrl.equals("")) {
+            Toast.makeText(getApplicationContext(), "请上传身份证反面", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (totalImgUrl.equals("")) {
+            Toast.makeText(getApplicationContext(), "请上传手持身份证照片", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 

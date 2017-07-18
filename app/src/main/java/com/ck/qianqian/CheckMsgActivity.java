@@ -136,19 +136,19 @@ public class CheckMsgActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.education:
 //                if (!education.isShown())
-                    education.showDropDown();
+                education.showDropDown();
                 break;
             case R.id.marriage:
 //                if (!marriage.isShown())
-                    marriage.showDropDown();
+                marriage.showDropDown();
                 break;
             case R.id.income:
 //                if (!income.isShown())
-                    income.showDropDown();
+                income.showDropDown();
                 break;
             case R.id.emergencyRelation:
 //                if (!emergencyRelation.isShown())
-                    emergencyRelation.showDropDown();
+                emergencyRelation.showDropDown();
                 break;
             case R.id.submit:
                 if (checkValue()) {
