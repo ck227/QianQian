@@ -36,26 +36,35 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="手机号码"
-                android:textColor="@color/second_text_color"
+                android:textColor="@color/base_text_color"
                 android:textSize="@dimen/BigTextSize"/>
 
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/check_input_shape"
+                android:background="@null"
                 android:enabled="false"
                 android:inputType="phone"
-                android:padding="8dp"
-                android:textCursorDrawable="@null"/>
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:textColor="@color/text_cyan"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/SecTextSize"/>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/divider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -63,25 +72,34 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="运营商"
-                android:textColor="@color/second_text_color"
+                android:textColor="@color/base_text_color"
                 android:textSize="@dimen/BigTextSize"/>
 
             <EditText
                 android:id="@+id/service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/check_input_shape"
-                android:padding="8dp"
+                android:background="@null"
                 android:enabled="false"
-                android:textCursorDrawable="@null"/>
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:textColor="@color/text_cyan"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/SecTextSize"/>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/divider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -89,18 +107,28 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="服务密码"
-                android:textColor="@color/second_text_color"
+                android:textColor="@color/base_text_color"
                 android:textSize="@dimen/BigTextSize"/>
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/check_input_shape"
+                android:background="@null"
                 android:inputType="textPassword"
-                android:padding="8dp"
-                android:textCursorDrawable="@null"/>
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:textColor="@color/text_cyan"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/SecTextSize"/>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/divider"/>
 
         <TextView
             android:id="@+id/submit"

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/base_text_color"
+        android:textColor="@color/text_cyan"
         android:textSize="@dimen/SecTextSize" />
 
 </LinearLayout>

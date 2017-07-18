@@ -22,6 +22,7 @@ import com.ck.qianqian.LoginActivity;
 import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.UpdatePwdActivity;
+import com.ck.qianqian.WebViewActivity;
 import com.ck.qianqian.credit.CreditHistoryActivity;
 import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
@@ -46,6 +47,8 @@ public class MyFragment extends Fragment {
 
     Unbinder unbinder;
 
+    @BindView(R.id.personInfo)
+    LinearLayout personInfo;
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.phone)
@@ -85,10 +88,16 @@ public class MyFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.check_rel, R.id.credit_rel, R.id.feedback_rel, R.id.setting_rel, R.id.logout_rel})
+    @OnClick({R.id.personInfo, R.id.check_rel, R.id.credit_rel, R.id.feedback_rel, R.id.setting_rel, R.id.logout_rel})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
+            case R.id.personInfo:
+                intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra("title","title");
+                intent.putExtra("url","www.alipay.com");
+                startActivity(intent);
+                break;
             case R.id.check_rel:
                 getStatus();
                 break;

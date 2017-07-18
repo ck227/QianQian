@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,6 +67,8 @@ public class CheckIdActivity extends BaseActivity {
         setContentView(R.layout.activity_check_id);
         ButterKnife.bind(this);
         titleName.setText("身份证认证");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     @OnClick({R.id.frontImg, R.id.backImg, R.id.personImg, R.id.submit})

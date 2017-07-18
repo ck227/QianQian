@@ -224,7 +224,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -232,7 +231,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="工作单位地址"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <EditText
@@ -249,10 +248,14 @@
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -260,7 +263,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="工作单位电话"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <EditText
@@ -278,10 +281,14 @@
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -289,7 +296,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="QQ号码"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <EditText
@@ -307,10 +314,14 @@
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -318,7 +329,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="紧急联系人电话"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <EditText
@@ -335,11 +346,14 @@
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -347,7 +361,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="紧急联系人姓名"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <EditText
@@ -364,10 +378,14 @@
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -375,7 +393,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="紧急联系人关系"
-                    android:textColor="@color/second_text_color"
+                    android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
                 <RelativeLayout
@@ -405,6 +423,11 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -429,6 +452,8 @@
                     android:textColor="@color/text_blue"
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/submit"
