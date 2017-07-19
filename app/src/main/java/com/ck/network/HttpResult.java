@@ -4,6 +4,10 @@ import com.ck.bean.Banks;
 import com.ck.bean.CheckInfo;
 import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
+import com.ck.bean.credit.Credit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cnbs5 on 2017/7/15.
@@ -49,4 +53,11 @@ public class HttpResult {
     }
 
 
+    /**
+     * 下面的是首页的
+     */
+
+    public static class CreditListResponse extends BaseResponse {
+        public List<Credit> list;
+    }
 }

@@ -84,4 +84,14 @@ public interface NetworkService {
     @GET("feedBack/add.html")
     Observable<HttpResult.BaseResponse> sendFeedback(@QueryMap Map<String, Object> options);
 
+
+    /**
+     * 下面的是首页的
+     */
+
+    //首页列表
+    @GET("loan/loanType.html")
+    Observable<HttpResult.CreditListResponse> getCreditList(@QueryMap Map<String, Object> options);
+
+
 }

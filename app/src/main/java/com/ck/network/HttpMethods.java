@@ -20,7 +20,7 @@ import rx.schedulers.Schedulers;
 public class HttpMethods {
 
     /**
-     * TODO : 乱码问题、联系人要选择
+     * TODO : 乱码问题、联系人要选择、
      * <p>
      * 支付宝、淘宝认证、首页
      */
@@ -157,6 +157,18 @@ public class HttpMethods {
         Observable observable = networkService.sendFeedback(options);
         toSubscribe(observable, subscriber);
     }
+
+    /**
+     * 下面的是首页的
+     */
+
+    //获取首页列表
+    public void getCreditList(Subscriber<HttpResult.CreditListResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCreditList(options);
+        toSubscribe(observable, subscriber);
+    }
+
+
 
 
 }

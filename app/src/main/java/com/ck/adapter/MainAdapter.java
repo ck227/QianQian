@@ -39,7 +39,7 @@ public class MainAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
+                    homeFragment = HomeFragment.newInstance();
                 }
                 return homeFragment;
             case 1:
