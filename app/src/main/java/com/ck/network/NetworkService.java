@@ -93,5 +93,9 @@ public interface NetworkService {
     @GET("loan/loanType.html")
     Observable<HttpResult.CreditListResponse> getCreditList(@QueryMap Map<String, Object> options);
 
+    //获取贷款的金额列表
+    @GET("loanDay/list.html")
+    Observable<HttpResult.GetCreditAmountResponse> getCreditAmountList(@QueryMap Map<String, Object> options);
+
 
 }

@@ -168,6 +168,12 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //获取贷款金额列表
+    public void getCreditAmountList(Subscriber<HttpResult.GetCreditAmountResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCreditAmountList(options);
+        toSubscribe(observable, subscriber);
+    }
+
 
 
 

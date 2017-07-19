@@ -5,6 +5,7 @@ import com.ck.bean.CheckInfo;
 import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
 import com.ck.bean.credit.Credit;
+import com.ck.bean.credit.GetCreditAmount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +60,9 @@ public class HttpResult {
 
     public static class CreditListResponse extends BaseResponse {
         public List<Credit> list;
+    }
+
+    public static class GetCreditAmountResponse extends BaseResponse {
+        public List<GetCreditAmount> list;
     }
 }
