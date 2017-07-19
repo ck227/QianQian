@@ -45,9 +45,11 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/check_input_shape"
                 android:gravity="top"
-                android:textCursorDrawable="@null"
                 android:hint="请输入反馈内容"
-                android:padding="12dp"/>
+                android:padding="12dp"
+                android:textColor="@color/second_text_color"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/SecTextSize"/>
 
         </LinearLayout>
 
@@ -73,10 +75,13 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/check_input_shape"
                 android:gravity="top"
-                android:inputType="phone"
-                android:textCursorDrawable="@null"
                 android:hint="请输入联系方式"
-                android:padding="12dp"/>
+                android:inputType="phone"
+                android:maxLength="11"
+                android:padding="12dp"
+                android:textColor="@color/second_text_color"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/SecTextSize"/>
 
         </LinearLayout>
 

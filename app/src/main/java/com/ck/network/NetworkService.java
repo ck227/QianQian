@@ -80,4 +80,8 @@ public interface NetworkService {
     @GET("userInfo/add.html")
     Observable<HttpResult.BaseResponse> addCheckInfo(@QueryMap Map<String, Object> options);
 
+    //意见反馈
+    @GET("feedBack/add.html")
+    Observable<HttpResult.BaseResponse> sendFeedback(@QueryMap Map<String, Object> options);
+
 }

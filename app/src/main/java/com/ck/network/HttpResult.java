@@ -15,6 +15,8 @@ public class HttpResult {
      * 登录、发送验证码、注册、找回密码、修改密码
      * <p>
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
+     * <p>
+     * 反馈
      */
     public static class BaseResponse {
         public int code;
@@ -45,10 +47,6 @@ public class HttpResult {
     public static class InfoResponse extends BaseResponse {
         public CheckInfo obj;
     }
-
-
-
-
 
 
 }

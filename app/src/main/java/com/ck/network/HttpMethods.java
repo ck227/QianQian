@@ -152,5 +152,11 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //意见反馈
+    public void sendFeedback(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.sendFeedback(options);
+        toSubscribe(observable, subscriber);
+    }
+
 
 }
