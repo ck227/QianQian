@@ -47,6 +47,7 @@ public class CreditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     myItemClickListener.onItemClick(v);
                 }
             });
+            //使用了这个那么item布局的margin会不起作用
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             return new RedViewHolder(view);
@@ -54,6 +55,12 @@ public class CreditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_credit_list, parent, false);
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myItemClickListener.onItemClick(v);
+                }
+            });
             return new BlueViewHolder(view);
         }
     }

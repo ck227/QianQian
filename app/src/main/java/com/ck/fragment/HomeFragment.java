@@ -1,6 +1,7 @@
 package com.ck.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import com.ck.listener.MyItemClickListener;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.qianqian.R;
+import com.ck.qianqian.credit.GetCreditActivity;
 import com.ck.util.MyApplication;
 import com.ck.widget.DividerItemDecoration;
 import com.ck.widget.LoadingDialog;
@@ -54,9 +56,9 @@ public class HomeFragment extends Fragment {
     private LoadingDialog dialog;
 
     public static HomeFragment newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
         return fragment;
@@ -78,7 +80,7 @@ public class HomeFragment extends Fragment {
     private void setViews() {
         data = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(),DividerItemDecoration.VERTICAL_LIST,36,android.R.color.transparent));
+        recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), DividerItemDecoration.VERTICAL_LIST, 36, android.R.color.transparent));
         recyclerView.getSwipeToRefresh().setColorSchemeResources(R.color.text_blue);
 //        recyclerView.setupMoreListener(new OnMoreListener() {
 //            @Override
@@ -128,12 +130,6 @@ public class HomeFragment extends Fragment {
                     }
                     isEnd = true;
                 }
-//                recyclerView.hideMoreProgress();
-//                if (needClear) {
-//                    setAdapter();
-//                } else {
-//                    adapter.notifyDataSetChanged();
-//                }
                 setAdapter();
             }
         };
@@ -144,7 +140,14 @@ public class HomeFragment extends Fragment {
         adapter = new CreditListAdapter(data, new MyItemClickListener() {
             @Override
             public void onItemClick(View view) {
+                int pos = recyclerView.getRecyclerView().getChildAdapterPosition(view);
+                if (data.get(pos).getValid() == 0) {
+                    //这里改成获取
+                    Intent intent = new Intent(getActivity(), GetCreditActivity.class);
+                    startActivity(intent);
+                } else {
 
+                }
             }
         });
         recyclerView.setAdapter(adapter);
@@ -155,4 +158,6 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+//    private void get
 }
