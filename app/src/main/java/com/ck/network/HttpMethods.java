@@ -20,9 +20,9 @@ import rx.schedulers.Schedulers;
 public class HttpMethods {
 
     /**
-     * TODO : 乱码问题、联系人要选择、
-     * <p>
-     * 支付宝、淘宝认证、首页
+     * TODO :
+     * 乱码问题、联系人要选择、兼容问题
+     * 支付宝、淘宝认证、还款
      */
 
 //    public static final String BASE_URL = "http://192.168.1.114:8080/lizhixinInterface/";
@@ -174,7 +174,23 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //获取贷款天数列表
+    public void getCreditDayList(Subscriber<HttpResult.GetCreditDayResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCreditDayList(options);
+        toSubscribe(observable, subscriber);
+    }
 
+    //获取贷款详细信息
+    public void getCreditDetail(Subscriber<HttpResult.GetCreditDetailResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCreditDetail(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //申请贷款
+    public void addCredit(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addCredit(options);
+        toSubscribe(observable, subscriber);
+    }
 
 
 }

@@ -6,6 +6,8 @@ import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
 import com.ck.bean.credit.Credit;
 import com.ck.bean.credit.GetCreditAmount;
+import com.ck.bean.credit.GetCreditDay;
+import com.ck.bean.credit.GetCreditDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,9 @@ public class HttpResult {
 
     /**
      * 登录、发送验证码、注册、找回密码、修改密码
-     * <p>
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
-     * <p>
      * 反馈
+     * 申请贷款
      */
     public static class BaseResponse {
         public int code;
@@ -58,11 +59,23 @@ public class HttpResult {
      * 下面的是首页的
      */
 
+    //首页列表
     public static class CreditListResponse extends BaseResponse {
         public List<Credit> list;
     }
 
+    //金额列表
     public static class GetCreditAmountResponse extends BaseResponse {
-        public List<GetCreditAmount> list;
+        public ArrayList<GetCreditAmount> list;
+    }
+
+    //天数列表
+    public static class GetCreditDayResponse extends BaseResponse {
+        public ArrayList<GetCreditDay> list;
+    }
+
+    //获取详细信息
+    public static class GetCreditDetailResponse extends BaseResponse {
+        public GetCreditDetail obj;
     }
 }

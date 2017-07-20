@@ -142,11 +142,10 @@ public class HomeFragment extends Fragment {
             public void onItemClick(View view) {
                 int pos = recyclerView.getRecyclerView().getChildAdapterPosition(view);
                 if (data.get(pos).getValid() == 0) {
-                    //这里改成获取
-                    Intent intent = new Intent(getActivity(), GetCreditActivity.class);
-                    startActivity(intent);
+                    //红色的没有开通，不让点的
+                    Toast.makeText(getActivity(), "暂未开通", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    getAmount(data.get(pos).getTypeId());
                 }
             }
         });
@@ -159,5 +158,35 @@ public class HomeFragment extends Fragment {
         unbinder.unbind();
     }
 
-//    private void get
+    private void getAmount(final int typeId) {
+        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("type", typeId);
+        Subscriber subscriber = new Subscriber<HttpResult.GetCreditAmountResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.GetCreditAmountResponse response) {
+                if (response.code == 0) {
+                    Intent intent = new Intent(getActivity(), GetCreditActivity.class);
+                    intent.putParcelableArrayListExtra("amounts", response.list);
+                    intent.putExtra("typeId",typeId);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().getCreditAmountList(subscriber, map);
+    }
 }

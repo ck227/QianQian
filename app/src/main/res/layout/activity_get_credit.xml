@@ -29,11 +29,11 @@
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/SecTextSize"/>
 
-            <!--<android.support.v7.widget.RecyclerView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/amountList"
                 android:layout_marginTop="12dp"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"/>-->
+                android:layout_width="match_parent"/>
 
             <TextView
                 android:layout_width="wrap_content"

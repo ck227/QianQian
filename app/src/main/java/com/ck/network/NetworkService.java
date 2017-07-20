@@ -54,7 +54,7 @@ public interface NetworkService {
     //上传图片
     @Multipart
     @POST("upload/upload.html")
-    Observable<HttpResult.UploadPicResponse> uploadPic(@Part("file\"; filename=\"ck.png") RequestBody body,@QueryMap Map<String, Object> options);
+    Observable<HttpResult.UploadPicResponse> uploadPic(@Part("file\"; filename=\"ck.png") RequestBody body, @QueryMap Map<String, Object> options);
 
     //添加身份证认证
     @GET("userCard/add.html")
@@ -94,8 +94,20 @@ public interface NetworkService {
     Observable<HttpResult.CreditListResponse> getCreditList(@QueryMap Map<String, Object> options);
 
     //获取贷款的金额列表
-    @GET("loanDay/list.html")
+    @GET("loanAmount/list.html")
     Observable<HttpResult.GetCreditAmountResponse> getCreditAmountList(@QueryMap Map<String, Object> options);
+
+    //获取贷款的天数列表
+    @GET("loanDay/list.html")
+    Observable<HttpResult.GetCreditDayResponse> getCreditDayList(@QueryMap Map<String, Object> options);
+
+    //获取贷款的详细信息
+    @GET("loanRule/rule.html")
+    Observable<HttpResult.GetCreditDetailResponse> getCreditDetail(@QueryMap Map<String, Object> options);
+
+    //申请贷款
+    @GET("loanRecord/add.html")
+    Observable<HttpResult.BaseResponse> addCredit(@QueryMap Map<String, Object> options);
 
 
 }
