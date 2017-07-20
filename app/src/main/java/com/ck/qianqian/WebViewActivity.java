@@ -3,7 +3,6 @@ package com.ck.qianqian;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -12,7 +11,7 @@ import com.ck.fragment.WebViewFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.titleName)
     TextView titleName;

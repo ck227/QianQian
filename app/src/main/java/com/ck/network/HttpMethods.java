@@ -21,8 +21,12 @@ public class HttpMethods {
 
     /**
      * TODO :
-     * 乱码问题、联系人要选择、兼容问题
+     * 乱码问题、联系人要选择、兼容问题、通信认证异常
      * 支付宝、淘宝认证、还款
+     *
+     *
+     * 设置只有修改密码/个人资料没有界面
+     * 苹果开发者账号：申请邓白氏码中
      */
 
 //    public static final String BASE_URL = "http://192.168.1.114:8080/lizhixinInterface/";
