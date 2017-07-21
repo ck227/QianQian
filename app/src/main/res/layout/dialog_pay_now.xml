@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/shape_white_round"
+              android:orientation="vertical"
+              android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请确保您的余额充足，扣款失败将严重影响你的个人信用"
+        android:textColor="@color/second_text_color"
+        android:textSize="@dimen/SecTextSize"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="暂不致辞信用卡还款服务"
+        android:textColor="@color/second_text_color"
+        android:textSize="@dimen/SecTextSize"
+        android:layout_marginTop="8dp"/>
+
+
+
+
+</LinearLayout>

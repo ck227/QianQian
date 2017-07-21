@@ -122,7 +122,8 @@ public class GetCreditActivity extends BaseActivity {
         dialog = new LoadingDialog(this, R.style.MyCustomDialog);
         dialog.show();
         Map<String, Object> map = new HashMap<>();
-        map.put("type", typeId);
+//        map.put("type", typeId);
+        map.put("type", "1");
         Subscriber subscriber = new Subscriber<HttpResult.GetCreditDayResponse>() {
             @Override
             public void onCompleted() {
