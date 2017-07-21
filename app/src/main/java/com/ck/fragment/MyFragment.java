@@ -156,7 +156,10 @@ public class MyFragment extends Fragment {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                MyApplication.getInstance().clear();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -165,6 +168,6 @@ public class MyFragment extends Fragment {
 
             }
         });
-        builder.create().show();//将dialog显示出来
+        builder.create().show();
     }
 }

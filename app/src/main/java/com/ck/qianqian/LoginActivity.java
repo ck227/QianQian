@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        account.setText("18507104251");
-        password.setText("123456");
+//        account.setText("18507104251");
+//        password.setText("123456");
         account.setSelection(account.getText().toString().length());
     }
 

@@ -31,4 +31,8 @@ public class MyApplication extends Application {
     public void setUserName(String username) {
         sp.edit().putString("username", username).commit();
     }
+
+    public void clear(){
+        sp.edit().clear().commit();
+    }
 }
