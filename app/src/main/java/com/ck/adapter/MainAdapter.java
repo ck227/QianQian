@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ck.fragment.HomeFragment;
 import com.ck.fragment.MyFragment;
+import com.ck.fragment.PayFragment;
 import com.ck.qianqian.R;
 
 /**
@@ -24,12 +25,17 @@ public class MainAdapter extends FragmentPagerAdapter {
     private int[] imageResId;
 
     private HomeFragment homeFragment;
+    private PayFragment payFragment;
     private MyFragment myFragment;
 
+    private Boolean needPay;
 
-    public MainAdapter(FragmentManager fm, Context context) {
+
+    public MainAdapter(FragmentManager fm, Context context, Boolean needPay) {
         super(fm);
         this.context = context;
+        this.needPay = needPay;
+//        this.needPay = true;
         tabTitles = new String[]{"首页", "个人中心"};
         imageResId = new int[]{R.drawable.main_menu0_selector, R.drawable.main_menu1_selector};
     }
@@ -38,10 +44,17 @@ public class MainAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                if (homeFragment == null) {
-                    homeFragment = HomeFragment.newInstance();
+                if (needPay) {
+                    if (payFragment == null) {
+                        payFragment = PayFragment.newInstance();
+                    }
+                    return payFragment;
+                } else {
+                    if (homeFragment == null) {
+                        homeFragment = HomeFragment.newInstance();
+                    }
+                    return homeFragment;
                 }
-                return homeFragment;
             case 1:
                 if (myFragment == null) {
                     myFragment = new MyFragment();

@@ -166,6 +166,13 @@ public class HttpMethods {
      * 下面的是首页的
      */
 
+    //进首页之前的判断
+    public void getHomeState(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getHomeState(options);
+        toSubscribe(observable, subscriber);
+    }
+
+
     //获取首页列表
     public void getCreditList(Subscriber<HttpResult.CreditListResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.getCreditList(options);

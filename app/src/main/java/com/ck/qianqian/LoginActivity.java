@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+//                dialog.cancel();
             }
 
             @Override
@@ -102,15 +102,50 @@ public class LoginActivity extends AppCompatActivity {
             public void onNext(HttpResult.BaseResponse response) {
                 if (response.code == 0) {
                     MyApplication.getInstance().setUserName(account.getText().toString());
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    //这里请求服务器
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+                    getHomeState();
                 } else {
                     Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 }
             }
         };
         HttpMethods.getInstance().login(subscriber, map);
+    }
+
+    private void getHomeState() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", account.getText().toString());
+        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.BaseResponse response) {
+                int code = response.code;
+                if (code == 3) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("needPay", true);//还款
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("needPay", false);//借款
+                    startActivity(intent);
+                }
+                finish();
+            }
+        };
+        HttpMethods.getInstance().getHomeState(subscriber, map);
     }
 
     private Boolean checkValue() {

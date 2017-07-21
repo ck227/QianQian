@@ -19,17 +19,20 @@ public class MainActivity extends AppCompatActivity {
 
     private MainAdapter adapter;
 
+    private Boolean needPay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        needPay = getIntent().getBooleanExtra("needPay", false);
         setViews();
 
     }
 
     private void setViews() {
-        adapter = new MainAdapter(getSupportFragmentManager(), MainActivity.this);
+        adapter = new MainAdapter(getSupportFragmentManager(), MainActivity.this,needPay);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < tabLayout.getTabCount(); i++) {

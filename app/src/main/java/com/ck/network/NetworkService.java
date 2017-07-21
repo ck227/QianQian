@@ -89,6 +89,10 @@ public interface NetworkService {
      * 下面的是首页的
      */
 
+    //进首页之前的判断
+    @GET("loan/homePage.html")
+    Observable<HttpResult.BaseResponse> getHomeState(@QueryMap Map<String, Object> options);
+
     //首页列表
     @GET("loan/loanType.html")
     Observable<HttpResult.CreditListResponse> getCreditList(@QueryMap Map<String, Object> options);
