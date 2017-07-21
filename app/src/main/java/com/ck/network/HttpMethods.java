@@ -23,8 +23,8 @@ public class HttpMethods {
      * TODO :
      * 乱码问题、联系人要选择、通信认证异常
      * 支付宝、淘宝认证、还款
-     *
-     *
+     * <p>
+     * <p>
      * 设置只有修改密码/个人资料没有界面
      * 苹果开发者账号：申请邓白氏码中
      */
@@ -200,6 +200,21 @@ public class HttpMethods {
     //申请贷款
     public void addCredit(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.addCredit(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    /**
+     * 还款
+     */
+    //还款详细信息
+    public void getPayDetail(Subscriber<HttpResult.GetPayDetailResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getPayDetail(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //续期的详细信息
+    public void getLaterPayDetail(Subscriber<HttpResult.GetCreditDetailResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getLaterPayDetail(options);
         toSubscribe(observable, subscriber);
     }
 

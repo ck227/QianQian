@@ -3,15 +3,18 @@ package com.ck.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ck.adapter.PayAdapter;
 import com.ck.qianqian.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -20,6 +23,18 @@ import butterknife.Unbinder;
 public class PayFragment extends Fragment {
 
     Unbinder unbinder;
+    @BindView(R.id.titleName)
+    TextView titleName;
+    @BindView(R.id.service)
+    TextView service;
+    @BindView(R.id.payNow)
+    TextView payNow;
+    @BindView(R.id.payLater)
+    TextView payLater;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+
+    private PayAdapter payAdapter;
 
     public PayFragment() {
         // Required empty public constructor
@@ -41,6 +56,36 @@ public class PayFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pay, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+        payAdapter = new PayAdapter(getChildFragmentManager());
+        viewPager.setAdapter(payAdapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    payNow.setTextColor(getResources().getColor(R.color.white));
+                    payNow.setBackgroundResource(R.drawable.pay_shape_left_blue);
+                    payLater.setTextColor(getResources().getColor(R.color.text_blue));
+                    payLater.setBackgroundResource(R.drawable.pay_shape_right_white);
+                } else {
+                    payNow.setTextColor(getResources().getColor(R.color.text_blue));
+                    payNow.setBackgroundResource(R.drawable.pay_shape_left_white);
+                    payLater.setTextColor(getResources().getColor(R.color.white));
+                    payLater.setBackgroundResource(R.drawable.pay_shape_right_blue);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         return view;
     }
 
@@ -48,5 +93,19 @@ public class PayFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick({R.id.service, R.id.payNow, R.id.payLater})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.service:
+                break;
+            case R.id.payNow:
+                viewPager.setCurrentItem(0, true);
+                break;
+            case R.id.payLater:
+                viewPager.setCurrentItem(1, true);
+                break;
+        }
     }
 }

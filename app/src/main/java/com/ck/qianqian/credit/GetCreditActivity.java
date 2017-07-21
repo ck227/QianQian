@@ -102,7 +102,7 @@ public class GetCreditActivity extends BaseActivity {
         dayAdapter = new GetCreditDayAdapter(days, new MyItemClickListener() {
             @Override
             public void onItemClick(View view) {
-                int pos = amountList.getChildAdapterPosition(view);
+                int pos = timeList.getChildAdapterPosition(view);
                 dayAdapter.changeSelect(pos);
 
                 dayPos = pos;
