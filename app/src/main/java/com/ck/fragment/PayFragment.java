@@ -1,6 +1,8 @@
 package com.ck.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -23,8 +25,6 @@ import butterknife.Unbinder;
 public class PayFragment extends Fragment {
 
     Unbinder unbinder;
-    @BindView(R.id.titleName)
-    TextView titleName;
     @BindView(R.id.service)
     TextView service;
     @BindView(R.id.payNow)
@@ -99,6 +99,9 @@ public class PayFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.service:
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:15717174872"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.payNow:
                 viewPager.setCurrentItem(0, true);
