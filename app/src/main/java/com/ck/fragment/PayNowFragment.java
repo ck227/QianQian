@@ -46,6 +46,8 @@ public class PayNowFragment extends Fragment {
 
     private LoadingDialog dialog;
 
+    private int recordId;
+
     public PayNowFragment() {
         // Required empty public constructor
     }
@@ -94,6 +96,8 @@ public class PayNowFragment extends Fragment {
                     day.setText(payNow.getRepaymentDay() + "天");
                     time.setText(payNow.getRepaymentTime());
                     money.setText(payNow.getRepaymentMoney() + "元");
+
+                    recordId = payNow.getRecordId();
                 } else {
                     Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
                 }
@@ -110,5 +114,9 @@ public class PayNowFragment extends Fragment {
 
     @OnClick(R.id.pay)
     public void onViewClicked() {
+    }
+
+    public int getRecordId() {
+        return recordId;
     }
 }

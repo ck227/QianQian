@@ -135,6 +135,8 @@ public class PayLaterFragment extends Fragment {
         dialog.show();
         Map<String, Object> map = new HashMap<>();
         map.put("dayId", days.get(dayPos).getId());
+        map.put("recordId", ((PayFragment)getParentFragment()).getReordId());
+
         Subscriber subscriber = new Subscriber<HttpResult.GetCreditDetailResponse>() {
             @Override
             public void onCompleted() {

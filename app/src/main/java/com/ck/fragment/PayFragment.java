@@ -111,4 +111,8 @@ public class PayFragment extends Fragment {
                 break;
         }
     }
+
+    public int getReordId(){
+        return ((PayNowFragment)payAdapter.getItem(0)).getRecordId();
+    }
 }
