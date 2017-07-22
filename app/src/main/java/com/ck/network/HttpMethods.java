@@ -20,12 +20,12 @@ import rx.schedulers.Schedulers;
 public class HttpMethods {
 
     /**
-     * TODO :
-     * 乱码问题、联系人要选择、通信认证异常
+     * 联系人要选择、通信认证异常
      * 支付宝、淘宝认证、还款
      * <p>
-     * <p>
-     * 设置只有修改密码/个人资料没有界面
+     * 没有完全认证就跳转到认证界面／固定方向／还款详情界面
+     * 乱码问题／设置只有修改密码／个人资料的头像和名字（登录的时候返回）
+     *
      * 苹果开发者账号：申请邓白氏码中
      */
 
@@ -67,7 +67,7 @@ public class HttpMethods {
     }
 
     //登录
-    public void login(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+    public void login(Subscriber<HttpResult.LoginResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.login(options);
         toSubscribe(observable, subscriber);
     }

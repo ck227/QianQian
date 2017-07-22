@@ -23,6 +23,7 @@
     <color name="text_cyan">#959cb7</color>
 
     <color name="red">#e83930</color>
+    <color name="red_press">#80e83930</color>
 
 
     <color name="light_green">#4ECFA6</color>

@@ -65,6 +65,7 @@ public class IndexActivity extends Activity implements Runnable {
             @Override
             public void onError(Throwable e) {
                 Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

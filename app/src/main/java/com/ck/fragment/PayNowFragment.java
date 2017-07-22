@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
+import com.ck.widget.PayNowDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -114,6 +116,18 @@ public class PayNowFragment extends Fragment {
 
     @OnClick(R.id.pay)
     public void onViewClicked() {
+        showDialog();
+    }
+
+    private void showDialog(){
+        final PayNowDialog dialog = new PayNowDialog(getActivity(), new PayNowDialog.ButtonListener() {
+            @Override
+            public void submit() {
+
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
     }
 
     public int getRecordId() {

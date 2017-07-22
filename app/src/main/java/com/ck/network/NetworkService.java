@@ -20,7 +20,7 @@ public interface NetworkService {
 
     //登录
     @GET("user/login.html")
-    Observable<HttpResult.BaseResponse> login(@QueryMap Map<String, Object> options);
+    Observable<HttpResult.LoginResponse> login(@QueryMap Map<String, Object> options);
 
     //发送验证码
     @GET("smsverify/send.html")

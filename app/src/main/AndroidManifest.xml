@@ -13,35 +13,52 @@
     <application
         android:name="com.ck.util.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/credit_handshake"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/credit_handshake"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".IndexActivity">
+        <activity android:name=".IndexActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".FindPwdActivity"/>
-        <activity android:name=".CheckCenterActivity"/>
-        <activity android:name=".CheckPhoneActivity"/>
-        <activity android:name=".CheckIdActivity"/>
-        <activity android:name=".CheckCardActivity"/>
-        <activity android:name=".CheckContactActivity"/>
-        <activity android:name=".credit.CreditHistoryActivity"/>
-        <activity android:name=".credit.CreditDetailActivity"/>
-        <activity android:name=".FeedbackActivity"/>
-        <activity android:name=".CheckMsgActivity"/>
-        <activity android:name=".UpdatePwdActivity"/>
-        <activity android:name=".WebViewActivity"/>
-        <activity android:name=".credit.GetCreditActivity"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FindPwdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckCenterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckPhoneActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckIdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckCardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckContactActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".credit.CreditHistoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".credit.CreditDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FeedbackActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CheckMsgActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UpdatePwdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WebViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".credit.GetCreditActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

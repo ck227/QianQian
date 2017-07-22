@@ -32,6 +32,14 @@ public class MyApplication extends Application {
         sp.edit().putString("username", username).commit();
     }
 
+    public String getRealName() {
+        return sp.getString("realname", "");
+    }
+
+    public void setRealName(String realname) {
+        sp.edit().putString("realname", realname).commit();
+    }
+
     public void clear(){
         sp.edit().clear().commit();
     }

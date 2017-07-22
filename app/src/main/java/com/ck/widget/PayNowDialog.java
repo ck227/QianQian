@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.ck.qianqian.R;
+
 
 /**
  * Created by cnbs5 on 2017/7/21.
@@ -28,5 +30,6 @@ public class PayNowDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_pay_now);
     }
 }

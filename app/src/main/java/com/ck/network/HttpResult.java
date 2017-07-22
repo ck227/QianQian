@@ -4,6 +4,7 @@ import com.ck.bean.Banks;
 import com.ck.bean.CheckInfo;
 import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
+import com.ck.bean.Login;
 import com.ck.bean.credit.Credit;
 import com.ck.bean.credit.GetCreditAmount;
 import com.ck.bean.credit.GetCreditDay;
@@ -28,6 +29,10 @@ public class HttpResult {
     public static class BaseResponse {
         public int code;
         public String msg;
+    }
+
+    public static class LoginResponse extends BaseResponse{
+        public Login obj;
     }
 
     //认证状态

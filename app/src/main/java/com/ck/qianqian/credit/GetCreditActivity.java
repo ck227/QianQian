@@ -17,6 +17,7 @@ import com.ck.listener.MyItemClickListener;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.qianqian.BaseActivity;
+import com.ck.qianqian.CheckCenterActivity;
 import com.ck.qianqian.R;
 import com.ck.util.MyApplication;
 import com.ck.widget.GridSpacingDecoration;
@@ -176,7 +177,7 @@ public class GetCreditActivity extends BaseActivity {
                     accountFee.setText("账户管理费：" + getCreditDetail.getAccountFee() + "元");
                     arrivalFee.setText(getCreditDetail.getArrivalFee() + "元");
                     amountFee.setText(getCreditDetail.getAmountFee() + "元");
-                } else {
+                }  else {
                     Toast.makeText(GetCreditActivity.this, response.msg, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -194,7 +195,7 @@ public class GetCreditActivity extends BaseActivity {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+
             }
 
             @Override
@@ -207,11 +208,46 @@ public class GetCreditActivity extends BaseActivity {
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(GetCreditActivity.this, response.msg, Toast.LENGTH_LONG).show();
                 if (response.code == 0) {//还需要判断在没有全部认证的情况下跳转到认证界面
+                    dialog.cancel();
                     finish();
+                }else if (response.code == -5) {
+//                    Toast.makeText(getApplicationContext(),"请完成认证",Toast.LENGTH_SHORT).show();
+                    getStatus();
                 }
             }
         };
         HttpMethods.getInstance().addCredit(subscriber, map);
+    }
+
+    private void getStatus() {
+//        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+//        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.CheckResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(GetCreditActivity.this, R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.CheckResponse response) {
+                if (response.code == 0) {
+                    Intent intent = new Intent(GetCreditActivity.this, CheckCenterActivity.class);
+                    intent.putExtra("status", response.obj);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(GetCreditActivity.this, response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().checkStatus(subscriber, map);
     }
 
     @OnClick(R.id.submit)

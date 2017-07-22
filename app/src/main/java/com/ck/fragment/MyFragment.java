@@ -79,6 +79,8 @@ public class MyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         unbinder = ButterKnife.bind(this, view);
         titleName.setText("个人中心");
+        name.setText(MyApplication.getInstance().getRealName());
+        phone.setText(MyApplication.getInstance().getUserName());
         return view;
     }
 
@@ -93,10 +95,10 @@ public class MyFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.personInfo:
-                intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra("title", "title");
-                intent.putExtra("url", "https://mobile.alipay.com/index.htm?cid=wap_dc");
-                startActivity(intent);
+//                intent = new Intent(getActivity(), WebViewActivity.class);
+//                intent.putExtra("title", "title");
+//                intent.putExtra("url", "https://mobile.alipay.com/index.htm?cid=wap_dc");
+//                startActivity(intent);
                 break;
             case R.id.check_rel:
                 getStatus();

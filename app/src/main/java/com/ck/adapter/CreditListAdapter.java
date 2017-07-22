@@ -68,7 +68,7 @@ public class CreditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof RedViewHolder) {
-            ((RedViewHolder) holder).name.setText(data.get(position).getStateDec());
+            ((RedViewHolder) holder).name.setText(data.get(position).getTitle());
             ((RedViewHolder) holder).credit_amount.setText(data.get(position).getLoanMoney());
             int state = data.get(position).getLoanState();
             String tmp = "";
@@ -97,7 +97,7 @@ public class CreditListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             ((RedViewHolder) holder).credit_state.setText(tmp);
         } else if (holder instanceof BlueViewHolder) {
-            ((BlueViewHolder) holder).name.setText(data.get(position).getStateDec());
+            ((BlueViewHolder) holder).name.setText(data.get(position).getTitle());
             ((BlueViewHolder) holder).credit_amount.setText(data.get(position).getLoanMoney());
             int state = data.get(position).getLoanState();
             String tmp = "";

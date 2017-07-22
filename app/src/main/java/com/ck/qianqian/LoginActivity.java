@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", account.getText().toString());
         map.put("passWord", password.getText().toString());
-        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+        Subscriber subscriber = new Subscriber<HttpResult.LoginResponse>() {
             @Override
             public void onCompleted() {
 //                dialog.cancel();
@@ -99,9 +99,10 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(HttpResult.BaseResponse response) {
+            public void onNext(HttpResult.LoginResponse response) {
                 if (response.code == 0) {
                     MyApplication.getInstance().setUserName(account.getText().toString());
+                    MyApplication.getInstance().setRealName(response.obj.getUserName());
                     //这里请求服务器
 //                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(intent);
