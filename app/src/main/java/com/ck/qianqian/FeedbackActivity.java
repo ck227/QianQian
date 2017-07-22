@@ -13,6 +13,8 @@ import com.ck.util.MyApplication;
 import com.ck.util.Utils;
 import com.ck.widget.LoadingDialog;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
