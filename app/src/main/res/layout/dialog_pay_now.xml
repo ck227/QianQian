@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="暂不支持信用卡还款服务。"
         android:textColor="@color/second_text_color"
         android:textSize="@dimen/SecTextSize" />
@@ -30,6 +30,7 @@
         android:textSize="@dimen/SecTextSize" />
 
     <TextView
+        android:id="@+id/money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -41,12 +42,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="支付方式："
         android:textColor="@color/second_text_color"
         android:textSize="@dimen/SecTextSize" />
 
     <RelativeLayout
+        android:id="@+id/alipay"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginTop="12dp">
@@ -61,6 +63,7 @@
             android:gravity="center"/>
 
         <ImageView
+            android:id="@+id/select_alipay"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@mipmap/check_contact_sure"
@@ -69,6 +72,33 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/alipay2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="12dp">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="支付宝转账"
+            android:textColor="@color/base_text_color"
+            android:textSize="@dimen/SecTextSize"
+            android:drawableLeft="@mipmap/ic_alipay"
+            android:drawablePadding="12dp"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/select_alipay2"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@mipmap/check_contact_sure"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/weixinPay"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginTop="12dp">
@@ -82,7 +112,14 @@
             android:drawablePadding="12dp"
             android:gravity="center"/>
 
-
+        <ImageView
+            android:id="@+id/select_weixinPay"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@mipmap/check_contact_sure"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
     <TextView
@@ -91,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/login_btn"
         android:gravity="center"
         android:paddingBottom="14dp"

@@ -1,9 +1,11 @@
 package com.ck.fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,8 @@ public class PayNowFragment extends Fragment {
 
     private int recordId;
 
+    private PayNow payNow;
+
     public PayNowFragment() {
         // Required empty public constructor
     }
@@ -94,7 +98,7 @@ public class PayNowFragment extends Fragment {
             @Override
             public void onNext(HttpResult.GetPayDetailResponse response) {
                 if (response.code == 0) {
-                    PayNow payNow = response.obj;
+                    payNow = response.obj;
                     day.setText(payNow.getRepaymentDay() + "天");
                     time.setText(payNow.getRepaymentTime());
                     money.setText(payNow.getRepaymentMoney() + "元");
@@ -122,12 +126,68 @@ public class PayNowFragment extends Fragment {
     private void showDialog(){
         final PayNowDialog dialog = new PayNowDialog(getActivity(), new PayNowDialog.ButtonListener() {
             @Override
-            public void submit() {
+            public void submit(int selectType) {
+                if (selectType == 0) {
+                    Toast.makeText(getContext(),"支付宝暂未开通",Toast.LENGTH_SHORT).show();
+                }else if (selectType == 1){
+                    //请求服务器
+                    showDialog2();
+                }else{
+                    Toast.makeText(getContext(),"微信暂未开通",Toast.LENGTH_SHORT).show();
+                }
+            }
+        },payNow.getRepaymentMoney());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+    }
+
+    private void showDialog2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("提示");
+        builder.setMessage("请将最终还款金额【"+payNow.getLoanAmount()+"元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
+                "\n"+
+        "收款人：李华"+"\n"+
+        "支付宝账号：15717174872");
+        builder.setPositiveButton("已转账", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                payOnline();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.create().show();
+    }
+
+    private void payOnline(){
+        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
         dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        map.put("recordId", recordId);
+        map.put("payType", 3);
+        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.BaseResponse response) {
+                Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+            }
+        };
+        HttpMethods.getInstance().payOnline(subscriber, map);
     }
 
     public int getRecordId() {

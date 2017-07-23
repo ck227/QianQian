@@ -20,11 +20,14 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import rx.Subscriber;
 import rx.functions.Action1;
 
@@ -102,34 +105,63 @@ public class CheckContactActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        uploadData();
+//        uploadData();
+        int size = contacts.size();
+        int page = size % 20 + 1;
+        for (int i = 0; i < page; i++) {
+            if (i < page - 1) {
+                List<Contact> data = contacts.subList(i * 20, i * 20 + 19);
+                uploadData(data,false);
+            } else {
+                List<Contact> data = contacts.subList(i * 20, contacts.size() - 1);
+                uploadData(data,true);
+            }
+        }
     }
 
-    private void uploadData() {
+//    private Boolean hasFinish = false;
+
+    private void uploadData(List<Contact> data,final Boolean isLast) {
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", MyApplication.getInstance().getUserName());
         Gson gson = new Gson();
-        map.put("jsonDate", gson.toJson(contacts));
+        map.put("jsonDate", gson.toJson(data));
+
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("Content-Type, application/json"),
+//                "{\"jsonDate\":"+gson.toJson(contacts)+"}");
+//        Gson gson=new Gson();
+//        HashMap<String,String> paramsMap=new HashMap<>();
+//        paramsMap.put("jsonDate",gson.toJson(contacts));
+//        paramsMap.put("jsonDate","[{bookName:fdsfsf,bookPhone:24324324}]");
+//        String strEntity = gson.toJson(paramsMap);
+//        String strEntity = "jsonDate="+gson.toJson(contacts);
+//        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strEntity);
+
+
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+                if (isLast)
+                    dialog.cancel();
             }
 
             @Override
             public void onError(Throwable e) {
-                dialog.cancel();
-                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+                if (isLast)
+                    dialog.cancel();
+//                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 if (response.code == 0) {
-                    Intent intent = new Intent();
-                    intent.putExtra("success", true);
-                    setResult(0, intent);
-                    finish();
+                    if(isLast){
+                        Intent intent = new Intent();
+                        intent.putExtra("success", true);
+                        setResult(0, intent);
+                        finish();
+                    }
                 }
             }
         };
@@ -137,3 +169,5 @@ public class CheckContactActivity extends BaseActivity {
     }
 
 }
+
+

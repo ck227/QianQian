@@ -15,49 +15,49 @@ public class GetCreditDetail {
      * trialFee : 26
      */
 
-    private int accountFee;
-    private int amountFee;
-    private int arrivalFee;
-    private int interestFee;
-    private int trialFee;
+    private String accountFee;
+    private String amountFee;
+    private String arrivalFee;
+    private String interestFee;
+    private String trialFee;
 
-    public int getAccountFee() {
+    public String getAccountFee() {
         return accountFee;
     }
 
-    public void setAccountFee(int accountFee) {
+    public void setAccountFee(String accountFee) {
         this.accountFee = accountFee;
     }
 
-    public int getAmountFee() {
+    public String getAmountFee() {
         return amountFee;
     }
 
-    public void setAmountFee(int amountFee) {
+    public void setAmountFee(String amountFee) {
         this.amountFee = amountFee;
     }
 
-    public int getArrivalFee() {
+    public String getArrivalFee() {
         return arrivalFee;
     }
 
-    public void setArrivalFee(int arrivalFee) {
+    public void setArrivalFee(String arrivalFee) {
         this.arrivalFee = arrivalFee;
     }
 
-    public int getInterestFee() {
+    public String getInterestFee() {
         return interestFee;
     }
 
-    public void setInterestFee(int interestFee) {
+    public void setInterestFee(String interestFee) {
         this.interestFee = interestFee;
     }
 
-    public int getTrialFee() {
+    public String getTrialFee() {
         return trialFee;
     }
 
-    public void setTrialFee(int trialFee) {
+    public void setTrialFee(String trialFee) {
         this.trialFee = trialFee;
     }
 }

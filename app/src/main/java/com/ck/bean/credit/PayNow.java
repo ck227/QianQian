@@ -18,7 +18,7 @@ public class PayNow {
     private int overdueSpot;
     private int recordId;
     private int repaymentDay;
-    private int repaymentMoney;
+    private String repaymentMoney;
     private String repaymentTime;
 
     public int getLoanAmount() {
@@ -53,11 +53,11 @@ public class PayNow {
         this.repaymentDay = repaymentDay;
     }
 
-    public int getRepaymentMoney() {
+    public String getRepaymentMoney() {
         return repaymentMoney;
     }
 
-    public void setRepaymentMoney(int repaymentMoney) {
+    public void setRepaymentMoney(String repaymentMoney) {
         this.repaymentMoney = repaymentMoney;
     }
 

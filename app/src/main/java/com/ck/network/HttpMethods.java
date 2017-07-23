@@ -1,5 +1,8 @@
 package com.ck.network;
 
+import com.ck.bean.Contact;
+
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -20,17 +23,24 @@ import rx.schedulers.Schedulers;
 public class HttpMethods {
 
     /**
-     * 联系人要选择、通信认证异常
-     * 支付宝、淘宝认证、还款
-     * <p>
-     * 没有完全认证就跳转到认证界面／还款详情界面
-     * 乱码问题
+     * 、
+     * 支付宝、淘宝认证、
+     *
+     * 还款详情界面／联系人要选择／主界面要处理多种情况
+     *
+     *
+     *
+     *
      *
      * 苹果开发者账号：申请邓白氏码中
+     *
+     * 不处理：通信认证异常
+     * 还款/续期 已处理，可能有逻辑上的问题
+     *
      */
 
-//    public static final String BASE_URL = "http://192.168.1.114:8080/lizhixinInterface/";
-    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+    public static final String BASE_URL = "http://192.168.1.221:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
@@ -139,7 +149,7 @@ public class HttpMethods {
     }
 
     //添加通讯录认证
-    public void addCheckContact(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+    public void addCheckContact(Subscriber<HttpResult.BaseResponse> subscriber,Map<String, Object> options) {
         Observable observable = networkService.addCheckContact(options);
         toSubscribe(observable, subscriber);
     }
@@ -215,6 +225,18 @@ public class HttpMethods {
     //续期的详细信息
     public void getLaterPayDetail(Subscriber<HttpResult.GetCreditDetailResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.getLaterPayDetail(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //线上转账还款
+    public void payOnline(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.payOnline(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //线上转账还款 续期
+    public void payOnlineLater(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.payOnlineLater(options);
         toSubscribe(observable, subscriber);
     }
 

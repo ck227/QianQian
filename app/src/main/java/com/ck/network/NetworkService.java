@@ -1,10 +1,15 @@
 package com.ck.network;
 
+import com.ck.bean.Contact;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -68,7 +73,10 @@ public interface NetworkService {
     @GET("userBank/add.html")
     Observable<HttpResult.BaseResponse> addCheckBank(@QueryMap Map<String, Object> options);
 
-    //添加通讯录
+//    //添加通讯录
+//    @POST("userBookPhone/add.html")
+//    Observable<HttpResult.BaseResponse> addCheckContact(@QueryMap Map<String, Object> options);
+//    @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST("userBookPhone/add.html")
     Observable<HttpResult.BaseResponse> addCheckContact(@QueryMap Map<String, Object> options);
 
@@ -124,6 +132,14 @@ public interface NetworkService {
     //获取续贷的详细信息
     @GET("loanRenewal/renewal.html")
     Observable<HttpResult.GetCreditDetailResponse> getLaterPayDetail(@QueryMap Map<String, Object> options);
+
+    //转账还款
+    @GET("repaymentRecord/add.html")
+    Observable<HttpResult.BaseResponse> payOnline(@QueryMap Map<String, Object> options);
+
+    //转账还款 续期
+    @GET("renewalRecord/add.html")
+    Observable<HttpResult.BaseResponse> payOnlineLater(@QueryMap Map<String, Object> options);
 
 
 
