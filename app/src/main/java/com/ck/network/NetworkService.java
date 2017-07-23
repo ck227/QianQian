@@ -99,7 +99,7 @@ public interface NetworkService {
 
     //进首页之前的判断
     @GET("loan/homePage.html")
-    Observable<HttpResult.BaseResponse> getHomeState(@QueryMap Map<String, Object> options);
+    Observable<HttpResult.IndexResponse> getHomeState(@QueryMap Map<String, Object> options);
 
     //首页列表
     @GET("loan/loanType.html")

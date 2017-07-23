@@ -6,6 +6,7 @@ import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
 import com.ck.bean.Login;
 import com.ck.bean.credit.Credit;
+import com.ck.bean.credit.CreditDetail;
 import com.ck.bean.credit.GetCreditAmount;
 import com.ck.bean.credit.GetCreditDay;
 import com.ck.bean.credit.GetCreditDetail;
@@ -31,6 +32,12 @@ public class HttpResult {
         public String msg;
     }
 
+    //判断首页状态
+    public static class IndexResponse extends BaseResponse{
+        public CreditDetail obj;
+    }
+
+    //登录
     public static class LoginResponse extends BaseResponse{
         public Login obj;
     }

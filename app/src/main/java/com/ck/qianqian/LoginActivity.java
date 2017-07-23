@@ -55,9 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-//        account.setText("18507104251");
-//        password.setText("123456");
-        account.setSelection(account.getText().toString().length());
+//        account.setSelection(account.getText().toString().length());
     }
 
     @OnClick({R.id.login, R.id.register, R.id.findPwd})
@@ -119,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getHomeState() {
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", account.getText().toString());
-        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
             @Override
             public void onCompleted() {
                 dialog.cancel();
@@ -132,15 +130,21 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(HttpResult.BaseResponse response) {
+            public void onNext(HttpResult.IndexResponse response) {
                 int code = response.code;
-                if (code == 3) {
+                if(code == 1 || code == 8){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("needPay", true);//还款
+                    intent.putExtra("state", 2);//
+                    intent.putExtra("code",code);
+                    intent.putExtra("creditDetail",response.obj);
+                    startActivity(intent);
+                }else if (code == 3) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("state", 1);//还款
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("needPay", false);//借款
+                    intent.putExtra("state", 0);//借款
                     startActivity(intent);
                 }
                 finish();

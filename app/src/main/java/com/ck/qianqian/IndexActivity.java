@@ -57,7 +57,7 @@ public class IndexActivity extends Activity implements Runnable {
     private void getHomeState() {
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", username);
-        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
             @Override
             public void onCompleted() {
             }
@@ -69,15 +69,21 @@ public class IndexActivity extends Activity implements Runnable {
             }
 
             @Override
-            public void onNext(HttpResult.BaseResponse response) {
+            public void onNext(HttpResult.IndexResponse response) {
                 int code = response.code;
-                if (code == 3) {
+                if (code == 1 || code == 8) {
                     Intent intent = new Intent(IndexActivity.this, MainActivity.class);
-                    intent.putExtra("needPay", true);//还款
+                    intent.putExtra("state", 2);//
+                    intent.putExtra("code", code);
+                    intent.putExtra("creditDetail", response.obj);
+                    startActivity(intent);
+                } else if (code == 3) {
+                    Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+                    intent.putExtra("state", 1);//还款
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(IndexActivity.this, MainActivity.class);
-                    intent.putExtra("needPay", false);//借款
+                    intent.putExtra("state", 0);//借款
                     startActivity(intent);
                 }
                 finish();

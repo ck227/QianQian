@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ck.bean.credit.CreditDetail;
+import com.ck.fragment.CreditStateFragment;
 import com.ck.fragment.HomeFragment;
 import com.ck.fragment.MyFragment;
 import com.ck.fragment.PayFragment;
@@ -26,16 +28,29 @@ public class MainAdapter extends FragmentPagerAdapter {
 
     private HomeFragment homeFragment;
     private PayFragment payFragment;
+    private CreditStateFragment creditStateFragment;
     private MyFragment myFragment;
 
-    private Boolean needPay;
+    private int state;
+
+    private int code;
+    private CreditDetail creditDetail;
 
 
-    public MainAdapter(FragmentManager fm, Context context, Boolean needPay) {
+    public MainAdapter(FragmentManager fm, Context context, int state) {
         super(fm);
         this.context = context;
-        this.needPay = needPay;
-//        this.needPay = true;
+        this.state = state;
+        tabTitles = new String[]{"首页", "个人中心"};
+        imageResId = new int[]{R.drawable.main_menu0_selector, R.drawable.main_menu1_selector};
+    }
+
+    public MainAdapter(FragmentManager fm, Context context, int state, int code, CreditDetail creditDetail) {
+        super(fm);
+        this.context = context;
+        this.state = state;
+        this.code = code;
+        this.creditDetail = creditDetail;
         tabTitles = new String[]{"首页", "个人中心"};
         imageResId = new int[]{R.drawable.main_menu0_selector, R.drawable.main_menu1_selector};
     }
@@ -44,16 +59,21 @@ public class MainAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                if (needPay) {
+                if (state == 1) {
                     if (payFragment == null) {
                         payFragment = PayFragment.newInstance();
                     }
                     return payFragment;
-                } else {
+                } else if (state == 0) {
                     if (homeFragment == null) {
                         homeFragment = HomeFragment.newInstance();
                     }
                     return homeFragment;
+                } else {
+                    if (creditStateFragment == null) {
+                        creditStateFragment = CreditStateFragment.newInstance(code,creditDetail);
+                    }
+                    return creditStateFragment;
                 }
             case 1:
                 if (myFragment == null) {

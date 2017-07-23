@@ -26,7 +26,9 @@ public class HttpMethods {
      * 、
      * 支付宝、淘宝认证、
      *
-     * 还款详情界面／联系人要选择／主界面要处理多种情况
+     * 还款详情界面／联系人要选择／主界面要处理多种情况/各种服务链接
+     *
+     * 取消申请/我的贷款列表
      *
      *
      *
@@ -39,8 +41,8 @@ public class HttpMethods {
      *
      */
 
-    public static final String BASE_URL = "http://192.168.1.221:8080/lizhixinInterface/";
-//    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.221:8080/lizhixinInterface/";
+    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
@@ -177,7 +179,7 @@ public class HttpMethods {
      */
 
     //进首页之前的判断
-    public void getHomeState(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+    public void getHomeState(Subscriber<HttpResult.IndexResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.getHomeState(options);
         toSubscribe(observable, subscriber);
     }
