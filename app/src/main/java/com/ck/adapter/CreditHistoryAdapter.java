@@ -68,7 +68,9 @@ public class CreditHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
             }else if(state == 6){
                 ((ViewHolder) holder).state.setText("已续期");
             }else if(state == 7){
-                ((ViewHolder) holder).state.setText("还款中");
+                ((ViewHolder) holder).state.setText("取消贷款");
+            }else if(state == 8){
+                ((ViewHolder) holder).state.setText("申请还款中");
             }else{
                 ((ViewHolder) holder).state.setText("未知状态");
             }

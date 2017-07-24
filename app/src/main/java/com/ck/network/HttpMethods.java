@@ -1,8 +1,6 @@
 package com.ck.network;
 
-import com.ck.bean.Contact;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -26,16 +24,16 @@ public class HttpMethods {
      * 、
      * 支付宝、淘宝认证
      *
-     * 下面的是测试发现的问题
-     * 0.找回密码短信验证的问题
-     * 1.个人信息认证，“服务与隐私”缺少链接
-     * 2.详情里面的（到期还款额）值没有，通过首页那个接口获取的是这个问题，通过8.6那个接口获取的没问题
-     * 3.贷款记录的状态不对（取消了的申请显示是还款中state==7）
-     * 4.放贷之后手机不知道，要重新进才能看到状态变化
-     * 5.客服电话，收款支付宝账号要改，现在用的李华的
+     * 是测试发现的问题
+     * 0.找回密码短信验证的问题（好了）
+     * 1.个人信息认证，“服务与隐私”缺少链接（好了）
+     * 2.详情里面的（到期还款额）值没有，通过首页那个接口获取的是这个问题，通过8.6那个接口获取的没问题（好了）
+     * 3.贷款记录的状态不对（取消了的申请显示是还款中state==7）  （好了）
+     * 4.放贷之后手机不知道，要重新进才能看到状态变化（好了）
+     * 5.客服电话，收款支付宝账号要改，现在用的李华的(先不改)
+     * 6.续期加回调（好了）
+     * 7.续期成功后，“我想还款”界面要变化(好了)
      *
-     *  1.上传身份证选择“截图”文件夹下
-     *  2.续期成功后，“我想还款”界面要变化(还是应该等后台确认续期成功才改)
      *
      * //下面是
      * 联系人要选择
@@ -43,6 +41,7 @@ public class HttpMethods {
      * 取消申请/(状态变了之后首页的刷新)   三个地方跳转到详情(index/还款/历史记录)，
      * 取消后首页的状态需要改变，跳转到了新的主界面，还没有测试过
      * 通信认证
+     * 截图
      * 苹果开发者账号：申请邓白氏码中
      */
 
@@ -92,6 +91,12 @@ public class HttpMethods {
     //发送验证码
     public void sendCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.sendCode(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //发送验证码
+    public void sendFindCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.sendFindCode(options);
         toSubscribe(observable, subscriber);
     }
 
@@ -262,6 +267,12 @@ public class HttpMethods {
     //取消申请
     public void cancelOrder(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.cancelOrder(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //续期的回调
+    public void payLaterCallback(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.payLaterCallback(options);
         toSubscribe(observable, subscriber);
     }
 

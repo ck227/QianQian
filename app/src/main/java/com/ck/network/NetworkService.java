@@ -31,6 +31,11 @@ public interface NetworkService {
     @GET("smsverify/send.html")
     Observable<HttpResult.BaseResponse> sendCode(@QueryMap Map<String, Object> options);
 
+    //找回密码的验证码
+    @GET("smsverify/sendTwo.html")
+    Observable<HttpResult.BaseResponse> sendFindCode(@QueryMap Map<String, Object> options);
+
+
     //注册
     @GET("user/registere.html")
     Observable<HttpResult.BaseResponse> register(@QueryMap Map<String, Object> options);
@@ -152,6 +157,10 @@ public interface NetworkService {
     //取消申请
     @GET("loanRecord/cancel.html")
     Observable<HttpResult.BaseResponse> cancelOrder(@QueryMap Map<String, Object> options);
+
+    //续期的回调
+    @GET("renewalRecord/update.html")
+    Observable<HttpResult.BaseResponse> payLaterCallback(@QueryMap Map<String, Object> options);
 
 
 }

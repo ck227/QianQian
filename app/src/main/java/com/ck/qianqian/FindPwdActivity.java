@@ -154,7 +154,7 @@ public class FindPwdActivity extends BaseActivity {
                 }
             }
         };
-        HttpMethods.getInstance().sendCode(subscriber, map);
+        HttpMethods.getInstance().sendFindCode(subscriber, map);
     }
 
     private void timerStart() {

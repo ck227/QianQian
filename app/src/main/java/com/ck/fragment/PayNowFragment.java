@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.ck.bean.credit.PayNow;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
+import com.ck.qianqian.IndexActivity;
+import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.credit.CreditDetailActivity;
 import com.ck.qianqian.credit.CreditHistoryActivity;
@@ -76,7 +78,7 @@ public class PayNowFragment extends Fragment {
         return view;
     }
 
-    private void getData() {
+    public void getData() {
         dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
         dialog.show();
         Map<String, Object> map = new HashMap<>();
@@ -213,7 +215,7 @@ public class PayNowFragment extends Fragment {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+//                dialog.cancel();
             }
 
             @Override
@@ -224,7 +226,13 @@ public class PayNowFragment extends Fragment {
 
             @Override
             public void onNext(HttpResult.BaseResponse response) {
-                Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                if(response.code > 0){
+                    getHomeState();
+                }else{
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+
             }
         };
         HttpMethods.getInstance().payOnline(subscriber, map);
@@ -234,5 +242,41 @@ public class PayNowFragment extends Fragment {
         return recordId;
     }
 
+    private void getHomeState() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.IndexResponse response) {
+                int code = response.code;
+                if (code == 1 || code == 8) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 2);//
+                    intent.putExtra("code", code);
+                    intent.putExtra("creditDetail", response.obj);
+                    startActivity(intent);
+                } else if (code == 3) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 1);//还款
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 0);//借款
+                    startActivity(intent);
+                }
+                getActivity().finish();
+            }
+        };
+        HttpMethods.getInstance().getHomeState(subscriber, map);
+    }
 
 }

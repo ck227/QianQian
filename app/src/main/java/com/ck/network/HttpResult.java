@@ -26,7 +26,7 @@ public class HttpResult {
      * 登录、发送验证码、注册、找回密码、修改密码
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
      * 反馈
-     * 申请贷款/首页判断/取消申请
+     * 申请贷款/首页判断/取消申请／续期的回调
      */
     public static class BaseResponse {
         public int code;

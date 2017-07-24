@@ -446,6 +446,7 @@
                     android:textSize="@dimen/SecTextSize"/>
 
                 <TextView
+                    android:id="@+id/service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="服务与隐私"

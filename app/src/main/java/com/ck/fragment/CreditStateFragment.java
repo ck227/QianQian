@@ -9,14 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ck.bean.credit.CreditDetail;
+import com.ck.network.HttpMethods;
+import com.ck.network.HttpResult;
 import com.ck.qianqian.R;
 import com.ck.qianqian.credit.CreditDetailActivity;
+import com.ck.qianqian.credit.CreditHistoryActivity;
+import com.ck.widget.LoadingDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import rx.Subscriber;
 
 /**
  * Created by chendaye on 2017/7/23.
@@ -39,6 +48,7 @@ public class CreditStateFragment extends Fragment {
     Unbinder unbinder;
 
     CreditDetail creditDetail;
+    private int otherCode = 0;
 
     public static CreditStateFragment newInstance(int code, CreditDetail creditDetail) {
 
@@ -63,7 +73,7 @@ public class CreditStateFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         titleName.setText("借贷中心");
         Bundle bundle = getArguments();
-        final int code = bundle.getInt("code");
+        otherCode = bundle.getInt("code");
         creditDetail = bundle.getParcelable("creditDetail");
 
         name.setText("贷款天数：" + creditDetail.getDayNumber());
@@ -72,7 +82,7 @@ public class CreditStateFragment extends Fragment {
 
         credit_amount.setText(creditDetail.getAmount() + "元");
 
-        if (code == 1) {
+        if (otherCode == 1) {
             credit_state.setText("申请贷款中");
         } else {
             credit_state.setText("还款中");
@@ -81,15 +91,53 @@ public class CreditStateFragment extends Fragment {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreditDetailActivity.class);
-                if (code == 1) {
-                    intent.putExtra("code", 99);
-                }
-                intent.putExtra("creditDetail", creditDetail);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), CreditDetailActivity.class);
+//                if (code == 1) {
+//                    intent.putExtra("code", 99);
+//                }
+//                intent.putExtra("creditDetail", creditDetail);
+//                startActivity(intent);
+                getRecordDetail();
             }
         });
 
         return view;
+    }
+
+    private LoadingDialog dialog;
+
+    private void getRecordDetail() {
+        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("recordId", creditDetail.getRecordId());
+        Subscriber subscriber = new Subscriber<HttpResult.GetDetailByRecordIdResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.GetDetailByRecordIdResponse response) {
+                int code = response.code;
+                if (code == 0) {
+                    Intent intent = new Intent(getActivity(), CreditDetailActivity.class);
+                    if (otherCode == 1) {
+                        intent.putExtra("code", 99);
+                    }
+                    intent.putExtra("creditDetail", response.obj);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().getDetailByRecordId(subscriber, map);
     }
 }

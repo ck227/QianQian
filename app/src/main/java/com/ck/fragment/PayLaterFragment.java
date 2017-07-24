@@ -243,6 +243,37 @@ public class PayLaterFragment extends Fragment {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
+//                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.BaseResponse response) {
+                if(response.code > 0){
+                    payLaterCallback(response.code);
+                }else{
+                    dialog.cancel();
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+//
+            }
+        };
+        HttpMethods.getInstance().payOnlineLater(subscriber, map);
+    }
+
+
+
+    private void payLaterCallback(int code){
+        Map<String, Object> map = new HashMap<>();
+        map.put("renewalId", code);
+        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+            @Override
+            public void onCompleted() {
                 dialog.cancel();
             }
 
@@ -255,8 +286,13 @@ public class PayLaterFragment extends Fragment {
             @Override
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                if(response.code == 0){
+                    ((PayNowFragment)((PayFragment)getParentFragment()).getPayAdapter().getItem(0)).getData();
+                }else{
+
+                }
             }
         };
-        HttpMethods.getInstance().payOnlineLater(subscriber, map);
+        HttpMethods.getInstance().payLaterCallback(subscriber, map);
     }
 }

@@ -53,6 +53,8 @@ public class CheckMsgActivity extends BaseActivity {
     EditText emergencyName;
     @BindView(R.id.emergencyRelation)
     AutoCompleteTextView emergencyRelation;
+    @BindView(R.id.service)
+    TextView service;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -133,7 +135,7 @@ public class CheckMsgActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.education, R.id.marriage, R.id.income, R.id.emergencyRelation, R.id.submit})
+    @OnClick({R.id.education, R.id.marriage, R.id.income, R.id.emergencyRelation, R.id.service, R.id.submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.education:
@@ -151,6 +153,12 @@ public class CheckMsgActivity extends BaseActivity {
             case R.id.emergencyRelation:
 //                if (!emergencyRelation.isShown())
                 emergencyRelation.showDropDown();
+                break;
+            case R.id.service:
+                Intent intent = new Intent(CheckMsgActivity.this, WebViewActivity.class);
+                intent.putExtra("title", "服务与隐私");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=RIVACY_SERVICE");
+                startActivity(intent);
                 break;
             case R.id.submit:
                 if (checkValue()) {
