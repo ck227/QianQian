@@ -48,6 +48,8 @@ public class CreditDetailActivity extends BaseActivity {
     TextView accountFee;
     @BindView(R.id.interestFee)
     TextView interestFee;
+    @BindView(R.id.arrivalFee)
+    TextView arrivalFee;
     @BindView(R.id.repaymentMoney)
     TextView repaymentMoney;
     @BindView(R.id.playMoneytime)
@@ -98,6 +100,7 @@ public class CreditDetailActivity extends BaseActivity {
         trialFee.setText(creditDetail.getTrialFee() + "元");
         accountFee.setText(creditDetail.getAccountFee() + "元");
         interestFee.setText(creditDetail.getInterestFee() + "元");
+        arrivalFee.setText(creditDetail.getArrivalFee()+"元");
         repaymentMoney.setText(creditDetail.getRepaymentMoney() + "元");
         playMoneytime.setText(creditDetail.getPlayMoneytime());
         repaymentTime.setText(creditDetail.getRepaymentTime());
