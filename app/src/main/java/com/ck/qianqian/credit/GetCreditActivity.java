@@ -19,6 +19,7 @@ import com.ck.network.HttpResult;
 import com.ck.qianqian.BaseActivity;
 import com.ck.qianqian.CheckCenterActivity;
 import com.ck.qianqian.CheckContactActivity;
+import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.WebViewActivity;
 import com.ck.util.MyApplication;
@@ -199,7 +200,7 @@ public class GetCreditActivity extends BaseActivity {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-
+//                dialog.cancel();
             }
 
             @Override
@@ -211,16 +212,61 @@ public class GetCreditActivity extends BaseActivity {
             @Override
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(GetCreditActivity.this, response.msg, Toast.LENGTH_LONG).show();
-                if (response.code == 0) {//还需要判断在没有全部认证的情况下跳转到认证界面
+                if (response.code == 0) {
                     dialog.cancel();
-                    finish();
+                    getHomeState();
                 } else if (response.code == -5) {
 //                    Toast.makeText(getApplicationContext(),"请完成认证",Toast.LENGTH_SHORT).show();
                     getStatus();
+                }else{
+                    dialog.cancel();
                 }
             }
         };
         HttpMethods.getInstance().addCredit(subscriber, map);
+    }
+
+    private void getHomeState() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onNext(HttpResult.IndexResponse response) {
+                int code = response.code;
+                if (code == 1 || code == 8) {
+                    Intent intent = new Intent(GetCreditActivity.this, MainActivity.class);
+                    intent.putExtra("state", 2);//
+                    intent.putExtra("code", code);
+                    intent.putExtra("creditDetail", response.obj);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else if (code == 3) {
+                    Intent intent = new Intent(GetCreditActivity.this, MainActivity.class);
+                    intent.putExtra("state", 1);//还款
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(GetCreditActivity.this, MainActivity.class);
+                    intent.putExtra("state", 0);//借款
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+                finish();
+            }
+        };
+        HttpMethods.getInstance().getHomeState(subscriber, map);
     }
 
     private void getStatus() {

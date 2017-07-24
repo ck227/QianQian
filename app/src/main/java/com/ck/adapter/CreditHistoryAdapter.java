@@ -49,7 +49,7 @@ public class CreditHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof ViewHolder) {
             CreditHistory creditHistory = data.get(position);
             ((ViewHolder) holder).name.setText(creditHistory.getLoanTypeName());
-            ((ViewHolder) holder).number.setText("编号：" + creditHistory.getRecordId());
+            ((ViewHolder) holder).number.setText(creditHistory.getLoanNumber());
             ((ViewHolder) holder).amount.setText(creditHistory.getAmountMoney());
             ((ViewHolder) holder).time.setText(creditHistory.getRepaymentTime());
             int state = creditHistory.getLoanState();
