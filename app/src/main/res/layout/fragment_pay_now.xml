@@ -6,6 +6,14 @@
               android:orientation="vertical"
               tools:context="com.ck.fragment.PayNowFragment">
 
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingBottom="16dp">
+
+
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -128,5 +136,7 @@
         android:paddingTop="14dp"
         android:text="还款"
         android:textColor="@color/white"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -287,6 +287,7 @@ public class PayLaterFragment extends Fragment {
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
                 if(response.code == 0){
+                    ((PayFragment)getParentFragment()).setContent(0);
                     ((PayNowFragment)((PayFragment)getParentFragment()).getPayAdapter().getItem(0)).getData();
                 }else{
 

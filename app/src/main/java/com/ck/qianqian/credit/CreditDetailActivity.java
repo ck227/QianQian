@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ck.adapter.CreditHistoryAdapter;
 import com.ck.bean.credit.CreditDetail;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
@@ -107,19 +108,43 @@ public class CreditDetailActivity extends BaseActivity {
         actualRepaymentTime.setText(creditDetail.getActualRepaymentTime());
         String states = creditDetail.getLoanState();
         int state = Integer.valueOf(states);
-        if (state == 1) {
-            loanState.setText("申请打款");
-        } else if (state == 2) {
+//        if (state == 1) {
+//            loanState.setText("申请打款");
+//        } else if (state == 2) {
+//            loanState.setText("取消放款");
+//        } else if (state == 3) {
+//            loanState.setText("已放款");
+//        } else if (state == 4) {
+//            loanState.setText("已还款");
+//        } else if (state == 5) {
+//            loanState.setText("已逾期");
+//        } else if (state == 6) {
+//            loanState.setText("已续期");
+//        }
+
+        if(state == 0){
+            loanState.setText("无贷款记录 ");
+        }else if(state == 1){//0：无贷款记录 1：申请贷款 2：取消放款 3：已放款 4：已还款 5：已逾期 6：已续期
+            loanState.setText("申请贷款中");
+        }else if(state == 2){
             loanState.setText("取消放款");
-        } else if (state == 3) {
+        }else if(state == 3){
             loanState.setText("已放款");
-        } else if (state == 4) {
+        }else if(state == 4){
             loanState.setText("已还款");
-        } else if (state == 5) {
+        }else if(state == 5){
             loanState.setText("已逾期");
-        } else if (state == 6) {
+        }else if(state == 6){
             loanState.setText("已续期");
+        }else if(state == 7){
+            loanState.setText("取消贷款");
+        }else if(state == 8){
+            loanState.setText("申请还款中");
+        }else{
+            loanState.setText("未知状态");
         }
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

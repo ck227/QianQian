@@ -119,4 +119,8 @@ public class PayFragment extends Fragment {
     public PayAdapter getPayAdapter(){
         return payAdapter;
     }
+
+    public void setContent(int pos){
+        viewPager.setCurrentItem(pos, true);
+    }
 }
