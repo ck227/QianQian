@@ -51,16 +51,26 @@ public class CreditHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
             ((ViewHolder) holder).name.setText(creditHistory.getLoanTypeName());
             ((ViewHolder) holder).number.setText(creditHistory.getLoanNumber());
             ((ViewHolder) holder).amount.setText(creditHistory.getAmountMoney());
-            ((ViewHolder) holder).time.setText(creditHistory.getRepaymentTime());
+            ((ViewHolder) holder).time.setText(creditHistory.getDay()+"天");
             int state = creditHistory.getLoanState();
-            if(state == 1){
+            if(state == 0){
+                ((ViewHolder) holder).state.setText("无贷款记录 ");
+            }else if(state == 1){//0：无贷款记录 1：申请贷款 2：取消放款 3：已放款 4：已还款 5：已逾期 6：已续期
                 ((ViewHolder) holder).state.setText("申请贷款中");
+            }else if(state == 2){
+                ((ViewHolder) holder).state.setText("取消放款");
             }else if(state == 3){
                 ((ViewHolder) holder).state.setText("已放款");
             }else if(state == 4){
                 ((ViewHolder) holder).state.setText("已还款");
-            }else{
+            }else if(state == 5){
+                ((ViewHolder) holder).state.setText("已逾期");
+            }else if(state == 6){
+                ((ViewHolder) holder).state.setText("已续期");
+            }else if(state == 7){
                 ((ViewHolder) holder).state.setText("还款中");
+            }else{
+                ((ViewHolder) holder).state.setText("未知状态");
             }
         }
     }

@@ -228,7 +228,7 @@ public class CheckIdActivity extends BaseActivity {
         dirFile.getParentFile().mkdirs();
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dirFile));
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
             bos.flush();
             bos.close();
         } catch (IOException e) {

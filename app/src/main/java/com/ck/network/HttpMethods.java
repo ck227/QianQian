@@ -25,7 +25,19 @@ public class HttpMethods {
     /**
      * 、
      * 支付宝、淘宝认证
-     * <p>
+     *
+     * 下面的是测试发现的问题
+     * 0.找回密码短信验证的问题
+     * 1.个人信息认证，“服务与隐私”缺少链接
+     * 2.详情里面的（到期还款额）值没有，通过首页那个接口获取的是这个问题，通过8.6那个接口获取的没问题
+     * 3.贷款记录的状态不对（取消了的申请显示是还款中state==7）
+     * 4.放贷之后手机不知道，要重新进才能看到状态变化
+     * 5.客服电话，收款支付宝账号要改，现在用的李华的
+     *
+     *  1.上传身份证选择“截图”文件夹下
+     *  2.续期成功后，“我想还款”界面要变化(还是应该等后台确认续期成功才改)
+     *
+     * //下面是
      * 联系人要选择
      * 各种服务链接
      * 取消申请/(状态变了之后首页的刷新)   三个地方跳转到详情(index/还款/历史记录)，
@@ -34,7 +46,7 @@ public class HttpMethods {
      * 苹果开发者账号：申请邓白氏码中
      */
 
-//    public static final String BASE_URL = "http://192.168.1.221:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.116:8080/lizhixinInterface/";
     public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
