@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.ck.bean.credit.PayNow;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
-import com.ck.qianqian.LoginActivity;
-import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
+import com.ck.qianqian.credit.CreditDetailActivity;
+import com.ck.qianqian.credit.CreditHistoryActivity;
 import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
 import com.ck.widget.PayNowDialog;
@@ -47,8 +47,6 @@ public class PayNowFragment extends Fragment {
     @BindView(R.id.pay)
     TextView pay;
     Unbinder unbinder;
-
-    private LoadingDialog dialog;
 
     private int recordId;
 
@@ -118,25 +116,67 @@ public class PayNowFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.pay)
-    public void onViewClicked() {
-        showDialog();
+    @OnClick({R.id.money, R.id.pay})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.money:
+                getRecordDetail();
+                break;
+            case R.id.pay:
+                showDialog();
+                break;
+        }
     }
 
-    private void showDialog(){
+    private LoadingDialog dialog;
+
+    private void getRecordDetail() {
+        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("recordId", recordId);
+        Subscriber subscriber = new Subscriber<HttpResult.GetDetailByRecordIdResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.GetDetailByRecordIdResponse response) {
+                int code = response.code;
+                if (code == 0) {
+                    Intent intent = new Intent(getActivity(), CreditDetailActivity.class);
+                    intent.putExtra("creditDetail", response.obj);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        HttpMethods.getInstance().getDetailByRecordId(subscriber, map);
+    }
+
+    private void showDialog() {
         final PayNowDialog dialog = new PayNowDialog(getActivity(), new PayNowDialog.ButtonListener() {
             @Override
             public void submit(int selectType) {
                 if (selectType == 0) {
-                    Toast.makeText(getContext(),"支付宝暂未开通",Toast.LENGTH_SHORT).show();
-                }else if (selectType == 1){
+                    Toast.makeText(getContext(), "支付宝暂未开通", Toast.LENGTH_SHORT).show();
+                } else if (selectType == 1) {
                     //请求服务器
                     showDialog2();
-                }else{
-                    Toast.makeText(getContext(),"微信暂未开通",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "微信暂未开通", Toast.LENGTH_SHORT).show();
                 }
             }
-        },payNow.getRepaymentMoney());
+        }, payNow.getRepaymentMoney());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.show();
     }
@@ -144,10 +184,10 @@ public class PayNowFragment extends Fragment {
     private void showDialog2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("提示");
-        builder.setMessage("请将最终还款金额【"+payNow.getLoanAmount()+"元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
-                "\n"+
-        "收款人：李华"+"\n"+
-        "支付宝账号：15717174872");
+        builder.setMessage("请将最终还款金额【" + payNow.getLoanAmount() + "元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
+                "\n" +
+                "收款人：李华" + "\n" +
+                "支付宝账号：15717174872");
         builder.setPositiveButton("已转账", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -163,7 +203,7 @@ public class PayNowFragment extends Fragment {
         builder.create().show();
     }
 
-    private void payOnline(){
+    private void payOnline() {
         dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
         dialog.show();
         Map<String, Object> map = new HashMap<>();
@@ -193,4 +233,6 @@ public class PayNowFragment extends Fragment {
     public int getRecordId() {
         return recordId;
     }
+
+
 }

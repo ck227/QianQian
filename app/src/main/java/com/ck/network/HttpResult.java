@@ -4,6 +4,7 @@ import com.ck.bean.Banks;
 import com.ck.bean.CheckInfo;
 import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
+import com.ck.bean.CreditHistory;
 import com.ck.bean.Login;
 import com.ck.bean.credit.Credit;
 import com.ck.bean.credit.CreditDetail;
@@ -25,7 +26,7 @@ public class HttpResult {
      * 登录、发送验证码、注册、找回密码、修改密码
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
      * 反馈
-     * 申请贷款/首页判断
+     * 申请贷款/首页判断/取消申请
      */
     public static class BaseResponse {
         public int code;
@@ -33,12 +34,12 @@ public class HttpResult {
     }
 
     //判断首页状态
-    public static class IndexResponse extends BaseResponse{
+    public static class IndexResponse extends BaseResponse {
         public CreditDetail obj;
     }
 
     //登录
-    public static class LoginResponse extends BaseResponse{
+    public static class LoginResponse extends BaseResponse {
         public Login obj;
     }
 
@@ -88,7 +89,7 @@ public class HttpResult {
         public ArrayList<GetCreditDay> list;
     }
 
-    //获取详细信息
+    //获取详细信息（计算费用）
     public static class GetCreditDetailResponse extends BaseResponse {
         public GetCreditDetail obj;
     }
@@ -100,5 +101,16 @@ public class HttpResult {
     public static class GetPayDetailResponse extends BaseResponse {
         public PayNow obj;
     }
+
+    //贷款记录
+    public static class CreditHistoryResponse extends BaseResponse {
+        public ArrayList<CreditHistory> list;
+    }
+
+    //根据id获取详情
+    public static class GetDetailByRecordIdResponse extends BaseResponse {
+        public CreditDetail obj;
+    }
+
 
 }

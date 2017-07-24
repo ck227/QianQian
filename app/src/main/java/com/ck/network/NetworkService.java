@@ -141,6 +141,17 @@ public interface NetworkService {
     @GET("renewalRecord/add.html")
     Observable<HttpResult.BaseResponse> payOnlineLater(@QueryMap Map<String, Object> options);
 
+    //历史记录
+    @GET("loanRecord/userList.html")
+    Observable<HttpResult.CreditHistoryResponse> getCreditHistory(@QueryMap Map<String, Object> options);
+
+    //获取贷款的详情
+    @GET("loanRecord/details.html")
+    Observable<HttpResult.GetDetailByRecordIdResponse> getDetailByRecordId(@QueryMap Map<String, Object> options);
+
+    //取消申请
+    @GET("loanRecord/cancel.html")
+    Observable<HttpResult.BaseResponse> cancelOrder(@QueryMap Map<String, Object> options);
 
 
 }

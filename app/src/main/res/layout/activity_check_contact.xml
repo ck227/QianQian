@@ -51,10 +51,24 @@
                 android:textSize="@dimen/SecTextSize"/>
 
             <TextView
+                android:id="@+id/contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="《通讯录授权协议》, 《信息手机使用规则》"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text="《通讯录授权协议》"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/SecTextSize"/>
+
+            <TextView
+                android:id="@+id/msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:text=",《信息手机使用规则》"
                 android:textColor="@color/text_blue"
                 android:textSize="@dimen/SecTextSize"/>
 

@@ -1,12 +1,12 @@
 package com.ck.qianqian;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +26,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import rx.Subscriber;
 import rx.functions.Action1;
 
@@ -35,6 +33,10 @@ public class CheckContactActivity extends BaseActivity {
 
     @BindView(R.id.titleName)
     TextView titleName;
+    @BindView(R.id.contact)
+    TextView contact;
+    @BindView(R.id.msg)
+    TextView msg;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -50,25 +52,43 @@ public class CheckContactActivity extends BaseActivity {
         contacts = new ArrayList<>();
     }
 
-    @OnClick(R.id.submit)
-    public void onViewClicked() {
-        RxPermissions.getInstance(CheckContactActivity.this)
-                .request(Manifest.permission.READ_CONTACTS)
-                .subscribe(new Action1<Boolean>() {
-                    @Override
-                    public void call(Boolean granted) {
-                        if (granted) {
-                            dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
-                            dialog.show();
-                            contacts.clear();//避免数据重复
-                            getContacts();
-                        } else {
-                            //不同意，给提示
-                            Toast.makeText(CheckContactActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+    @OnClick({R.id.contact, R.id.msg, R.id.submit})
+    public void onViewClicked(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.contact:
+                intent = new Intent(CheckContactActivity.this, WebViewActivity.class);
+                intent.putExtra("title", "通讯录协议");
+                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=BOOK_SERVICE");
+                startActivity(intent);
+                break;
+            case R.id.msg:
+                intent = new Intent(CheckContactActivity.this, WebViewActivity.class);
+                intent.putExtra("title", "信息协议");
+                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=USER_SERVICE");
+                startActivity(intent);
+                break;
+            case R.id.submit:
+                RxPermissions.getInstance(CheckContactActivity.this)
+                        .request(Manifest.permission.READ_CONTACTS)
+                        .subscribe(new Action1<Boolean>() {
+                            @Override
+                            public void call(Boolean granted) {
+                                if (granted) {
+                                    dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
+                                    dialog.show();
+                                    contacts.clear();//避免数据重复
+                                    getContacts();
+                                } else {
+                                    //不同意，给提示
+                                    Toast.makeText(CheckContactActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                break;
+        }
     }
+
 
     private void getContacts() {
 //        ContentResolver cr = getContentResolver();
@@ -111,17 +131,17 @@ public class CheckContactActivity extends BaseActivity {
         for (int i = 0; i < page; i++) {
             if (i < page - 1) {
                 List<Contact> data = contacts.subList(i * 20, i * 20 + 19);
-                uploadData(data,false);
+                uploadData(data, false);
             } else {
                 List<Contact> data = contacts.subList(i * 20, contacts.size() - 1);
-                uploadData(data,true);
+                uploadData(data, true);
             }
         }
     }
 
 //    private Boolean hasFinish = false;
 
-    private void uploadData(List<Contact> data,final Boolean isLast) {
+    private void uploadData(List<Contact> data, final Boolean isLast) {
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", MyApplication.getInstance().getUserName());
         Gson gson = new Gson();
@@ -156,7 +176,7 @@ public class CheckContactActivity extends BaseActivity {
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 if (response.code == 0) {
-                    if(isLast){
+                    if (isLast) {
                         Intent intent = new Intent();
                         intent.putExtra("success", true);
                         setResult(0, intent);
@@ -167,6 +187,7 @@ public class CheckContactActivity extends BaseActivity {
         };
         HttpMethods.getInstance().addCheckContact(subscriber, map);
     }
+
 
 }
 

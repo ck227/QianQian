@@ -6,53 +6,78 @@ package com.ck.bean;
 
 public class CreditHistory {
 
-    private String name;
 
-    private String number;
+    /**
+     * amountMoney : 1000
+     * day : 7
+     * loanNumber : LZX20170723030538234
+     * loanState : 3
+     * loanTypeName : 千元贷款极速到账（秒过）
+     * recordId : 7
+     * repaymentTime : 2017-07-30
+     */
 
-    private String amount;
+    private String amountMoney;
+    private int day;
+    private String loanNumber;
+    private int loanState;
+    private String loanTypeName;
+    private int recordId;
+    private String repaymentTime;
 
-    private String time;
-
-    private String state;
-
-    public String getName() {
-        return name;
+    public String getAmountMoney() {
+        return amountMoney;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAmountMoney(String amountMoney) {
+        this.amountMoney = amountMoney;
     }
 
-    public String getNumber() {
-        return number;
+    public int getDay() {
+        return day;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setDay(int day) {
+        this.day = day;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getLoanNumber() {
+        return loanNumber;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setLoanNumber(String loanNumber) {
+        this.loanNumber = loanNumber;
     }
 
-    public String getTime() {
-        return time;
+    public int getLoanState() {
+        return loanState;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setLoanState(int loanState) {
+        this.loanState = loanState;
     }
 
-    public String getState() {
-        return state;
+    public String getLoanTypeName() {
+        return loanTypeName;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setLoanTypeName(String loanTypeName) {
+        this.loanTypeName = loanTypeName;
+    }
+
+    public int getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
+    }
+
+    public String getRepaymentTime() {
+        return repaymentTime;
+    }
+
+    public void setRepaymentTime(String repaymentTime) {
+        this.repaymentTime = repaymentTime;
     }
 }

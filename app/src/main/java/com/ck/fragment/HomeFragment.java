@@ -180,7 +180,7 @@ public class HomeFragment extends Fragment {
                 if (response.code == 0) {
                     Intent intent = new Intent(getActivity(), GetCreditActivity.class);
                     intent.putParcelableArrayListExtra("amounts", response.list);
-                    intent.putExtra("typeId",typeId);
+                    intent.putExtra("typeId", typeId);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();

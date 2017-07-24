@@ -32,6 +32,7 @@ public class CreditDetail implements Parcelable {
      * userName :
      */
 
+    private String loanTypeName;
     private String accountFee;
     private String actualRepaymentMoney;
     private String actualRepaymentTime;
@@ -52,6 +53,14 @@ public class CreditDetail implements Parcelable {
     private String repaymentTime;
     private String trialFee;
     private String userName;
+
+    public String getLoanTypeName() {
+        return loanTypeName;
+    }
+
+    public void setLoanTypeName(String loanTypeName) {
+        this.loanTypeName = loanTypeName;
+    }
 
     public String getAccountFee() {
         return accountFee;
@@ -220,6 +229,7 @@ public class CreditDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.loanTypeName);
         dest.writeString(this.accountFee);
         dest.writeString(this.actualRepaymentMoney);
         dest.writeString(this.actualRepaymentTime);
@@ -246,6 +256,7 @@ public class CreditDetail implements Parcelable {
     }
 
     protected CreditDetail(Parcel in) {
+        this.loanTypeName = in.readString();
         this.accountFee = in.readString();
         this.actualRepaymentMoney = in.readString();
         this.actualRepaymentTime = in.readString();
@@ -268,7 +279,7 @@ public class CreditDetail implements Parcelable {
         this.userName = in.readString();
     }
 
-    public static final Parcelable.Creator<CreditDetail> CREATOR = new Parcelable.Creator<CreditDetail>() {
+    public static final Creator<CreditDetail> CREATOR = new Creator<CreditDetail>() {
         @Override
         public CreditDetail createFromParcel(Parcel source) {
             return new CreditDetail(source);

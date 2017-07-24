@@ -24,21 +24,16 @@ public class HttpMethods {
 
     /**
      * 、
-     * 支付宝、淘宝认证、
-     *
-     * 还款详情界面／联系人要选择／主界面要处理多种情况/各种服务链接
-     *
-     * 取消申请/我的贷款列表
-     *
-     *
-     *
-     *
-     *
+     * 支付宝、淘宝认证
+     * <p>
+     * 联系人要选择
+     * <p>
+     * 各种服务链接
+     * 取消申请/(状态变了之后首页的刷新)   三个地方跳转到详情(index/还款/历史记录)，
+     * 取消后首页的状态需要改变，跳转到了新的主界面，还没有测试过
+     * <p>
+     * 通信认证
      * 苹果开发者账号：申请邓白氏码中
-     *
-     * 不处理：通信认证异常
-     * 还款/续期 已处理，可能有逻辑上的问题
-     *
      */
 
 //    public static final String BASE_URL = "http://192.168.1.221:8080/lizhixinInterface/";
@@ -151,7 +146,7 @@ public class HttpMethods {
     }
 
     //添加通讯录认证
-    public void addCheckContact(Subscriber<HttpResult.BaseResponse> subscriber,Map<String, Object> options) {
+    public void addCheckContact(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.addCheckContact(options);
         toSubscribe(observable, subscriber);
     }
@@ -203,7 +198,7 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
-    //获取贷款详细信息
+    //获取贷款详细信息（计算费用）
     public void getCreditDetail(Subscriber<HttpResult.GetCreditDetailResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.getCreditDetail(options);
         toSubscribe(observable, subscriber);
@@ -242,5 +237,22 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //贷款记录
+    public void getCreditHistory(Subscriber<HttpResult.CreditHistoryResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCreditHistory(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //进入详细
+    public void getDetailByRecordId(Subscriber<HttpResult.GetDetailByRecordIdResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getDetailByRecordId(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //取消申请
+    public void cancelOrder(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.cancelOrder(options);
+        toSubscribe(observable, subscriber);
+    }
 
 }

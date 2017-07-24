@@ -109,7 +109,8 @@
                 android:layout_weight="1"
                 android:text="0.0元"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/SecTextSize"/>
+                android:textSize="@dimen/SecTextSize"
+                android:drawableRight="@mipmap/my_arrow_right"/>
         </LinearLayout>
 
     </LinearLayout>

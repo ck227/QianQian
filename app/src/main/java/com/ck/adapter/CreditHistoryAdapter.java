@@ -47,15 +47,27 @@ public class CreditHistoryAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
-//            CreditHistory creditHistory = data.get(position);
-//            ((ViewHolder) holder).name.setText(creditHistory.getName());
+            CreditHistory creditHistory = data.get(position);
+            ((ViewHolder) holder).name.setText(creditHistory.getLoanTypeName());
+            ((ViewHolder) holder).number.setText("编号：" + creditHistory.getRecordId());
+            ((ViewHolder) holder).amount.setText(creditHistory.getAmountMoney());
+            ((ViewHolder) holder).time.setText(creditHistory.getRepaymentTime());
+            int state = creditHistory.getLoanState();
+            if(state == 1){
+                ((ViewHolder) holder).state.setText("申请贷款中");
+            }else if(state == 3){
+                ((ViewHolder) holder).state.setText("已放款");
+            }else if(state == 4){
+                ((ViewHolder) holder).state.setText("已还款");
+            }else{
+                ((ViewHolder) holder).state.setText("还款中");
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-//        return data == null ? 0 : data.size();
-        return 10;
+        return data == null ? 0 : data.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

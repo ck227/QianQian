@@ -18,7 +18,9 @@ import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.qianqian.BaseActivity;
 import com.ck.qianqian.CheckCenterActivity;
+import com.ck.qianqian.CheckContactActivity;
 import com.ck.qianqian.R;
+import com.ck.qianqian.WebViewActivity;
 import com.ck.util.MyApplication;
 import com.ck.widget.GridSpacingDecoration;
 import com.ck.widget.LoadingDialog;
@@ -50,6 +52,8 @@ public class GetCreditActivity extends BaseActivity {
     TextView arrivalFee;
     @BindView(R.id.amountFee)
     TextView amountFee;
+    @BindView(R.id.contract)
+    TextView contract;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -177,7 +181,7 @@ public class GetCreditActivity extends BaseActivity {
                     accountFee.setText("账户管理费：" + getCreditDetail.getAccountFee() + "元");
                     arrivalFee.setText(getCreditDetail.getArrivalFee() + "元");
                     amountFee.setText(getCreditDetail.getAmountFee() + "元");
-                }  else {
+                } else {
                     Toast.makeText(GetCreditActivity.this, response.msg, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -210,7 +214,7 @@ public class GetCreditActivity extends BaseActivity {
                 if (response.code == 0) {//还需要判断在没有全部认证的情况下跳转到认证界面
                     dialog.cancel();
                     finish();
-                }else if (response.code == -5) {
+                } else if (response.code == -5) {
 //                    Toast.makeText(getApplicationContext(),"请完成认证",Toast.LENGTH_SHORT).show();
                     getStatus();
                 }
@@ -250,12 +254,6 @@ public class GetCreditActivity extends BaseActivity {
         HttpMethods.getInstance().checkStatus(subscriber, map);
     }
 
-    @OnClick(R.id.submit)
-    public void onViewClicked() {
-        if (checkValue()) {
-            addCredit();
-        }
-    }
 
     private Boolean checkValue() {
         if (amountPos < 0) {
@@ -267,5 +265,22 @@ public class GetCreditActivity extends BaseActivity {
             return false;
         }
         return true;
+    }
+
+    @OnClick({R.id.contract, R.id.submit})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.contract:
+                Intent intent = new Intent(GetCreditActivity.this, WebViewActivity.class);
+                intent.putExtra("title", "贷款须知");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=LOAN_SERVICE");
+                startActivity(intent);
+                break;
+            case R.id.submit:
+                if (checkValue()) {
+                    addCredit();
+                }
+                break;
+        }
     }
 }
