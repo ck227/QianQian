@@ -59,13 +59,13 @@ public class CheckContactActivity extends BaseActivity {
             case R.id.contact:
                 intent = new Intent(CheckContactActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "通讯录协议");
-                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=BOOK_SERVICE");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=BOOK_SERVICE");
                 startActivity(intent);
                 break;
             case R.id.msg:
                 intent = new Intent(CheckContactActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "信息协议");
-                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=USER_SERVICE");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=USER_SERVICE");
                 startActivity(intent);
                 break;
             case R.id.submit:
@@ -127,13 +127,13 @@ public class CheckContactActivity extends BaseActivity {
         }
 //        uploadData();
         int size = contacts.size();
-        int page = size % 20 + 1;
-        for (int i = 0; i < page; i++) {
+        int page = size / 20 + 1;
+        for (int i = 1; i < page; i++) {
             if (i < page - 1) {
-                List<Contact> data = contacts.subList(i * 20, i * 20 + 19);
+                List<Contact> data = contacts.subList((i - 1) * 20, (i - 1) * 20 + 19);
                 uploadData(data, false);
             } else {
-                List<Contact> data = contacts.subList(i * 20, contacts.size() - 1);
+                List<Contact> data = contacts.subList((i - 1) * 20, contacts.size() - 1);
                 uploadData(data, true);
             }
         }

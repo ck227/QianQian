@@ -221,6 +221,8 @@ public class CheckCenterActivity extends BaseActivity {
                 } else if (hasCheckContact == 2) {
                     Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
                 }
+//                intent = new Intent(this, CheckContactActivity.class);
+//                startActivityForResult(intent, 5);
                 break;
         }
     }
