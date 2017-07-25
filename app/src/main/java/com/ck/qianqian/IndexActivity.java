@@ -39,9 +39,7 @@ public class IndexActivity extends Activity implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         Intent intent;
-
         username = MyApplication.getInstance().getUserName();
         if (username != null && username.length() > 0) {
             //进入之前要判断一下
@@ -51,7 +49,6 @@ public class IndexActivity extends Activity implements Runnable {
             startActivity(intent);
             finish();
         }
-
     }
 
     private void getHomeState() {

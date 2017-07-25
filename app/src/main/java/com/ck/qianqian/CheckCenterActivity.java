@@ -12,11 +12,7 @@ import android.widget.Toast;
 import com.ck.bean.CheckStatus;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
-import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,10 +53,22 @@ public class CheckCenterActivity extends BaseActivity {
     TextView checkContactText;
     @BindView(R.id.check_contact_ll)
     LinearLayout checkContactLl;
+    @BindView(R.id.check_alipay_ic)
+    ImageView checkAlipayIc;
+    @BindView(R.id.check_alipay_text)
+    TextView checkAlipayText;
+    @BindView(R.id.check_alipay_ll)
+    LinearLayout checkAlipayLl;
+    @BindView(R.id.check_taobao_ic)
+    ImageView checkTaobaoIc;
+    @BindView(R.id.check_taobao_text)
+    TextView checkTaobaoText;
+    @BindView(R.id.check_taobao_ll)
+    LinearLayout checkTaobaoLl;
 
     private CheckStatus status;
 
-    private int hasCheckPhone, hasCheckMsg, hasCheckId, hasCheckCard, hasCheckContact;
+    private int hasCheckPhone, hasCheckMsg, hasCheckId, hasCheckCard, hasCheckContact, hasCheckAlipay, hasCheckTaobao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +83,9 @@ public class CheckCenterActivity extends BaseActivity {
         hasCheckId = status.getUser_card_audit();
         hasCheckCard = status.getUser_bank_audit();
         hasCheckContact = status.getUser_book_phone_audit();
+
+        hasCheckAlipay = status.getUser_zfb_audit();
+        hasCheckTaobao = status.getUser_tb_audit();
         setViews();
     }
 
@@ -167,9 +178,44 @@ public class CheckCenterActivity extends BaseActivity {
         } else if (hasCheckContact == 3) {
             checkContactText.setText("通信认证(未通过)");
         }
+        //支付宝认证
+        if (hasCheckAlipay == 2) {
+            checkAlipayIc.setImageResource(R.mipmap.check_contact2);
+            checkAlipayText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkAlipayIc.setImageResource(R.mipmap.check_contact);
+            checkAlipayText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckAlipay == 0) {
+            checkAlipayText.setText("支付宝认证(未认证)");
+        } else if (hasCheckAlipay == 1) {
+            checkAlipayText.setText("支付宝认证(待认证)");
+        } else if (hasCheckAlipay == 2) {
+            checkAlipayText.setText("支付宝认证(已认证)");
+        } else if (hasCheckAlipay == 3) {
+            checkAlipayText.setText("支付宝认证(未通过)");
+        }
+        //淘宝认证
+        if (hasCheckTaobao == 2) {
+            checkTaobaoIc.setImageResource(R.mipmap.check_contact2);
+            checkTaobaoText.setTextColor(getResources().getColor(R.color.text_blue));
+        } else {
+            checkTaobaoIc.setImageResource(R.mipmap.check_contact);
+            checkTaobaoText.setTextColor(getResources().getColor(R.color.second_text_color));
+        }
+        if (hasCheckTaobao == 0) {
+            checkTaobaoText.setText("淘宝认证(未认证)");
+        } else if (hasCheckTaobao == 1) {
+            checkTaobaoText.setText("淘宝认证(待认证)");
+        } else if (hasCheckTaobao == 2) {
+            checkTaobaoText.setText("淘宝认证(已认证)");
+        } else if (hasCheckTaobao == 3) {
+            checkTaobaoText.setText("淘宝认证(未通过)");
+        }
+
     }
 
-    @OnClick({R.id.check_phone_ll, R.id.check_msg_ll, R.id.check_id_ll, R.id.check_card_ll, R.id.check_contact_ll})
+    @OnClick({R.id.check_phone_ll, R.id.check_msg_ll, R.id.check_id_ll, R.id.check_card_ll, R.id.check_contact_ll, R.id.check_alipay_ll, R.id.check_taobao_ll})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -221,8 +267,32 @@ public class CheckCenterActivity extends BaseActivity {
                 } else if (hasCheckContact == 2) {
                     Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
                 }
-//                intent = new Intent(this, CheckContactActivity.class);
-//                startActivityForResult(intent, 5);
+                break;
+            case R.id.check_alipay_ll:
+                if (hasCheckAlipay == 0 || hasCheckAlipay == 3) {
+                    intent = new Intent(this, WebViewActivity.class);
+                    intent.putExtra("title", "支付宝认证");
+                    intent.putExtra("url", "https://auth.alipay.com/login/index.htm");
+                    intent.putExtra("type", 2);
+                    startActivityForResult(intent, 6);
+                } else if (hasCheckAlipay == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckAlipay == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.check_taobao_ll:
+                if (hasCheckTaobao == 0 || hasCheckTaobao == 3) {
+                    intent = new Intent(this, WebViewActivity.class);
+                    intent.putExtra("title", "淘宝认证");
+                    intent.putExtra("url", "https://login.taobao.com/");
+                    intent.putExtra("type", 3);
+                    startActivityForResult(intent, 7);
+                } else if (hasCheckTaobao == 1) {
+                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                } else if (hasCheckTaobao == 2) {
+                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -254,6 +324,16 @@ public class CheckCenterActivity extends BaseActivity {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckContact = 1;
                 checkContactText.setText("通信认证(待认证)");
+            }
+        } else if (requestCode == 6 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckAlipay = 1;
+                checkAlipayText.setText("支付宝认证(待认证)");
+            }
+        } else if (requestCode == 7 && data != null) {
+            if (data.getBooleanExtra("success", false)) {
+                hasCheckTaobao = 1;
+                checkTaobaoText.setText("淘宝认证(待认证)");
             }
         }
     }

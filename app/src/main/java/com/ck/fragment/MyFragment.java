@@ -95,10 +95,7 @@ public class MyFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.personInfo:
-//                intent = new Intent(getActivity(), WebViewActivity.class);
-//                intent.putExtra("title", "title");
-//                intent.putExtra("url", "https://mobile.alipay.com/index.htm?cid=wap_dc");
-//                startActivity(intent);
+
                 break;
             case R.id.check_rel:
                 getStatus();

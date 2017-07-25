@@ -66,6 +66,11 @@ public interface NetworkService {
     @POST("upload/upload.html")
     Observable<HttpResult.UploadPicResponse> uploadPic(@Part("file\"; filename=\"ck.png") RequestBody body, @QueryMap Map<String, Object> options);
 
+    //上传视频
+    @Multipart
+    @POST("upload/upload.html")
+    Observable<HttpResult.UploadPicResponse> uploadVideo(@Part("file\"; filename=\"ck.mp4") RequestBody body, @QueryMap Map<String, Object> options);
+
     //添加身份证认证
     @GET("userCard/add.html")
     Observable<HttpResult.BaseResponse> addCheckId(@QueryMap Map<String, Object> options);
@@ -97,6 +102,13 @@ public interface NetworkService {
     @GET("feedBack/add.html")
     Observable<HttpResult.BaseResponse> sendFeedback(@QueryMap Map<String, Object> options);
 
+    //添加支付宝认证
+    @GET("userZfb/add.html")
+    Observable<HttpResult.BaseResponse> addAlipay(@QueryMap Map<String, Object> options);
+
+    //添加淘宝认证
+    @GET("userTb/add.html")
+    Observable<HttpResult.BaseResponse> addTaobao(@QueryMap Map<String, Object> options);
 
     /**
      * 下面的是首页的

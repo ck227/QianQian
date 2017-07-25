@@ -22,7 +22,8 @@ public class HttpMethods {
 
     /**
      * 、
-     * 支付宝、淘宝认证
+     *
+     * 混淆/
      *
      * 是测试发现的问题
      * 0.找回密码短信验证的问题（好了）
@@ -33,10 +34,12 @@ public class HttpMethods {
      * 5.客服电话，收款支付宝账号要改，现在用的李华的(先不改)
      * 6.续期加回调（好了）
      * 7.续期成功后，“我想还款”界面要变化(好了)
+     * 8.续了之后自动切换过去（好了）
+     * 9.界面底色（好了）
      *
-     *
-     * 8.续了之后自动切换过去
-     * 9.界面底色
+     * 10.修改logo
+     * 11.认证的界面还有功能优化（好了要改图标）
+     * 12支付宝、淘宝认证（好了要调试）
      *
      *
      *
@@ -44,13 +47,13 @@ public class HttpMethods {
      * 联系人要选择
      * 各种服务链接
      * 取消申请/(状态变了之后首页的刷新)   三个地方跳转到详情(index/还款/历史记录)，
-     * 取消后首页的状态需要改变，跳转到了新的主界面，还没有测试过
+     * 取消后首页的状态需要改变，跳转到了新的主界面
      * 通信认证
      * 截图
      * 苹果开发者账号：申请邓白氏码中
      */
 
-//    public static final String BASE_URL = "http://192.168.1.116:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.118:8080/lizhixinInterface/";
     public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
@@ -147,6 +150,12 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //上传视频
+    public void uploadVideo(Subscriber<HttpResult.UploadPicResponse> subscriber, RequestBody body, Map<String, Object> options) {
+        Observable observable = networkService.uploadVideo(body, options);
+        toSubscribe(observable, subscriber);
+    }
+
     //添加身份证认证
     public void addCheckId(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.addCheckId(options);
@@ -188,6 +197,20 @@ public class HttpMethods {
         Observable observable = networkService.sendFeedback(options);
         toSubscribe(observable, subscriber);
     }
+
+    //支付宝认证
+    public void addAlipay(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addAlipay(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //淘宝认证
+    public void addTaobao(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.addTaobao(options);
+        toSubscribe(observable, subscriber);
+    }
+
+
 
     /**
      * 下面的是首页的

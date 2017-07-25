@@ -5,7 +5,48 @@
               android:background="@color/base_background"
               android:orientation="vertical">
 
-    <include layout="@layout/base_back_title"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titleBar"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:onClick="back"
+            android:paddingLeft="22dp"
+            android:paddingRight="22dp"
+            android:src="@mipmap/base_back"/>
+
+        <TextView
+            android:id="@+id/titleName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/TitleTextSize"/>
+
+        <TextView
+            android:id="@+id/button"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="开始录制"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/SecTextSize"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/divider"/>
+
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/map_container"
