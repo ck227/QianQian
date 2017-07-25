@@ -32,7 +32,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import rx.Subscriber;
 
-public class WebViewActivity extends BaseActivity implements View.OnClickListener {
+public class WebViewActivity extends BaseActivity {//implements View.OnClickListener
 
     @BindView(R.id.titleName)
     TextView titleName;
@@ -45,6 +45,8 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
     private String title;
     private String url;
     private int type;
+
+    private WebViewFragment webViewFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,8 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
 
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("webView") == null) {
-            fm.beginTransaction().add(R.id.map_container, WebViewFragment.newInstance(url), "webView").commit();
+            webViewFragment = WebViewFragment.newInstance(url,type);
+            fm.beginTransaction().add(R.id.map_container, webViewFragment, "webView").commit();
         }
 
         if (type == 2 || type == 3) {//支付宝验证，开始录屏
@@ -77,20 +80,22 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
             Intent captureIntent = mMediaProjectionManager.createScreenCaptureIntent();
             startActivityForResult(captureIntent, REQUEST_CODE);
 
-            new Handler().postDelayed(new Runnable() {
+//            new Handler().postDelayed(new Runnable() {
+//
+//                public void run() {
+//                    //execute the task
+//                    finishRecord();
+//                }
+//
+//            }, 5000);
+        }
+    }
 
-                public void run() {
-                    //execute the task
-                    if (mRecorder != null) {
-                        mRecorder.quit();
-                        mRecorder = null;
-                        uploadVideo();
-                    }
-                }
-
-            }, 5000);
-
-
+    public void finishRecord(){
+        if (mRecorder != null) {
+            mRecorder.quit();
+            mRecorder = null;
+            uploadVideo();
         }
     }
 
@@ -121,7 +126,7 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
         button.setText("停止录制");
         Toast.makeText(this, "正在录制...", Toast.LENGTH_SHORT).show();
     }
-
+/*
     @Override
     public void onClick(View v) {
         if (mRecorder != null) {
@@ -135,7 +140,7 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
             Intent captureIntent = mMediaProjectionManager.createScreenCaptureIntent();
             startActivityForResult(captureIntent, REQUEST_CODE);
         }
-    }
+    }*/
 
     private void uploadVideo() {
         dialog = new LoadingDialog(this, R.style.MyCustomDialog);

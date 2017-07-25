@@ -1,6 +1,7 @@
 package com.ck.qianqian;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +14,13 @@ import com.ck.bean.CheckStatus;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.widget.LoadingDialog;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 public class CheckCenterActivity extends BaseActivity {
 
@@ -270,11 +273,26 @@ public class CheckCenterActivity extends BaseActivity {
                 break;
             case R.id.check_alipay_ll:
                 if (hasCheckAlipay == 0 || hasCheckAlipay == 3) {
-                    intent = new Intent(this, WebViewActivity.class);
-                    intent.putExtra("title", "支付宝认证");
-                    intent.putExtra("url", "https://auth.alipay.com/login/index.htm");
-                    intent.putExtra("type", 2);
-                    startActivityForResult(intent, 6);
+                    RxPermissions.getInstance(CheckCenterActivity.this)
+                            .request(
+                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)//这里申请了两组权限
+                            .subscribe(new Action1<Boolean>() {
+                                @Override
+                                public void call(Boolean granted) {
+                                    if (granted) {
+                                        Intent intent = new Intent(CheckCenterActivity.this, WebViewActivity.class);
+                                        intent.putExtra("title", "支付宝认证");
+                                        intent.putExtra("url", "https://auth.alipay.com/login/index.htm");
+                                        intent.putExtra("type", 2);
+                                        startActivityForResult(intent, 6);
+                                    } else {
+                                        //不同意，给提示
+                                        Toast.makeText(CheckCenterActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
                 } else if (hasCheckAlipay == 1) {
                     Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckAlipay == 2) {

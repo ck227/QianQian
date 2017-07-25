@@ -1,6 +1,8 @@
 package com.ck.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.ck.qianqian.R;
+import com.ck.qianqian.WebViewActivity;
+
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.webkit.JsResult;
@@ -31,10 +35,13 @@ public class WebViewFragment extends Fragment {
     private View view;
     private String realUrl;
 
-    public static WebViewFragment newInstance(String url) {
+    private int type;
+
+    public static WebViewFragment newInstance(String url,int type) {
 
         Bundle args = new Bundle();
         args.putString("url", url);
+        args.putInt("type",type);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(args);
         return fragment;
@@ -48,6 +55,7 @@ public class WebViewFragment extends Fragment {
                     .inflate(R.layout.fragment_webview, container, false);
             ButterKnife.bind(this, view);
             realUrl = getArguments().getString("url");
+            type = getArguments().getInt("type");
             setViews();
         }
         return view;
@@ -93,11 +101,27 @@ public class WebViewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
+//            if (url.startsWith("scheme:") || url.startsWith("scheme:")) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                startActivity(intent);
+//
+//            }
+//            return false;
             return true;
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
+
+            if(type == 2){
+                if(url.contains("my.alipay.com")){
+                    ((WebViewActivity)getActivity()).finishRecord();
+                }
+            }else if(type == 3){
+                if(url.contains("taobao://h5.m.taobao")){
+                    ((WebViewActivity)getActivity()).finishRecord();
+                }
+            }
             super.onPageFinished(view, url);
         }
     }
