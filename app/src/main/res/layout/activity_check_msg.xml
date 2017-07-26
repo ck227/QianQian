@@ -57,7 +57,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
-                        android:src="@mipmap/my_arrow_down"/>
+                        android:src="@mipmap/my_arrow_right"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -102,7 +102,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
-                        android:src="@mipmap/my_arrow_down"/>
+                        android:src="@mipmap/my_arrow_right"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -147,7 +147,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
-                        android:src="@mipmap/my_arrow_down"/>
+                        android:src="@mipmap/my_arrow_right"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -166,7 +166,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="常住地址"
+                    android:text="现居地址"
                     android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
@@ -175,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="请输入常住地址"
+                    android:hint="请输入现居地址"
                     android:paddingBottom="14dp"
                     android:paddingTop="14dp"
                     android:textColor="@color/text_cyan"
@@ -332,12 +332,13 @@
                     android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/emergencyPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="请输入紧急联系人电话"
+                    android:drawableRight="@mipmap/my_arrow_right"
+                    android:hint="请输入紧急联系人(1)电话"
                     android:inputType="phone"
                     android:paddingBottom="14dp"
                     android:paddingTop="14dp"
@@ -345,7 +346,9 @@
                     android:textColorHint="@color/text_cyan"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/SecTextSize"/>
+
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -364,12 +367,12 @@
                     android:textColor="@color/base_text_color"
                     android:textSize="@dimen/BigTextSize"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/emergencyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="请输入紧急联系人姓名"
+                    android:hint="请输入紧急联系人(1)姓名"
                     android:paddingBottom="14dp"
                     android:paddingTop="14dp"
                     android:textColor="@color/text_cyan"
@@ -418,7 +421,232 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
-                        android:src="@mipmap/my_arrow_down"/>
+                        android:src="@mipmap/my_arrow_right"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人电话"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <TextView
+                    android:id="@+id/emergencyPhone2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/my_arrow_right"
+                    android:hint="请输入紧急联系人(2)电话"
+                    android:inputType="phone"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
+                    android:textColor="@color/text_cyan"
+                    android:textColorHint="@color/text_cyan"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/SecTextSize"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人姓名"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <TextView
+                    android:id="@+id/emergencyName2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入紧急联系人(2)姓名"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
+                    android:textColor="@color/text_cyan"
+                    android:textColorHint="@color/text_cyan"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/SecTextSize"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人关系"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/emergencyRelation2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:paddingBottom="14dp"
+                        android:paddingTop="14dp"
+                        android:textColor="@color/text_cyan"
+                        android:textSize="@dimen/SecTextSize"></AutoCompleteTextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:src="@mipmap/my_arrow_right"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人电话"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <TextView
+                    android:id="@+id/emergencyPhone3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:drawableRight="@mipmap/my_arrow_right"
+                    android:hint="请输入紧急联系人(3)电话"
+                    android:inputType="phone"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
+                    android:textColor="@color/text_cyan"
+                    android:textColorHint="@color/text_cyan"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/SecTextSize"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人姓名"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <TextView
+                    android:id="@+id/emergencyName3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入紧急联系人(3)姓名"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
+                    android:textColor="@color/text_cyan"
+                    android:textColorHint="@color/text_cyan"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/SecTextSize"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人关系"
+                    android:textColor="@color/base_text_color"
+                    android:textSize="@dimen/BigTextSize"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/emergencyRelation3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:paddingBottom="14dp"
+                        android:paddingTop="14dp"
+                        android:textColor="@color/text_cyan"
+                        android:textSize="@dimen/SecTextSize"></AutoCompleteTextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:src="@mipmap/my_arrow_right"/>
 
                 </RelativeLayout>
             </LinearLayout>
@@ -453,7 +681,6 @@
                     android:textColor="@color/text_blue"
                     android:textSize="@dimen/SecTextSize"/>
             </LinearLayout>
-
 
 
             <TextView

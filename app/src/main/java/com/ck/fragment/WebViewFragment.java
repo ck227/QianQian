@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.ck.qianqian.R;
 import com.ck.qianqian.WebViewActivity;
 
@@ -37,11 +38,11 @@ public class WebViewFragment extends Fragment {
 
     private int type;
 
-    public static WebViewFragment newInstance(String url,int type) {
+    public static WebViewFragment newInstance(String url, int type) {
 
         Bundle args = new Bundle();
         args.putString("url", url);
-        args.putInt("type",type);
+        args.putInt("type", type);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(args);
         return fragment;
@@ -101,10 +102,11 @@ public class WebViewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             try {
-                if(url.startsWith("taobao://") || url.startsWith("alipays://")) {
-                    ((WebViewActivity)getActivity()).finishRecord();
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent);
+                if (url.startsWith("taobao://") || url.startsWith("alipays://")) {
+                    ((WebViewActivity) getActivity()).finishRecord();
+                    //不跳转
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                    startActivity(intent);
                     return true;
                 }
             } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
@@ -117,13 +119,13 @@ public class WebViewFragment extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
 
-            if(type == 2){
-                if(url.contains("my.alipay.com")){
-                    ((WebViewActivity)getActivity()).finishRecord();
+            if (type == 2) {
+                if (url.contains("my.alipay.com")) {
+                    ((WebViewActivity) getActivity()).finishRecord();
                 }
-            }else if(type == 3){
-                if(url.contains("www.taobao.com")){
-                    ((WebViewActivity)getActivity()).finishRecord();
+            } else if (type == 3) {
+                if (url.contains("www.taobao.com")) {
+                    ((WebViewActivity) getActivity()).finishRecord();
                 }
             }
             super.onPageFinished(view, url);

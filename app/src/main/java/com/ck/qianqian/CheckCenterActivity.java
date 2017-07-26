@@ -381,6 +381,7 @@ public class CheckCenterActivity extends BaseActivity {
                     intent.putParcelableArrayListExtra("marriages", response.obj.getListMarriage());
                     intent.putParcelableArrayListExtra("incomes", response.obj.getListIncome());
                     intent.putParcelableArrayListExtra("contacts", response.obj.getListContacts());
+                    intent.putParcelableArrayListExtra("contactsOne", response.obj.getListContactsOne());
                     startActivityForResult(intent, 2);
                 } else {
                     Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();

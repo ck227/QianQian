@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class CheckInfo implements Parcelable {
 
     private ArrayList<InfoType> listContacts;
+    private ArrayList<InfoType> listContactsOne;
     private ArrayList<InfoType> listEducation;
     private ArrayList<InfoType> listIncome;
     private ArrayList<InfoType> listMarriage;
@@ -22,6 +23,14 @@ public class CheckInfo implements Parcelable {
 
     public void setListContacts(ArrayList<InfoType> listContacts) {
         this.listContacts = listContacts;
+    }
+
+    public ArrayList<InfoType> getListContactsOne() {
+        return listContactsOne;
+    }
+
+    public void setListContactsOne(ArrayList<InfoType> listContactsOne) {
+        this.listContactsOne = listContactsOne;
     }
 
     public ArrayList<InfoType> getListEducation() {
@@ -56,6 +65,7 @@ public class CheckInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.listContacts);
+        dest.writeTypedList(this.listContactsOne);
         dest.writeTypedList(this.listEducation);
         dest.writeTypedList(this.listIncome);
         dest.writeTypedList(this.listMarriage);
@@ -66,12 +76,13 @@ public class CheckInfo implements Parcelable {
 
     protected CheckInfo(Parcel in) {
         this.listContacts = in.createTypedArrayList(InfoType.CREATOR);
+        this.listContactsOne = in.createTypedArrayList(InfoType.CREATOR);
         this.listEducation = in.createTypedArrayList(InfoType.CREATOR);
         this.listIncome = in.createTypedArrayList(InfoType.CREATOR);
         this.listMarriage = in.createTypedArrayList(InfoType.CREATOR);
     }
 
-    public static final Parcelable.Creator<CheckInfo> CREATOR = new Parcelable.Creator<CheckInfo>() {
+    public static final Creator<CheckInfo> CREATOR = new Creator<CheckInfo>() {
         @Override
         public CheckInfo createFromParcel(Parcel source) {
             return new CheckInfo(source);
