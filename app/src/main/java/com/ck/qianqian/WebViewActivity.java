@@ -66,7 +66,7 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
 
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentByTag("webView") == null) {
-            webViewFragment = WebViewFragment.newInstance(url,type);
+            webViewFragment = WebViewFragment.newInstance(url, type);
             fm.beginTransaction().add(R.id.map_container, webViewFragment, "webView").commit();
         }
 
@@ -91,14 +91,21 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
         }
     }
 
-    public void finishRecord(){
-        if (mRecorder != null) {
-            mRecorder.quit();
-            mRecorder = null;
-            uploadVideo();
-        }
-    }
+    public void finishRecord() {
+        new Handler().postDelayed(new Runnable() {
 
+            public void run() {
+                //execute the task
+                if (mRecorder != null) {
+                    mRecorder.quit();
+                    mRecorder = null;
+                    uploadVideo();
+                }
+            }
+
+        }, 3000);
+
+    }
 
     private MediaProjectionManager mMediaProjectionManager;
     private ScreenRecorder mRecorder;

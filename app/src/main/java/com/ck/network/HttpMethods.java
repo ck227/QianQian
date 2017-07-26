@@ -54,7 +54,7 @@ public class HttpMethods {
      * 苹果开发者账号：申请邓白氏码中
      */
 
-//    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.118:8080/lizhixinInterface/";
     public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;

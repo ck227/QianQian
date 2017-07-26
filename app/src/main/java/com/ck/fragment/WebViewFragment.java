@@ -73,23 +73,23 @@ public class WebViewFragment extends Fragment {
         webView.setWebViewClient(new HelloWebViewClient());
         webView.loadUrl(realUrl);
 
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-                AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-                b.setTitle("");
-                b.setMessage(message);
-                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        result.confirm();
-                    }
-                });
-                b.setCancelable(false);
-                b.create().show();
-                return true;
-            }
-        });
+//        webView.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+//                AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+//                b.setTitle("");
+//                b.setMessage(message);
+//                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        result.confirm();
+//                    }
+//                });
+//                b.setCancelable(false);
+//                b.create().show();
+//                return true;
+//            }
+//        });
     }
 
     private class HelloWebViewClient extends WebViewClient {
@@ -100,13 +100,17 @@ public class WebViewFragment extends Fragment {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            try {
+                if(url.startsWith("taobao://") || url.startsWith("alipays://")) {
+                    ((WebViewActivity)getActivity()).finishRecord();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                    return true;
+                }
+            } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
+                return false;
+            }
             view.loadUrl(url);
-//            if (url.startsWith("scheme:") || url.startsWith("scheme:")) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//                startActivity(intent);
-//
-//            }
-//            return false;
             return true;
         }
 
@@ -118,7 +122,7 @@ public class WebViewFragment extends Fragment {
                     ((WebViewActivity)getActivity()).finishRecord();
                 }
             }else if(type == 3){
-                if(url.contains("taobao://h5.m.taobao")){
+                if(url.contains("www.taobao.com")){
                     ((WebViewActivity)getActivity()).finishRecord();
                 }
             }
