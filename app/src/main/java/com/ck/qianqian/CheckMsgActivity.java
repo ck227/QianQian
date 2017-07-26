@@ -124,6 +124,8 @@ public class CheckMsgActivity extends BaseActivity {
         marriage.setAdapter(adapter2);
         income.setAdapter(adapter3);
         emergencyRelation.setAdapter(adapter4);
+        emergencyRelation2.setAdapter(adapter5);
+        emergencyRelation3.setAdapter(adapter6);
 
         education.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
