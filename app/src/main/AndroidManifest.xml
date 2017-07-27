@@ -15,7 +15,7 @@
     <application
         android:name="com.ck.util.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/credit_handshake"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/credit_handshake"
         android:supportsRtl="true"

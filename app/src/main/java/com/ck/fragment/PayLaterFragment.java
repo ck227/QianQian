@@ -157,6 +157,7 @@ public class PayLaterFragment extends Fragment {
         Subscriber subscriber = new Subscriber<HttpResult.GetCreditDayResponse>() {
             @Override
             public void onCompleted() {
+
             }
 
             @Override
@@ -178,19 +179,19 @@ public class PayLaterFragment extends Fragment {
     }
 
     private void getState() {
-        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
-        dialog.show();
+//        dialog = new LoadingDialog(getActivity(), R.style.MyCustomDialog);
+//        dialog.show();
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", MyApplication.getInstance().getUserName());
         Subscriber subscriber = new Subscriber<HttpResult.PayLaterState>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+//                dialog.cancel();
             }
 
             @Override
             public void onError(Throwable e) {
-                dialog.cancel();
+//                dialog.cancel();
                 Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
             }
 
@@ -199,18 +200,12 @@ public class PayLaterFragment extends Fragment {
                 if (response.code == 0) {
                     if (response.obj == null) {
                         //什么事都不用做，可以正常续期
-
-//                        submit.setEnabled(true);
-//                        submit.setBackgroundResource(R.drawable.login_btn);
-//                        cardView.setVisibility(View.GONE);
-//                        cancel.setVisibility(View.GONE);
                     } else {
                         //
                         submit.setEnabled(false);
                         submit.setBackgroundResource(R.drawable.shape_gray_round);
                         cardView.setVisibility(View.VISIBLE);
                         cancel.setVisibility(View.VISIBLE);
-
 
                         //下面的内容显示出来
                         PayLater payLater = response.obj;
@@ -226,18 +221,6 @@ public class PayLaterFragment extends Fragment {
                         serviceFee2.setText("服务费：" + payLater.getServiceFee()+"元");
 
                         renewalNumber.setText(payLater.getRenewalNumber()+"期");
-
-                        //dayNumber 续期天数
-                        //applyRenewalTime 续期申请时间
-                        //state 续期状态
-                        //trialFee2 快速信审费
-
-                        //interestFee2 利息
-                        //accountFee2 账户管理费
-                        //amountFee 贷款金额
-                        //serviceFee2 服务费
-
-                        //renewalNumber 期数
                     }
                 } else {
 //                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
@@ -354,7 +337,7 @@ public class PayLaterFragment extends Fragment {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-//                dialog.cancel();
+                dialog.cancel();
             }
 
             @Override
@@ -369,7 +352,6 @@ public class PayLaterFragment extends Fragment {
 //                    payLaterCallback(response.code);
                     getState();
                 } else {
-                    dialog.cancel();
                     Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
                 }
 //

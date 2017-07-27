@@ -187,7 +187,7 @@ public interface NetworkService {
     Observable<HttpResult.PayLaterState> getPayLaterState(@QueryMap Map<String, Object> options);
 
     //获取续期转改
-    @GET("loanRenewal/details.html")
+    @GET("loanRenewal/cancel.html")
     Observable<HttpResult.BaseResponse> cancelPayLater(@QueryMap Map<String, Object> options);
 
 

@@ -42,9 +42,9 @@ public class HttpMethods {
      * 12.支付宝、淘宝认证（好了要调试）
      * 13.紧急联系人留3个(好了)
      *
-     * 14.银行卡认证，添加省市
-     * 15.续费利息加服务费
-     * 16.续期的状态界面
+     * 14.银行卡认证，添加省市（好了）
+     * 15.续费利息加服务费（好了）
+     * 16.续期的状态界面(好了)
      *
      *
      *
@@ -58,7 +58,7 @@ public class HttpMethods {
      * 苹果开发者账号：申请邓白氏码中
      */
 
-//    public static final String BASE_URL = "http://192.168.1.118:8080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
     public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
