@@ -40,6 +40,8 @@ public class CheckCardActivity extends BaseActivity {
     AutoCompleteTextView type;
     @BindView(R.id.cardNo)
     EditText cardNo;
+    @BindView(R.id.address)
+    TextView address;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -105,7 +107,7 @@ public class CheckCardActivity extends BaseActivity {
         }
     };
 
-    @OnClick({R.id.type, R.id.submit})
+    @OnClick({R.id.type, R.id.submit, R.id.address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.type:
@@ -120,6 +122,9 @@ public class CheckCardActivity extends BaseActivity {
                     uploadData();
                 }
                 break;
+            case R.id.address:
+                getProvince();
+                break;
         }
     }
 
@@ -131,6 +136,8 @@ public class CheckCardActivity extends BaseActivity {
         map.put("bankType", bankType);
         map.put("bankName", name.getText().toString());
         map.put("bankNumber", cardNo.getText().toString());
+        map.put("provinceId", provinceId);
+        map.put("cityId", cityId);
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
@@ -170,10 +177,61 @@ public class CheckCardActivity extends BaseActivity {
             Toast.makeText(getApplicationContext(), "请输入银行卡号", Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (provinceId < 0 || cityId < 0) {
+            Toast.makeText(getApplicationContext(), "请选择开户地址", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
+    //获取省的数据
+    private void getProvince() {
+        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+        dialog.show();
+        Subscriber subscriber = new Subscriber<HttpResult.ProvinceResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.ProvinceResponse response) {
+                if (response.code == 0) {
+                    Intent intent = new Intent(CheckCardActivity.this, ChooseCityActivity.class);
+                    intent.putParcelableArrayListExtra("provinces", response.list);
+                    startActivityForResult(intent, 0);
+                } else {
+                    Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        };
+        HttpMethods.getInstance().getProvince(subscriber);
+    }
+
+    private int provinceId = -1;
+    private String provinceName;
+    private int cityId = -1;
+    private String cityName;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && data != null) {
+            provinceId = data.getIntExtra("provinceId", 0);
+            provinceName = data.getStringExtra("provinceName");
+            cityId = data.getIntExtra("cityId", 0);
+            cityName = data.getStringExtra("cityName");
+
+            address.setText(provinceName + cityName);
+        }
+    }
 }
 
 

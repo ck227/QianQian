@@ -20,6 +20,7 @@ public class GetCreditDetail {
     private String arrivalFee;
     private String interestFee;
     private String trialFee;
+    private String serviceFee;
 
     public String getAccountFee() {
         return accountFee;
@@ -55,6 +56,14 @@ public class GetCreditDetail {
 
     public String getTrialFee() {
         return trialFee;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
     }
 
     public void setTrialFee(String trialFee) {

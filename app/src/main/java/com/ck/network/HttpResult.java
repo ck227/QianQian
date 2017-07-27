@@ -4,8 +4,11 @@ import com.ck.bean.Banks;
 import com.ck.bean.CheckInfo;
 import com.ck.bean.CheckPhone;
 import com.ck.bean.CheckStatus;
+import com.ck.bean.City;
 import com.ck.bean.CreditHistory;
 import com.ck.bean.Login;
+import com.ck.bean.PayLater;
+import com.ck.bean.Province;
 import com.ck.bean.credit.Credit;
 import com.ck.bean.credit.CreditDetail;
 import com.ck.bean.credit.GetCreditAmount;
@@ -26,7 +29,7 @@ public class HttpResult {
      * 登录、发送验证码、注册、找回密码、修改密码
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
      * 反馈
-     * 申请贷款/首页判断/取消申请／续期的回调/支付宝认证添加/淘宝认证添加
+     * 申请贷款/首页判断/取消申请／续期的回调/支付宝认证添加/淘宝认证添加／取消续期的
      */
     public static class BaseResponse {
         public int code;
@@ -112,5 +115,19 @@ public class HttpResult {
         public CreditDetail obj;
     }
 
+    //省份列表
+    public static class ProvinceResponse extends BaseResponse {
+        public ArrayList<Province> list;
+    }
+
+    //城市列表
+    public static class CityResponse extends BaseResponse {
+        public ArrayList<City> list;
+    }
+
+    //获取续期状态
+    public static class PayLaterState extends BaseResponse{
+        public PayLater obj;
+    }
 
 }

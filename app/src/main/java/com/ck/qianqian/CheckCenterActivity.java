@@ -16,6 +16,9 @@ import com.ck.network.HttpResult;
 import com.ck.widget.LoadingDialog;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -390,5 +393,7 @@ public class CheckCenterActivity extends BaseActivity {
         };
         HttpMethods.getInstance().getInfos(subscriber);
     }
+
+
 
 }

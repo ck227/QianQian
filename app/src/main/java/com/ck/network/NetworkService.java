@@ -174,5 +174,23 @@ public interface NetworkService {
     @GET("renewalRecord/update.html")
     Observable<HttpResult.BaseResponse> payLaterCallback(@QueryMap Map<String, Object> options);
 
+    //省份列表
+    @GET("provinceAct/list.html")
+    Observable<HttpResult.ProvinceResponse> getProvince();
+
+    //城市列表
+    @GET("cityAct/list.html")
+    Observable<HttpResult.CityResponse> getCity(@QueryMap Map<String, Object> options);
+
+    //获取续期转改
+    @GET("loanRenewal/details.html")
+    Observable<HttpResult.PayLaterState> getPayLaterState(@QueryMap Map<String, Object> options);
+
+    //获取续期转改
+    @GET("loanRenewal/details.html")
+    Observable<HttpResult.BaseResponse> cancelPayLater(@QueryMap Map<String, Object> options);
+
+
+
 
 }

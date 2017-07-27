@@ -309,4 +309,28 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //获取省份
+    public void getProvince(Subscriber<HttpResult.ProvinceResponse> subscriber) {
+        Observable observable = networkService.getProvince();
+        toSubscribe(observable, subscriber);
+    }
+
+    //获取城市
+    public void getCity(Subscriber<HttpResult.CityResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getCity(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //获取续期状态
+    public void getPayLaterState(Subscriber<HttpResult.PayLaterState> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getPayLaterState(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //取消续期
+    public void cancelPayLater(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.cancelPayLater(options);
+        toSubscribe(observable, subscriber);
+    }
+
 }
