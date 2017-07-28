@@ -125,7 +125,7 @@ public class PayNowFragment extends Fragment {
                 getRecordDetail();
                 break;
             case R.id.pay:
-                showDialog();
+                showDialog2();
                 break;
         }
     }
@@ -165,6 +165,7 @@ public class PayNowFragment extends Fragment {
         HttpMethods.getInstance().getDetailByRecordId(subscriber, map);
     }
 
+    //支付宝和微信暂时没有
     private void showDialog() {
         final PayNowDialog dialog = new PayNowDialog(getActivity(), new PayNowDialog.ButtonListener() {
             @Override

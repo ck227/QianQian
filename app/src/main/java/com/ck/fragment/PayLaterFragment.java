@@ -283,7 +283,7 @@ public class PayLaterFragment extends Fragment {
 
     //请求服务器延期
     private void payLater() {
-        showDialog();
+        showDialog2();
     }
 
     private void showDialog() {

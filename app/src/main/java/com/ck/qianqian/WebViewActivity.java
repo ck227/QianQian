@@ -82,7 +82,7 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
 
 //            new Handler().postDelayed(new Runnable() {
 //
-//                public void run() {
+//                publ  ic void run() {
 //                    //execute the task
 //                    finishRecord();
 //                }
