@@ -131,7 +131,7 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
         mRecorder = new ScreenRecorder(width, height, bitrate, 1, mediaProjection, file.getAbsolutePath());
         mRecorder.start();
         button.setText("停止录制");
-        Toast.makeText(this, "正在录制...", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "正在录制...", Toast.LENGTH_SHORT).show();
     }
 /*
     @Override
