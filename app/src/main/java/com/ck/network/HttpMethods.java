@@ -31,7 +31,7 @@ public class HttpMethods {
      * 2.详情里面的（到期还款额）值没有，通过首页那个接口获取的是这个问题，通过8.6那个接口获取的没问题（好了）
      * 3.贷款记录的状态不对（取消了的申请显示是还款中state==7）  （好了）
      * 4.放贷之后手机不知道，要重新进才能看到状态变化（好了）
-     * 5.客服电话，收款支付宝账号要改，现在用的李华的(先不改)
+     * 5.客服电话，收款支付宝账号要改，现在用的李华的(好了)
      * 6.续期加回调（好了）
      * 7.续期成功后，“我想还款”界面要变化(好了)
      * 8.续了之后自动切换过去（好了）
@@ -48,7 +48,12 @@ public class HttpMethods {
      *
      * 17.信息中心认证修改界面（好了）
      * 18.支付直接弹出框(好了)
-     * 19.修改接口地址
+     * 19.修改接口地址(好了)
+     * 20.通讯录的两个网页去掉（好了）
+     * 21.logo／短信的开通／
+     * 22.所有权限的问题
+     *
+     * 23.贷款记录也要取消???
      *
      *
      *
@@ -63,7 +68,8 @@ public class HttpMethods {
      */
 
 //    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
-    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+//    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+    public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;

@@ -66,6 +66,7 @@ public class CreditDetailActivity extends BaseActivity {
     private Intent intent;
     private int code;
     private CreditDetail creditDetail;
+//    private Boolean fromHistory;
 
     public void back(View view) {
         finish();
@@ -80,6 +81,7 @@ public class CreditDetailActivity extends BaseActivity {
         intent = getIntent();
         code = intent.getIntExtra("code", 0);
         creditDetail = intent.getParcelableExtra("creditDetail");
+//        fromHistory = intent.getBooleanExtra("fromHistory",false);
         setViews();
     }
 

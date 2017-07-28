@@ -131,11 +131,13 @@ public class CreditHistoryActivity extends BaseActivity {
         HttpMethods.getInstance().getCreditHistory(subscriber, map);
     }
 
+    private int pos;
+
     private void setAdapter() {
         adapter = new CreditHistoryAdapter(data, new MyItemClickListener() {
             @Override
             public void onItemClick(View view) {
-                int pos = recyclerView.getRecyclerView().getChildAdapterPosition(view);
+                pos = recyclerView.getRecyclerView().getChildAdapterPosition(view);
 //                getOrderDetail(data.get(pos).getId());
 
                 //
@@ -171,6 +173,10 @@ public class CreditHistoryActivity extends BaseActivity {
                 int code = response.code;
                 if (code == 0) {
                     Intent intent = new Intent(CreditHistoryActivity.this, CreditDetailActivity.class);
+//                    if (data.get(pos).getLoanState() == 1) {
+//                        intent.putExtra("code", 99);
+//                        intent.putExtra("fromHistory",true);
+//                    }
                     intent.putExtra("creditDetail", response.obj);
                     startActivity(intent);
                 } else {
