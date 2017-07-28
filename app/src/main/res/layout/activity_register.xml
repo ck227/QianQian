@@ -5,9 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ck.qianqian.RegisterActivity">
+    tools:context="com.ck.qianqian.RegisterActivity"
+    android:background="@color/base_background">
 
     <include layout="@layout/base_back_title"/>
+
+
+    <View
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="@color/divider"
+        android:layout_marginTop="12dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +23,7 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"

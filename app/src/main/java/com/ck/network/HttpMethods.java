@@ -55,6 +55,8 @@ public class HttpMethods {
      *
      * 23.贷款记录也要取消???
      *
+     * 24.service/service.html?key=CONTRACT_SERVICE&loanNumber=
+     *
      *
      *
      * //下面是

@@ -207,7 +207,7 @@ public class CheckMsgActivity extends BaseActivity {
             case R.id.service:
                 Intent intent = new Intent(CheckMsgActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "服务与隐私");
-                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=RIVACY_SERVICE");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=RIVACY_SERVICE"+"&loginName="+MyApplication.getInstance().getUserName());
                 startActivity(intent);
                 break;
             case R.id.submit:

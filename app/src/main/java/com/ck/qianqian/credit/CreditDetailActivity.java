@@ -152,7 +152,7 @@ public class CreditDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CreditDetailActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "贷款合同");
-                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=CONTRACT_SERVICE");
+                intent.putExtra("url",HttpMethods.BASE_URL + "service/service.html?key=CONTRACT_SERVICE&recordId="+creditDetail.getRecordId()+"&loginName="+MyApplication.getInstance().getUserName());
                 startActivity(intent);
 //                http://localhost:8080/lizhixinInterface/service/service.html?key=LOAN_SERVICE
             }

@@ -319,7 +319,7 @@ public class GetCreditActivity extends BaseActivity {
             case R.id.contract:
                 Intent intent = new Intent(GetCreditActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "贷款须知");
-                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=LOAN_SERVICE");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=LOAN_SERVICE"+"&loginName="+MyApplication.getInstance().getUserName());
                 startActivity(intent);
                 break;
             case R.id.submit:
