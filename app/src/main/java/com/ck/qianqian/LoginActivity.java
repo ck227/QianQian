@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 //                    finish();
                     getHomeState();
                 } else {
+                    dialog.cancel();
                     Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 }
             }
