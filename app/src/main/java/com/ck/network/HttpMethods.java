@@ -72,6 +72,7 @@ public class HttpMethods {
 //    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
 //    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
     public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
+//    http://www.lizhixin.cn/lizhixinInterface/
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
