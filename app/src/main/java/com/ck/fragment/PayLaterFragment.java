@@ -309,8 +309,8 @@ public class PayLaterFragment extends Fragment {
         builder.setTitle("提示");
         builder.setMessage("请将最终还款金额【" + getCreditDetail.getArrivalFee() + "元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
                 "\n" +
-                "收款人：李华" + "\n" +
-                "支付宝账号：15717174872");
+                "收款人：李佳" + "\n" +
+                "支付宝账号：13628691614");
         builder.setPositiveButton("已转账", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
