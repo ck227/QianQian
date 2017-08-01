@@ -22,9 +22,9 @@ public class HttpMethods {
 
     /**
      * 、
-     *
+     * <p>
      * 混淆/
-     *
+     * <p>
      * 是测试发现的问题
      * 0.找回密码短信验证的问题（好了）
      * 1.个人信息认证，“服务与隐私”缺少链接（好了）
@@ -36,23 +36,26 @@ public class HttpMethods {
      * 7.续期成功后，“我想还款”界面要变化(好了)
      * 8.续了之后自动切换过去（好了）
      * 9.界面底色（好了）
-     *
+     * <p>
      * 10.修改logo（好了）
      * 11.认证的界面还有功能优化（好了要改图标）
      * 12.支付宝、淘宝认证（好了要调试）
      * 13.紧急联系人留3个(好了)
-     *
+     * <p>
      * 14.银行卡认证，添加省市（好了）
      * 15.续费利息加服务费（好了）
      * 16.续期的状态界面(好了)
-     *
+     * <p>
      * 17.信息中心认证修改界面（好了）
      * 18.支付直接弹出框(好了)
      * 19.修改接口地址(好了)
      * 20.通讯录的两个网页去掉（好了）
      * 21.logo／短信的开通／
      * 22.所有权限的问题
-     *
+     * 23.客服改成弹窗
+     * 24.贷款记录空的加显示
+     * 25.录屏取消的话，界面返回
+     * <p>
      * //下面是
      * 联系人要选择
      * 各种服务链接
@@ -67,7 +70,6 @@ public class HttpMethods {
 //    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
     public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
 //    public static final String BASE_URL = "http://www.lizhixin.cn/lizhixinInterface/";
-//
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
@@ -222,7 +224,6 @@ public class HttpMethods {
         Observable observable = networkService.addTaobao(options);
         toSubscribe(observable, subscriber);
     }
-
 
 
     /**

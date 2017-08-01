@@ -36,6 +36,8 @@ public class CreditHistoryActivity extends BaseActivity {
 
     @BindView(R.id.titleName)
     TextView titleName;
+    @BindView(R.id.text)
+    TextView text;
     @BindView(R.id.recyclerView)
     SuperRecyclerView recyclerView;
 
@@ -147,6 +149,10 @@ public class CreditHistoryActivity extends BaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        if (data.size() == 0) {
+            text.setVisibility(View.VISIBLE);
+        }
     }
 
     private LoadingDialog dialog;

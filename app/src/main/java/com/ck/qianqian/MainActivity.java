@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private CreditDetail creditDetail;
     private Intent intent;
 
+//    private RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,29 +50,9 @@ public class MainActivity extends AppCompatActivity {
         }
         setViews();
 
-        RxPermissions.getInstance(MainActivity.this)
-                .requestEach(Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.READ_CONTACTS)//这里申请了两组权限
-                .subscribe(new Action1<Permission>() {
-                    @Override
-                    public void call(Permission permission) {
-                        if (permission.granted) {
-                            // 用户允许权限
-                        } else {
-                            //明天真机调试
-//                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+//        rxPermissions = new RxPermissions(this); // where this is an Activity instance
 
-//        showDialog();
-    }
-
-    private void showDialog() {
-
-        RxPermissions.getInstance(MainActivity.this)
+        /*rxPermissions
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA,
@@ -79,14 +61,42 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void call(Boolean granted) {
                         if (granted) {
-//                            handler.sendEmptyMessage(1);
+                            // 用户允许权限
+                            Toast.makeText(getApplicationContext(), "已同意软件权限", Toast.LENGTH_SHORT).show();
                         } else {
-//                            Toast.makeText(MainActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
-//                            handler.sendEmptyMessage(0);
+                            //明天真机调试
+                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        showDialog();
+    }
+
+   /* private void showDialog() {
+
+        rxPermissions
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_CONTACTS)//这里申请了两组权限
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean granted) {
+                        if (granted) {
+                            // 用户允许权限
+                            Toast.makeText(getApplicationContext(), "已同意软件权限", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //明天真机调试
+                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-    }
+    }*/
 
     /*private void showDialog2() {
         RxPermissions.getInstance(MainActivity.this)
@@ -106,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }*/
 
-    private Handler handler = new Handler() {
+    /*private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -116,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 //                showDialog2();
             }
         }
-    };
+    };*/
 
     private void setViews() {
         if (state == 2) {

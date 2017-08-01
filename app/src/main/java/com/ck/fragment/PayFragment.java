@@ -1,18 +1,22 @@
 package com.ck.fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ck.adapter.PayAdapter;
+import com.ck.qianqian.LoginActivity;
 import com.ck.qianqian.R;
+import com.ck.util.MyApplication;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,9 +103,10 @@ public class PayFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.service:
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:15717174872"));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:15717174872"));
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+                showDialog();
                 break;
             case R.id.payNow:
                 viewPager.setCurrentItem(0, true);
@@ -112,15 +117,29 @@ public class PayFragment extends Fragment {
         }
     }
 
-    public int getReordId(){
-        return ((PayNowFragment)payAdapter.getItem(0)).getRecordId();
+    public int getReordId() {
+        return ((PayNowFragment) payAdapter.getItem(0)).getRecordId();
     }
 
-    public PayAdapter getPayAdapter(){
+    public PayAdapter getPayAdapter() {
         return payAdapter;
     }
 
-    public void setContent(int pos){
+    public void setContent(int pos) {
         viewPager.setCurrentItem(pos, true);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("请联系客服");
+        builder.setMessage("微信：liu_shi001" + "\n" + "QQ号：" + "351761660");
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.create().show();
     }
 }

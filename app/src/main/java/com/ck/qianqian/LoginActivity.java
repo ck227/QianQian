@@ -1,6 +1,7 @@
 package com.ck.qianqian;
 
 
+import android.Manifest;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.ck.network.HttpResult;
 import com.ck.util.MyApplication;
 import com.ck.util.Utils;
 import com.ck.widget.LoadingDialog;
+import com.tbruyelle.rxpermissions.Permission;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 
 /**
@@ -49,11 +53,15 @@ public class LoginActivity extends AppCompatActivity {
     private LoadingDialog dialog;
     private Transition explode;
 
+    private RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        rxPermissions = new RxPermissions(this);
 
 //        account.setSelection(account.getText().toString().length());
     }
@@ -64,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.login:
                 if (checkValue()) {
-                    login();
+                    showDialog();
                 }
                 break;
             case R.id.register:
@@ -76,6 +84,36 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void showDialog() {
+
+        rxPermissions
+                .request(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)//这里申请了两组权限
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean granted) {
+
+                        if (granted) {
+                            login();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                        }
+
+                        /*if (permission.granted) {
+                            login();
+                        } else if (permission.shouldShowRequestPermissionRationale) {
+                            // Denied permission without ask never again
+                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                        }*/
+                    }
+                });
     }
 
     private void login() {
@@ -133,13 +171,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onNext(HttpResult.IndexResponse response) {
                 int code = response.code;
-                if(code == 1 || code == 8){
+                if (code == 1 || code == 8) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("state", 2);//
-                    intent.putExtra("code",code);
-                    intent.putExtra("creditDetail",response.obj);
+                    intent.putExtra("code", code);
+                    intent.putExtra("creditDetail", response.obj);
                     startActivity(intent);
-                }else if (code == 3) {
+                } else if (code == 3) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("state", 1);//还款
                     startActivity(intent);

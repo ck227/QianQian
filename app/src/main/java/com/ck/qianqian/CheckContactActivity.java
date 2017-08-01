@@ -16,6 +16,7 @@ import com.ck.network.HttpResult;
 import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
 import com.google.gson.Gson;
+import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class CheckContactActivity extends BaseActivity {
     private LoadingDialog dialog;
     private ArrayList<Contact> contacts;
 
+    private RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class CheckContactActivity extends BaseActivity {
         ButterKnife.bind(this);
         titleName.setText("通信认证");
         contacts = new ArrayList<>();
+
+        rxPermissions = new RxPermissions(this);
     }
 
     @OnClick({R.id.contact, R.id.msg, R.id.submit})
@@ -69,7 +74,7 @@ public class CheckContactActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.submit:
-                RxPermissions.getInstance(CheckContactActivity.this)
+                rxPermissions
                         .request(Manifest.permission.READ_CONTACTS)
                         .subscribe(new Action1<Boolean>() {
                             @Override
@@ -83,8 +88,23 @@ public class CheckContactActivity extends BaseActivity {
                                     //不同意，给提示
                                     Toast.makeText(CheckContactActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
                                 }
+
+                                /*if (permission.granted) {
+                                    dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
+                                    dialog.show();
+                                    contacts.clear();//避免数据重复
+                                    getContacts();
+                                } else if(permission.shouldShowRequestPermissionRationale){
+                                    // Denied permission without ask never again
+                                    Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                                }*/
+
                             }
                         });
+
+
                 break;
         }
     }

@@ -14,6 +14,7 @@ import com.ck.bean.CheckStatus;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.widget.LoadingDialog;
+import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.HashMap;
@@ -76,6 +77,8 @@ public class CheckCenterActivity extends BaseActivity {
 
     private int hasCheckPhone, hasCheckMsg, hasCheckId, hasCheckCard, hasCheckContact, hasCheckAlipay, hasCheckTaobao;
 
+    private RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,8 @@ public class CheckCenterActivity extends BaseActivity {
         hasCheckAlipay = status.getUser_zfb_audit();
         hasCheckTaobao = status.getUser_tb_audit();
         setViews();
+
+        rxPermissions = new RxPermissions(this);
     }
 
     /**
@@ -276,7 +281,7 @@ public class CheckCenterActivity extends BaseActivity {
                 break;
             case R.id.check_alipay_ll:
                 if (hasCheckAlipay == 0 || hasCheckAlipay == 3) {
-                    RxPermissions.getInstance(CheckCenterActivity.this)
+                    rxPermissions
                             .request(
                                     Manifest.permission.READ_EXTERNAL_STORAGE,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE)//这里申请了两组权限
@@ -290,9 +295,21 @@ public class CheckCenterActivity extends BaseActivity {
                                         intent.putExtra("type", 2);
                                         startActivityForResult(intent, 6);
                                     } else {
-                                        //不同意，给提示
                                         Toast.makeText(CheckCenterActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
                                     }
+
+                                    /*if (permission.granted) {
+                                        Intent intent = new Intent(CheckCenterActivity.this, WebViewActivity.class);
+                                        intent.putExtra("title", "支付宝认证");
+                                        intent.putExtra("url", "https://auth.alipay.com/login/index.htm");
+                                        intent.putExtra("type", 2);
+                                        startActivityForResult(intent, 6);
+                                    } else if(permission.shouldShowRequestPermissionRationale){
+                                        // Denied permission without ask never again
+                                        Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                                    }*/
                                 }
                             });
 
@@ -393,7 +410,6 @@ public class CheckCenterActivity extends BaseActivity {
         };
         HttpMethods.getInstance().getInfos(subscriber);
     }
-
 
 
 }

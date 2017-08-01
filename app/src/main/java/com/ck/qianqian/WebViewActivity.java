@@ -82,11 +82,10 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
 
 //            new Handler().postDelayed(new Runnable() {
 //
-//                publ  ic void run() {
+//                public void run() {
 //                    //execute the task
 //                    finishRecord();
 //                }
-//
 //            }, 5000);
         }
     }
@@ -120,6 +119,7 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
         MediaProjection mediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
         if (mediaProjection == null) {
             Log.e("@@", "media projection is null");
+            finish();
             return;
         }
         // video size

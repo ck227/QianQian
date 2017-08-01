@@ -96,6 +96,8 @@ public class CheckMsgActivity extends BaseActivity {
     private int contactId2 = -1;
     private int contactId3 = -1;
 
+    private RxPermissions rxPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +112,7 @@ public class CheckMsgActivity extends BaseActivity {
         contacts = intent.getParcelableArrayListExtra("contacts");
         contactsOne = intent.getParcelableArrayListExtra("contactsOne");
         setViews();
+        rxPermissions = new RxPermissions(this);
     }
 
     private void setViews() {
@@ -228,8 +231,10 @@ public class CheckMsgActivity extends BaseActivity {
         }
     }
 
+
+
     private void getContact(final int position) {
-        RxPermissions.getInstance(CheckMsgActivity.this)
+        rxPermissions
                 .request(Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS)
                 .subscribe(new Action1<Boolean>() {
                     @Override

@@ -1,6 +1,7 @@
 package com.ck.qianqian;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import com.ck.util.MyApplication;
 import com.ck.util.Utils;
 import com.ck.widget.ChoosePhotoDialog;
 import com.ck.widget.LoadingDialog;
+import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.BufferedOutputStream;
@@ -60,6 +62,8 @@ public class CheckIdActivity extends BaseActivity {
     TextView submit;
 
     private int type;
+    private RxPermissions rxPermissions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,7 @@ public class CheckIdActivity extends BaseActivity {
         setContentView(R.layout.activity_check_id);
         ButterKnife.bind(this);
         titleName.setText("身份证认证");
-
+        rxPermissions = new RxPermissions(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
@@ -102,7 +106,7 @@ public class CheckIdActivity extends BaseActivity {
                     @Override
                     public void chooseGallery() {
                         // TODO Auto-generated method CheckIdActivity
-                        RxPermissions.getInstance(CheckIdActivity.this)
+                        rxPermissions
                                 .request(
                                         Manifest.permission.CAMERA,
                                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -116,15 +120,25 @@ public class CheckIdActivity extends BaseActivity {
                                             //不同意，给提示
                                             Toast.makeText(CheckIdActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
                                         }
+
+                                        /*if (permission.granted) {
+                                            selectPicFromLocal();
+                                        } else if (permission.shouldShowRequestPermissionRationale) {
+                                            // Denied permission without ask never again
+                                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                                        }*/
                                     }
                                 });
+
 
                     }
 
                     @Override
                     public void chooseCamera() {
                         // TODO Auto-generated method stub
-                        RxPermissions.getInstance(CheckIdActivity.this)
+                        rxPermissions
                                 .request(
                                         Manifest.permission.CAMERA,
                                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -138,9 +152,17 @@ public class CheckIdActivity extends BaseActivity {
                                             //不同意，给提示
                                             Toast.makeText(CheckIdActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
                                         }
+
+                                        /*if (permission.granted) {
+                                            selectPicFromCamera();
+                                        } else if(permission.shouldShowRequestPermissionRationale){
+                                            // Denied permission without ask never again
+                                            Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
+                                        }*/
                                     }
                                 });
-
                     }
                 });
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -170,20 +192,55 @@ public class CheckIdActivity extends BaseActivity {
         cameraFile = new File(Utils.getSDPath() + "/jiedai/",
                 System.currentTimeMillis() + ".jpg");
         cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
-                        MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), 2);
+//        startActivityForResult(
+//                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
+//                        MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), 2);
+
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion < 24) {
+            startActivityForResult(
+                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
+                            MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), 2);
+        } else {
+
+            ContentValues contentValues = new ContentValues(1);
+            contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
+            Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, uri), 2);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) { // 本地相册
-            startPhotoZoom(Uri.parse("file://" + getFilePath(data.getData())));
-        } else if (requestCode == 2) {
-            if (cameraFile != null && cameraFile.exists()) {// 拍照
-                startPhotoZoom(Uri.parse("file://" + cameraFile));
+            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+            if (currentapiVersion < 24) {
+                startPhotoZoom(Uri.parse("file://" + getFilePath(data.getData())));
+            } else {
+                ContentValues contentValues = new ContentValues(1);
+                contentValues.put(MediaStore.Images.Media.DATA, getFilePath(data.getData()));
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                startPhotoZoom(uri);
             }
+
+        } else if (requestCode == 2) {
+            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
+            if (cameraFile != null && cameraFile.exists()) {// 拍照
+                if (currentapiVersion < 24) {
+                    startPhotoZoom(Uri.parse("file://" + cameraFile));
+                }else{
+                    ContentValues contentValues = new ContentValues(1);
+//                    Toast.makeText(getApplicationContext(),cameraFile.getAbsolutePath(),Toast.LENGTH_SHORT).show();
+                    contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
+                    Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                    startPhotoZoom(uri);
+                }
+            }
+
+
         } else if (requestCode == 3 && data != null) {// 裁剪后
             try {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
@@ -197,6 +254,9 @@ public class CheckIdActivity extends BaseActivity {
 
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 8);
