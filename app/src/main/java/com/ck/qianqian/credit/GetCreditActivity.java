@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,8 @@ public class GetCreditActivity extends BaseActivity {
     TextView arrivalFee;
     @BindView(R.id.amountFee)
     TextView amountFee;
+    @BindView(R.id.icon)
+    ImageView icon;
     @BindView(R.id.contract)
     TextView contract;
     @BindView(R.id.submit)
@@ -122,7 +125,25 @@ public class GetCreditActivity extends BaseActivity {
         gm2 = new GridLayoutManager(getApplicationContext(), 2);
         timeList.setLayoutManager(gm2);
         timeList.addItemDecoration(new GridSpacingDecoration(4, 32, false));
+
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEnable) {
+                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.shape_gray_round);
+                } else {
+                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.login_btn);
+                }
+                isEnable = !isEnable;
+            }
+        });
     }
+
+    private Boolean isEnable = true;
 
     private void getDays() {
         dialog = new LoadingDialog(this, R.style.MyCustomDialog);
@@ -218,7 +239,7 @@ public class GetCreditActivity extends BaseActivity {
                 } else if (response.code == -5) {
 //                    Toast.makeText(getApplicationContext(),"请完成认证",Toast.LENGTH_SHORT).show();
                     getStatus();
-                }else{
+                } else {
                     dialog.cancel();
                 }
             }
@@ -318,8 +339,8 @@ public class GetCreditActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.contract:
                 Intent intent = new Intent(GetCreditActivity.this, WebViewActivity.class);
-                intent.putExtra("title", "贷款须知");
-                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=LOAN_SERVICE"+"&loginName="+MyApplication.getInstance().getUserName());
+                intent.putExtra("title", "借款服务合同");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=LOAN_SERVICE" + "&loginName=" + MyApplication.getInstance().getUserName());
                 startActivity(intent);
                 break;
             case R.id.submit:

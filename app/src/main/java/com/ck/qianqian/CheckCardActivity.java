@@ -17,6 +17,7 @@ import com.ck.bean.Bank;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.util.MyApplication;
+import com.ck.util.Utils;
 import com.ck.widget.LoadingDialog;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class CheckCardActivity extends BaseActivity {
     EditText cardNo;
     @BindView(R.id.address)
     TextView address;
+    @BindView(R.id.phone)
+    TextView phone;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -138,6 +141,7 @@ public class CheckCardActivity extends BaseActivity {
         map.put("bankNumber", cardNo.getText().toString());
         map.put("provinceId", provinceId);
         map.put("cityId", cityId);
+        map.put("phone", phone.getText().toString());
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
@@ -167,6 +171,14 @@ public class CheckCardActivity extends BaseActivity {
     private Boolean checkValue() {
         if (TextUtils.isEmpty(name.getText().toString())) {
             Toast.makeText(getApplicationContext(), "请输入姓名", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(phone.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(!Utils.isMobileNO(phone.getText().toString())){
+            Toast.makeText(getApplicationContext(), "手机号错误", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (bankType < 0) {

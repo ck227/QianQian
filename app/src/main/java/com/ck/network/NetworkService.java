@@ -190,6 +190,10 @@ public interface NetworkService {
     @GET("loanRenewal/cancel.html")
     Observable<HttpResult.BaseResponse> cancelPayLater(@QueryMap Map<String, Object> options);
 
+    //版本更新
+    @GET("appVersionAct/appVersion.html")
+    Observable<HttpResult.VersionReponse> getVersion(@QueryMap Map<String, Object> options);
+
 
 
 

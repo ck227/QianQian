@@ -9,6 +9,7 @@ import com.ck.bean.CreditHistory;
 import com.ck.bean.Login;
 import com.ck.bean.PayLater;
 import com.ck.bean.Province;
+import com.ck.bean.Version;
 import com.ck.bean.credit.Credit;
 import com.ck.bean.credit.CreditDetail;
 import com.ck.bean.credit.GetCreditAmount;
@@ -129,5 +130,12 @@ public class HttpResult {
     public static class PayLaterState extends BaseResponse{
         public PayLater obj;
     }
+
+    //版本更新
+    public static class VersionReponse extends BaseResponse{
+        public Version obj;
+    }
+
+
 
 }

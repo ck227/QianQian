@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,8 @@ public class CheckMsgActivity extends BaseActivity {
     AutoCompleteTextView emergencyRelation3;
     @BindView(R.id.service)
     TextView service;
+    @BindView(R.id.icon)
+    ImageView icon;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -178,7 +181,26 @@ public class CheckMsgActivity extends BaseActivity {
             }
         });
 
+
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEnable) {
+                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.shape_gray_round);
+                } else {
+                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.login_btn);
+                }
+                isEnable = !isEnable;
+            }
+        });
+
     }
+
+    private Boolean isEnable = true;
 
     @OnClick({R.id.education, R.id.marriage, R.id.income, R.id.emergencyRelation, R.id.emergencyRelation2, R.id.emergencyRelation3, R.id.service, R.id.submit, R.id.emergencyPhone, R.id.emergencyPhone2, R.id.emergencyPhone3})
     public void onViewClicked(View view) {
@@ -210,7 +232,7 @@ public class CheckMsgActivity extends BaseActivity {
             case R.id.service:
                 Intent intent = new Intent(CheckMsgActivity.this, WebViewActivity.class);
                 intent.putExtra("title", "服务与隐私");
-                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=RIVACY_SERVICE"+"&loginName="+MyApplication.getInstance().getUserName());
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=RIVACY_SERVICE" + "&loginName=" + MyApplication.getInstance().getUserName());
                 startActivity(intent);
                 break;
             case R.id.submit:
@@ -230,7 +252,6 @@ public class CheckMsgActivity extends BaseActivity {
                 break;
         }
     }
-
 
 
     private void getContact(final int position) {

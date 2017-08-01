@@ -54,9 +54,12 @@ public class HttpMethods {
      * 25.录屏取消的话，界面返回(好了)
      *
      * 26.7.0相机
-     * 27.版本更新
+     * 27.版本更新（好了）
      * 28.通讯录选择问题 （很痛苦）
      * 29.引导页
+     * 30.签名
+     * 31.勾勾要可以点(好了)
+     * 32.银行认证加手机号（好了）
 
      * //下面是
      * 联系人要选择
@@ -71,7 +74,7 @@ public class HttpMethods {
 //    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
 //    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
     public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
-//    public static final String BASE_URL = "http://www.lizhixin.cn/lizhixinInterface/";
+//  public static final String BASE_URL = "http://www.lizhixin.cn/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
     private Retrofit retrofit;
@@ -341,6 +344,12 @@ public class HttpMethods {
     //取消续期
     public void cancelPayLater(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.cancelPayLater(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //版本更新
+    public void getVersion(Subscriber<HttpResult.VersionReponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.getVersion(options);
         toSubscribe(observable, subscriber);
     }
 
