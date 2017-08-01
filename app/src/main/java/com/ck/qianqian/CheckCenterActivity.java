@@ -191,10 +191,10 @@ public class CheckCenterActivity extends BaseActivity {
         }
         //支付宝认证
         if (hasCheckAlipay == 2) {
-            checkAlipayIc.setImageResource(R.mipmap.check_contact2);
+            checkAlipayIc.setImageResource(R.mipmap.check_alipay2);
             checkAlipayText.setTextColor(getResources().getColor(R.color.text_blue));
         } else {
-            checkAlipayIc.setImageResource(R.mipmap.check_contact);
+            checkAlipayIc.setImageResource(R.mipmap.check_alipay);
             checkAlipayText.setTextColor(getResources().getColor(R.color.second_text_color));
         }
         if (hasCheckAlipay == 0) {
@@ -208,10 +208,10 @@ public class CheckCenterActivity extends BaseActivity {
         }
         //淘宝认证
         if (hasCheckTaobao == 2) {
-            checkTaobaoIc.setImageResource(R.mipmap.check_contact2);
+            checkTaobaoIc.setImageResource(R.mipmap.check_taobao2);
             checkTaobaoText.setTextColor(getResources().getColor(R.color.text_blue));
         } else {
-            checkTaobaoIc.setImageResource(R.mipmap.check_contact);
+            checkTaobaoIc.setImageResource(R.mipmap.check_taobao);
             checkTaobaoText.setTextColor(getResources().getColor(R.color.second_text_color));
         }
         if (hasCheckTaobao == 0) {

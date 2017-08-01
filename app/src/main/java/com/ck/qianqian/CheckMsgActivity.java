@@ -240,9 +240,16 @@ public class CheckMsgActivity extends BaseActivity {
                     @Override
                     public void call(Boolean granted) {
                         if (granted) {
-                            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                            intent.setClassName("com.android.contacts", "com.android.contacts.activities.ContactSelectionActivity");
+//                            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                            intent.setClassName("com.android.contacts", "com.android.contacts.activities.ContactSelectionActivity");
+//                            startActivityForResult(intent, position);
+
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_PICK);
+                            intent.setData(ContactsContract.Contacts.CONTENT_URI);
+//                            intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                             startActivityForResult(intent, position);
+
                         } else {
                             //不同意，给提示
                             Toast.makeText(CheckMsgActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
@@ -266,7 +273,6 @@ public class CheckMsgActivity extends BaseActivity {
             emergencyName3.setText(contact[0]);
             emergencyPhone3.setText(contact[1]);
         }
-
     }
 
     private String[] getPhoneNumber(Intent intent) {
@@ -274,16 +280,17 @@ public class CheckMsgActivity extends BaseActivity {
         Cursor phone = null;
         try {
             String[] projections = {ContactsContract.Contacts._ID, ContactsContract.Contacts.HAS_PHONE_NUMBER};
-            cursor = getContentResolver().query(intent.getData(), projections, null, null, null);
+            cursor = getContentResolver().query(intent.getData(), null, null, null, null);
             if ((cursor == null) || (!cursor.moveToFirst())) {
                 return null;
             }
+//            cursor.moveToFirst();
             int _id = cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID);
             String id = cursor.getString(_id);
             int has_phone_number = cursor.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER);
             int hasPhoneNumber = cursor.getInt(has_phone_number);
             String phoneNumber = null;
-            String phoneNmae = null;
+            String phoneName = null;
             if (hasPhoneNumber > 0) {
                 phone = getContentResolver().query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -294,11 +301,11 @@ public class CheckMsgActivity extends BaseActivity {
                     int index = phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                     int index2 = phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
                     String number = phone.getString(index);
-                    phoneNmae = phone.getString(index2);
+                    phoneName = phone.getString(index2);
                     phoneNumber = number;
                 }
             }
-            return new String[]{phoneNmae, phoneNumber};
+            return new String[]{phoneName, phoneNumber};
         } catch (Exception e) {
 
         } finally {
