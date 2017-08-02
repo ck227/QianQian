@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,12 @@ import android.widget.Toast;
 import com.ck.bean.credit.CreditDetail;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
+import com.ck.qianqian.IndexActivity;
+import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.qianqian.credit.CreditDetailActivity;
 import com.ck.qianqian.credit.CreditHistoryActivity;
+import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
 
 import java.util.HashMap;
@@ -35,6 +39,8 @@ public class CreditStateFragment extends Fragment {
 
     @BindView(R.id.titleName)
     TextView titleName;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.credit_text)
@@ -101,7 +107,51 @@ public class CreditStateFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setColorSchemeResources(R.color.text_blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getHomeState();
+            }
+        });
+
         return view;
+    }
+
+    private void getHomeState() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
+            @Override
+            public void onCompleted() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.IndexResponse response) {
+                int code = response.code;
+                if (code == 1 || code == 8) {
+                    //状态没有变化，不用动
+                } else if (code == 3) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 1);//还款
+                    startActivity(intent);
+                    getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 0);//借款
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
+            }
+        };
+        HttpMethods.getInstance().getHomeState(subscriber, map);
     }
 
     private LoadingDialog dialog;

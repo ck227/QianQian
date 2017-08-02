@@ -1,5 +1,6 @@
 package com.ck.qianqian;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -164,7 +166,7 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
             @Override
             public void onError(Throwable e) {
                 dialog.dismiss();
-                Utils.showSnackBar(WebViewActivity.this, titleName, "请稍后再试");
+                showDialog();
             }
 
             @Override
@@ -179,11 +181,30 @@ public class WebViewActivity extends BaseActivity {//implements View.OnClickList
                     }
                 } else {
                     dialog.dismiss();//upload/image/zhf/2017-07-25/_1500965150717.png
-                    Utils.showSnackBar(WebViewActivity.this, titleName, "上传失败");
+                    showDialog();
                 }
             }
         };
         HttpMethods.getInstance().uploadVideo(subscriber, fbody, map);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(WebViewActivity.this);
+        builder.setTitle("上传失败，是否重新上传?");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                uploadVideo();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setCancelable(false);
+        builder.create().show();
     }
 
     private void addAlipay() {

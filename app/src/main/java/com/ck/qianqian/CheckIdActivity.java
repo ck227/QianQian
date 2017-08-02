@@ -215,7 +215,7 @@ public class CheckIdActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) { // 本地相册
-            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+            /*int currentapiVersion = android.os.Build.VERSION.SDK_INT;
             if (currentapiVersion < 24) {
                 startPhotoZoom(Uri.parse("file://" + getFilePath(data.getData())));
             } else {
@@ -223,10 +223,19 @@ public class CheckIdActivity extends BaseActivity {
                 contentValues.put(MediaStore.Images.Media.DATA, getFilePath(data.getData()));
                 Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
                 startPhotoZoom(uri);
+            }*/
+
+            try {
+//                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                saveFile(bitmap);
+
+                uploadPic(new File(getFilePath(data.getData())));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         } else if (requestCode == 2) {
-            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+            /*int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
             if (cameraFile != null && cameraFile.exists()) {// 拍照
                 if (currentapiVersion < 24) {
@@ -238,8 +247,9 @@ public class CheckIdActivity extends BaseActivity {
                     Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
                     startPhotoZoom(uri);
                 }
-            }
+            }*/
 
+            uploadPic(cameraFile);
 
         } else if (requestCode == 3 && data != null) {// 裁剪后
             try {
