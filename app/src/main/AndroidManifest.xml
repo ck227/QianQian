@@ -80,6 +80,7 @@
             android:name=".credit.GetCreditActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".ChooseCityActivity"></activity>
+        <activity android:name=".GuideActivity"></activity>
     </application>
 
 </manifest>

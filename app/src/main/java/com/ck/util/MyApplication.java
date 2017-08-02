@@ -40,7 +40,17 @@ public class MyApplication extends Application {
         sp.edit().putString("realname", realname).commit();
     }
 
-    public void clear(){
-        sp.edit().clear().commit();
+    public void clear() {
+//        sp.edit().clear().commit();
+        sp.edit().putString("realname", "").commit();
+        sp.edit().putString("username", "").commit();
+    }
+
+    public Boolean getIsFirst() {
+        return sp.getBoolean("isFirst", true);
+    }
+
+    public void setIsFirst(Boolean isFirst) {
+        sp.edit().putBoolean("isFirst", isFirst).commit();
     }
 }

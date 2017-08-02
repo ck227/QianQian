@@ -45,9 +45,17 @@ public class IndexActivity extends Activity implements Runnable {
             //进入之前要判断一下
             getHomeState();
         } else {
-            intent = new Intent(IndexActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            if (MyApplication.getInstance().getIsFirst()) {
+                //如果是第一次，进入引导页
+                MyApplication.getInstance().setIsFirst(false);
+                intent = new Intent(IndexActivity.this, GuideActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                intent = new Intent(IndexActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
