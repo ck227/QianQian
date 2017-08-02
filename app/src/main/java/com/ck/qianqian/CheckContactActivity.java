@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class CheckContactActivity extends BaseActivity {
     TextView contact;
     @BindView(R.id.msg)
     TextView msg;
+    @BindView(R.id.icon)
+    ImageView icon;
     @BindView(R.id.submit)
     TextView submit;
 
@@ -55,7 +58,25 @@ public class CheckContactActivity extends BaseActivity {
         contacts = new ArrayList<>();
 
         rxPermissions = new RxPermissions(this);
+
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEnable) {
+                    icon.setImageResource(R.mipmap.check_contact_sure2);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.shape_gray_round);
+                } else {
+                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    submit.setClickable(false);
+                    submit.setBackgroundResource(R.drawable.login_btn);
+                }
+                isEnable = !isEnable;
+            }
+        });
     }
+
+    private Boolean isEnable = true;
 
     @OnClick({R.id.contact, R.id.msg, R.id.submit})
     public void onViewClicked(View view) {
@@ -63,8 +84,8 @@ public class CheckContactActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.contact:
                 intent = new Intent(CheckContactActivity.this, WebViewActivity.class);
-                intent.putExtra("title", "通讯录协议");
-                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=BOOK_SERVICE");
+                intent.putExtra("title", "信息协议");
+                intent.putExtra("url", HttpMethods.BASE_URL + "service/service.html?key=USER_SERVICE" + "&loginName=" + MyApplication.getInstance().getUserName());
                 startActivity(intent);
                 break;
             case R.id.msg:

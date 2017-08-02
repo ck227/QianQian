@@ -71,7 +71,7 @@ public class MainAdapter extends FragmentPagerAdapter {
                     return homeFragment;
                 } else {
                     if (creditStateFragment == null) {
-                        creditStateFragment = CreditStateFragment.newInstance(code,creditDetail);
+                        creditStateFragment = CreditStateFragment.newInstance(code, creditDetail);
                     }
                     return creditStateFragment;
                 }
@@ -82,6 +82,10 @@ public class MainAdapter extends FragmentPagerAdapter {
                 return myFragment;
         }
         return null;
+    }
+
+    public void refreshData() {
+        creditStateFragment.refresh();
     }
 
     @Override

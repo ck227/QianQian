@@ -66,6 +66,10 @@ public class CreditStateFragment extends Fragment {
         return fragment;
     }
 
+    public void refresh(){
+        getHomeState();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -186,7 +186,7 @@ public class CheckMsgActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (isEnable) {
-                    icon.setImageResource(R.mipmap.check_contact_sure);
+                    icon.setImageResource(R.mipmap.check_contact_sure2);
                     submit.setClickable(false);
                     submit.setBackgroundResource(R.drawable.shape_gray_round);
                 } else {

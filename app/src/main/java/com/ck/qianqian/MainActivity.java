@@ -157,6 +157,25 @@ public class MainActivity extends AppCompatActivity {
         }
         viewPager.setCurrentItem(1);
         viewPager.setCurrentItem(0);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0 && state == 2) {
+                    adapter.refreshData();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void checkUpdate() {
@@ -186,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     //弹窗之前检查版本
                     final Version version = response.obj;
                     AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
-                    b.setTitle("发现新的版本"+version.getVersioNumber());
+                    b.setTitle("发现新的版本" + version.getVersioNumber());
                     b.setMessage(version.getVersionContent());
                     b.setPositiveButton("更新", new DialogInterface.OnClickListener() {
                         @Override
@@ -202,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                     if (version.getIsVersion() == 1) {
                         b.setCancelable(false);
-                    }else{
+                    } else {
                         b.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
