@@ -132,7 +132,7 @@ public class PayFragment extends Fragment {
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("请联系客服");
-        builder.setMessage("微信：liu_shi001" + "\n" + "QQ号：" + "351761660");
+        builder.setMessage("微信：351761660" + "\n" + "QQ号：" + "351761660");
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
