@@ -2,8 +2,10 @@ package com.ck.fragment;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,6 +24,8 @@ import com.ck.bean.credit.GetCreditDetail;
 import com.ck.listener.MyItemClickListener;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
+import com.ck.qianqian.IndexActivity;
+import com.ck.qianqian.MainActivity;
 import com.ck.qianqian.R;
 import com.ck.util.MyApplication;
 import com.ck.widget.GridSpacingDecoration;
@@ -60,6 +64,8 @@ public class PayLaterFragment extends Fragment {
 
     @BindView(R.id.submit)
     TextView submit;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
     @BindView(R.id.dayNumber)
@@ -122,7 +128,52 @@ public class PayLaterFragment extends Fragment {
         setViews();
         getDays();
         getState();
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.text_blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getHomeState();
+            }
+        });
         return view;
+    }
+
+    private void getHomeState() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        Subscriber subscriber = new Subscriber<HttpResult.IndexResponse>() {
+            @Override
+            public void onCompleted() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getActivity(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.IndexResponse response) {
+                int code = response.code;
+                if (code == 1 || code == 8) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 2);
+                    intent.putExtra("code", code);
+                    intent.putExtra("creditDetail", response.obj);
+                } else if (code == 3) {
+                    //状态没有变化，不用动
+
+                } else {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("state", 0);//借款
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
+            }
+        };
+        HttpMethods.getInstance().getHomeState(subscriber, map);
     }
 
     private void setViews() {
