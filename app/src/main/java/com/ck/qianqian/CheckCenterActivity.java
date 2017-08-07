@@ -115,9 +115,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckPhone == 0) {
             checkPhoneText.setText("手机认证(未认证)");
         } else if (hasCheckPhone == 1) {
-            checkPhoneText.setText("手机认证(待认证)");
+            checkPhoneText.setText("手机认证(核审中)");
         } else if (hasCheckPhone == 2) {
-            checkPhoneText.setText("手机认证(已认证)");
+            checkPhoneText.setText("手机认证(核审通过)");
         } else if (hasCheckPhone == 3) {
             checkPhoneText.setText("手机认证(未通过)");
         }
@@ -132,9 +132,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckMsg == 0) {
             checkMsgText.setText("信息认证(未认证)");
         } else if (hasCheckMsg == 1) {
-            checkMsgText.setText("信息认证(待认证)");
+            checkMsgText.setText("信息认证(核审中)");
         } else if (hasCheckMsg == 2) {
-            checkMsgText.setText("信息认证(已认证)");
+            checkMsgText.setText("信息认证(核审通过)");
         } else if (hasCheckMsg == 3) {
             checkMsgText.setText("信息认证(未通过)");
         }
@@ -149,9 +149,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckId == 0) {
             checkIdText.setText("身份认证(未认证)");
         } else if (hasCheckId == 1) {
-            checkIdText.setText("身份认证(待认证)");
+            checkIdText.setText("身份认证(核审中)");
         } else if (hasCheckId == 2) {
-            checkIdText.setText("身份认证(已认证)");
+            checkIdText.setText("身份认证(核审通过)");
         } else if (hasCheckId == 3) {
             checkIdText.setText("身份认证(未通过)");
         }
@@ -166,9 +166,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckCard == 0) {
             checkCardText.setText("银行卡认证(未认证)");
         } else if (hasCheckCard == 1) {
-            checkCardText.setText("银行卡认证(待认证)");
+            checkCardText.setText("银行卡认证(核审中)");
         } else if (hasCheckCard == 2) {
-            checkCardText.setText("银行卡认证(已认证)");
+            checkCardText.setText("银行卡认证(核审通过)");
         } else if (hasCheckCard == 3) {
             checkCardText.setText("银行卡认证(未通过)");
         }
@@ -183,9 +183,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckContact == 0) {
             checkContactText.setText("通信认证(未认证)");
         } else if (hasCheckContact == 1) {
-            checkContactText.setText("通信认证(待认证)");
+            checkContactText.setText("通信认证(核审中)");
         } else if (hasCheckContact == 2) {
-            checkContactText.setText("通信认证(已认证)");
+            checkContactText.setText("通信认证(核审通过)");
         } else if (hasCheckContact == 3) {
             checkContactText.setText("通信认证(未通过)");
         }
@@ -200,9 +200,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckAlipay == 0) {
             checkAlipayText.setText("支付宝认证(未认证)");
         } else if (hasCheckAlipay == 1) {
-            checkAlipayText.setText("支付宝认证(待认证)");
+            checkAlipayText.setText("支付宝认证(核审中)");
         } else if (hasCheckAlipay == 2) {
-            checkAlipayText.setText("支付宝认证(已认证)");
+            checkAlipayText.setText("支付宝认证(核审通过)");
         } else if (hasCheckAlipay == 3) {
             checkAlipayText.setText("支付宝认证(未通过)");
         }
@@ -217,9 +217,9 @@ public class CheckCenterActivity extends BaseActivity {
         if (hasCheckTaobao == 0) {
             checkTaobaoText.setText("淘宝认证(未认证)");
         } else if (hasCheckTaobao == 1) {
-            checkTaobaoText.setText("淘宝认证(待认证)");
+            checkTaobaoText.setText("淘宝认证(核审中)");
         } else if (hasCheckTaobao == 2) {
-            checkTaobaoText.setText("淘宝认证(已认证)");
+            checkTaobaoText.setText("淘宝认证(核审通过)");
         } else if (hasCheckTaobao == 3) {
             checkTaobaoText.setText("淘宝认证(未通过)");
         }
@@ -235,18 +235,18 @@ public class CheckCenterActivity extends BaseActivity {
                     intent = new Intent(this, CheckPhoneActivity.class);
                     startActivityForResult(intent, 1);
                 } else if (hasCheckPhone == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckPhone == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_msg_ll:
                 if (hasCheckMsg == 0 || hasCheckMsg == 3) {
                     getInfos();
                 } else if (hasCheckMsg == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckMsg == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_id_ll:
@@ -254,9 +254,9 @@ public class CheckCenterActivity extends BaseActivity {
                     intent = new Intent(this, CheckIdActivity.class);
                     startActivityForResult(intent, 3);
                 } else if (hasCheckId == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckId == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_card_ll:
@@ -264,9 +264,9 @@ public class CheckCenterActivity extends BaseActivity {
                     intent = new Intent(this, CheckCardActivity.class);
                     startActivityForResult(intent, 4);
                 } else if (hasCheckCard == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckCard == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_contact_ll:
@@ -274,9 +274,9 @@ public class CheckCenterActivity extends BaseActivity {
                     intent = new Intent(this, CheckContactActivity.class);
                     startActivityForResult(intent, 5);
                 } else if (hasCheckContact == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckContact == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_alipay_ll:
@@ -314,9 +314,9 @@ public class CheckCenterActivity extends BaseActivity {
                             });
 
                 } else if (hasCheckAlipay == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckAlipay == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.check_taobao_ll:
@@ -327,9 +327,9 @@ public class CheckCenterActivity extends BaseActivity {
                     intent.putExtra("type", 3);
                     startActivityForResult(intent, 7);
                 } else if (hasCheckTaobao == 1) {
-                    Toast.makeText(getApplicationContext(), "待认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
                 } else if (hasCheckTaobao == 2) {
-                    Toast.makeText(getApplicationContext(), "已认证", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "核审通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -341,37 +341,37 @@ public class CheckCenterActivity extends BaseActivity {
         if (requestCode == 1 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckPhone = 1;
-                checkPhoneText.setText("手机认证(待认证)");
+                checkPhoneText.setText("手机认证(核审中)");
             }
         } else if (requestCode == 2 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckMsg = 1;
-                checkMsgText.setText("信息认证(待认证)");
+                checkMsgText.setText("信息认证(核审中)");
             }
         } else if (requestCode == 3 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckId = 1;
-                checkIdText.setText("身份认证(待认证)");
+                checkIdText.setText("身份认证(核审中)");
             }
         } else if (requestCode == 4 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckCard = 1;
-                checkCardText.setText("银行卡认证(待认证)");
+                checkCardText.setText("银行卡认证(核审中)");
             }
         } else if (requestCode == 5 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckContact = 1;
-                checkContactText.setText("通信认证(待认证)");
+                checkContactText.setText("通信认证(核审中)");
             }
         } else if (requestCode == 6 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckAlipay = 1;
-                checkAlipayText.setText("支付宝认证(待认证)");
+                checkAlipayText.setText("支付宝认证(核审中)");
             }
         } else if (requestCode == 7 && data != null) {
             if (data.getBooleanExtra("success", false)) {
                 hasCheckTaobao = 1;
-                checkTaobaoText.setText("淘宝认证(待认证)");
+                checkTaobaoText.setText("淘宝认证(核审中)");
             }
         }
     }
