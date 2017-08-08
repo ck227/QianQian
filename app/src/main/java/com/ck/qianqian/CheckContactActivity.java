@@ -155,13 +155,14 @@ public class CheckContactActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
             dialog.cancel();
-            Toast.makeText(getApplicationContext(), "获取通讯录失败", Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(getApplicationContext(), "获取到" + contacts.size() + "条数据", Toast.LENGTH_SHORT).show();
+            if (contacts.size() == 0)
+                return;
         }
 //        uploadData();
         int size = contacts.size();
         int page = size / 20 + 1;
-        for (int i = 1; i < page; i++) {
+        for (int i = 1; i < page + 1; i++) {
             if (i < page - 1) {
                 List<Contact> data = contacts.subList((i - 1) * 20, (i - 1) * 20 + 19);
                 uploadData(data, false);
