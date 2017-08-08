@@ -95,39 +95,28 @@ public class CheckContactActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.submit:
-                rxPermissions
-                        .request(Manifest.permission.READ_CONTACTS)
-                        .subscribe(new Action1<Boolean>() {
-                            @Override
-                            public void call(Boolean granted) {
-                                if (granted) {
-                                    dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
-                                    dialog.show();
-                                    contacts.clear();//避免数据重复
-                                    getContacts();
-                                } else {
-                                    //不同意，给提示
-                                    Toast.makeText(CheckContactActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
-                                }
-
-                                /*if (permission.granted) {
-                                    dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
-                                    dialog.show();
-                                    contacts.clear();//避免数据重复
-                                    getContacts();
-                                } else if(permission.shouldShowRequestPermissionRationale){
-                                    // Denied permission without ask never again
-                                    Toast.makeText(getApplicationContext(), "请同意软件权限", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getApplicationContext(), "请手动开启权限", Toast.LENGTH_SHORT).show();
-                                }*/
-
-                            }
-                        });
-
-
+                submit();
                 break;
         }
+    }
+
+    private void submit() {
+        rxPermissions
+                .request(Manifest.permission.READ_CONTACTS)
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean granted) {
+                        if (granted) {
+                            dialog = new LoadingDialog(CheckContactActivity.this, R.style.MyCustomDialog);
+                            dialog.show();
+                            contacts.clear();//避免数据重复
+                            getContacts();
+                        } else {
+                            //不同意，给提示
+                            Toast.makeText(CheckContactActivity.this, "请同意软件的权限，才能继续提供服务", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
 
@@ -165,6 +154,9 @@ public class CheckContactActivity extends BaseActivity {
             cursor.close();//使用完后一定要将cursor关闭，不然会造成内存泄露等问题
         } catch (Exception e) {
             e.printStackTrace();
+            dialog.cancel();
+            Toast.makeText(getApplicationContext(), "获取通讯录失败", Toast.LENGTH_SHORT).show();
+            return;
         }
 //        uploadData();
         int size = contacts.size();
