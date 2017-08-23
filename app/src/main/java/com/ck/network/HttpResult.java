@@ -127,15 +127,23 @@ public class HttpResult {
     }
 
     //获取续期状态
-    public static class PayLaterState extends BaseResponse{
+    public static class PayLaterState extends BaseResponse {
         public PayLater obj;
     }
 
     //版本更新
-    public static class VersionReponse extends BaseResponse{
+    public static class VersionReponse extends BaseResponse {
         public Version obj;
     }
 
+    //新加的认证
+    public static class CheckSthResponse extends BaseResponse {
+        public String real_name_required;
+    }
+
+    public static class CheckSth2Response extends BaseResponse{
+        public String task_id;
+    }
 
 
 }

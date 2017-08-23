@@ -66,9 +66,9 @@ public class HttpMethods {
      * 37.苹果开发者账号(好了)
      */
 
-//    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
+    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
 //    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
-    public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
+//    public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
 //  public static final String BASE_URL = "http://www.lizhixin.cn/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;
@@ -117,9 +117,26 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //这里是后面加的运营商的认证
     //发送验证码
     public void sendFindCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
         Observable observable = networkService.sendFindCode(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    public void checkSth(Subscriber<HttpResult.CheckSthResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkSth(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    public void checkSth2(Subscriber<HttpResult.CheckSth2Response> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkSth2(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //发送验证码
+    public void sendPhoneCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.sendPhoneCode(options);
         toSubscribe(observable, subscriber);
     }
 

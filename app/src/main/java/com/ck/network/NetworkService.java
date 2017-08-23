@@ -35,6 +35,18 @@ public interface NetworkService {
     @GET("smsverify/sendTwo.html")
     Observable<HttpResult.BaseResponse> sendFindCode(@QueryMap Map<String, Object> options);
 
+    //新加的运营商的短信验证
+    @GET("userPhoneService/status.html")
+    Observable<HttpResult.BaseResponse> sendPhoneCode(@QueryMap Map<String, Object> options);
+
+    //新加的验证接口
+    @GET("userPhoneService/channel.html")
+    Observable<HttpResult.CheckSthResponse> checkSth(@QueryMap Map<String, Object> options);
+
+    //新加的验证接口
+    @GET("userPhoneService/tasks.html")
+    Observable<HttpResult.CheckSth2Response> checkSth2(@QueryMap Map<String, Object> options);
+
 
     //注册
     @GET("user/registere.html")

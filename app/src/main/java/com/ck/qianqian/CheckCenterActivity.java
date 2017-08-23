@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.ck.bean.CheckStatus;
 import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
+import com.ck.util.MyApplication;
 import com.ck.widget.LoadingDialog;
 import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -232,7 +233,7 @@ public class CheckCenterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.check_phone_ll:
                 if (hasCheckPhone == 0 || hasCheckPhone == 3) {
-                    intent = new Intent(this, CheckPhoneActivity.class);
+                    intent = new Intent(CheckCenterActivity.this, CheckPhoneActivity.class);
                     startActivityForResult(intent, 1);
                 } else if (hasCheckPhone == 1) {
                     Toast.makeText(getApplicationContext(), "核审中", Toast.LENGTH_SHORT).show();
