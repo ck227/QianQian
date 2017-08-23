@@ -157,14 +157,14 @@ public class CheckPhoneActivity extends BaseActivity {
 
                 } else if (response.code == -8) {
                     count++;
-                    if (count < 11) {
+                    if (count < 51) {
                         sendCode2();
                     } else {
 //                        finish();
                     }
                 } else if (response.code == -9) {
                     count++;
-                    if (count < 11) {
+                    if (count < 51) {
                         sendCode2();
                     } else {
 //                        finish();
