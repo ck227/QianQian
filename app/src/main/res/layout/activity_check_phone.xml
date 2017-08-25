@@ -130,7 +130,7 @@
             android:layout_marginRight="16dp"
             android:background="@color/divider"/>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -193,7 +193,7 @@
                     android:background="@color/divider"/>
 
             </LinearLayout>
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <TextView
             android:id="@+id/submit"

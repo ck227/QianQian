@@ -66,9 +66,9 @@ public class HttpMethods {
      * 37.苹果开发者账号(好了)
      */
 
-//    public static final String BASE_URL = "http://192.168.1.138:8080/lizhixinInterface/";
-//    public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
-//    public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
+//    public static final String BASE_URL = "http://192.168.1.119:8080/lizhixinInterface/";
+//  public static final String BASE_URL = "http://115.28.161.246:3080/lizhixinInterface/";
+//  public static final String BASE_URL = "http://39.108.82.199/lizhixinInterface/";
   public static final String BASE_URL = "http://www.lizhixin.cn/lizhixinInterface/";
 
     private static final int DEFAULT_TIMEOUT = 5;

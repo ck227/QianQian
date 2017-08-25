@@ -1,11 +1,14 @@
 package com.ck.qianqian;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +18,7 @@ import com.ck.network.HttpMethods;
 import com.ck.network.HttpResult;
 import com.ck.util.MyApplication;
 import com.ck.util.Utils;
+import com.ck.widget.InputCodeDialog;
 import com.ck.widget.LoadingDialog;
 
 import java.util.HashMap;
@@ -41,10 +45,10 @@ public class CheckPhoneActivity extends BaseActivity {
     @BindView(R.id.password)
     EditText password;
 
-    @BindView(R.id.code)
-    EditText code;
-    @BindView(R.id.getCode)
-    TextView getCode;
+//    @BindView(R.id.code)
+//    EditText code;
+//    @BindView(R.id.getCode)
+//    TextView getCode;
 
     private LoadingDialog dialog;
     private CheckPhone checkPhone;
@@ -57,14 +61,14 @@ public class CheckPhoneActivity extends BaseActivity {
         titleName.setText("手机认证");
         getData();
 
-        getCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkValue()) {
-                    sendCode();
-                }
-            }
-        });
+//        getCode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (checkValue()) {
+//                    sendCode();
+//                }
+//            }
+//        });
     }
 
     private String task_id;
@@ -126,6 +130,7 @@ public class CheckPhoneActivity extends BaseActivity {
 
     private int count;
 
+
     /**
      * 下面的是验证码的
      */
@@ -151,23 +156,24 @@ public class CheckPhoneActivity extends BaseActivity {
             public void onNext(HttpResult.BaseResponse response) {
                 Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 if (response.code == 0) {
-                    timerStart();
+//                    timerStart();
+//                    noCode = true;
+                    showDialog();
                 } else if (response.code == -7) {
-//                    finish();
 
                 } else if (response.code == -8) {
                     count++;
                     if (count < 51) {
                         sendCode2();
                     } else {
-//                        finish();
+
                     }
                 } else if (response.code == -9) {
                     count++;
                     if (count < 51) {
                         sendCode2();
                     } else {
-//                        finish();
+
                     }
                 } else if (response.code == -10) {
                     unNeedCode = true;
@@ -178,9 +184,35 @@ public class CheckPhoneActivity extends BaseActivity {
         HttpMethods.getInstance().sendPhoneCode(subscriber, map);
     }
 
+    //这里要改成可以输验证码
+    private void showDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(CheckPhoneActivity.this);
+//        builder.setTitle("长时间没有收到短信验证码，可以不填");
+//        builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.create().show();
+        InputCodeDialog dialog = new InputCodeDialog(CheckPhoneActivity.this, new InputCodeDialog.ButtonListener() {
+            @Override
+            public void button(String code) {
+                if (code != null && code.length() > 0) {
+                    codeString = code;
+                    sendData();
+                }
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+    }
+
+    private String codeString;
+
     private Boolean unNeedCode = false;
 
-    private Timer timer;
+   /* private Timer timer;
     private int time = 60;
 
     private void timerStart() {
@@ -215,7 +247,7 @@ public class CheckPhoneActivity extends BaseActivity {
             }
         }
 
-    };
+    };*/
 
     private void getData() {
         dialog = new LoadingDialog(this, R.style.MyCustomDialog);
@@ -287,7 +319,8 @@ public class CheckPhoneActivity extends BaseActivity {
     @OnClick(R.id.submit)
     public void onViewClicked() {
         if (checkPwd()) {
-            sendData();
+//            sendData();
+            sendCode();
         }
     }
 
@@ -299,11 +332,14 @@ public class CheckPhoneActivity extends BaseActivity {
         map.put("phone", checkPhone.getPhone());
         map.put("servicePassWord", password.getText().toString());
         //这里要加传的code
+
         if (unNeedCode) {
             map.put("verify", "-10");
         } else {
-            map.put("verify", code.getText().toString());
+            //这里改成真正的值
+            map.put("verify", codeString);
         }
+
 
         map.put("task_id", task_id);
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
@@ -337,10 +373,6 @@ public class CheckPhoneActivity extends BaseActivity {
     private Boolean checkPwd() {
         if (TextUtils.isEmpty(password.getText().toString())) {
             Toast.makeText(getApplicationContext(), "请输入服务密码", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (TextUtils.isEmpty(code.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "请输入验证码", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
