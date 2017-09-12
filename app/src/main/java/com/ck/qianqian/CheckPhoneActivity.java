@@ -154,6 +154,7 @@ public class CheckPhoneActivity extends BaseActivity {
 
             @Override
             public void onNext(HttpResult.BaseResponse response) {
+//                if (count % 3 == 0)
                 Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                 if (response.code == 0) {
 //                    timerStart();
@@ -164,6 +165,11 @@ public class CheckPhoneActivity extends BaseActivity {
                 } else if (response.code == -8) {
                     count++;
                     if (count < 51) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         sendCode2();
                     } else {
 
@@ -171,13 +177,19 @@ public class CheckPhoneActivity extends BaseActivity {
                 } else if (response.code == -9) {
                     count++;
                     if (count < 51) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         sendCode2();
                     } else {
 
                     }
                 } else if (response.code == -10) {
                     unNeedCode = true;
-                    sendData();
+//                    sendData();
+                    checkFuckingWhat();
                 }
             }
         };
@@ -186,21 +198,15 @@ public class CheckPhoneActivity extends BaseActivity {
 
     //这里要改成可以输验证码
     private void showDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(CheckPhoneActivity.this);
-//        builder.setTitle("长时间没有收到短信验证码，可以不填");
-//        builder.setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.create().show();
         InputCodeDialog dialog = new InputCodeDialog(CheckPhoneActivity.this, new InputCodeDialog.ButtonListener() {
             @Override
             public void button(String code) {
                 if (code != null && code.length() > 0) {
+
+                    //先验证验证码
                     codeString = code;
-                    sendData();
+                    checkInputCode();
+//                    sendData();
                 }
             }
         });
@@ -209,8 +215,80 @@ public class CheckPhoneActivity extends BaseActivity {
     }
 
     private String codeString;
-
     private Boolean unNeedCode = false;
+
+    private void checkInputCode() {
+        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        map.put("verify", codeString);
+        map.put("task_id", task_id);
+        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.BaseResponse response) {
+                if (response.code == 0) {
+                    //再请求9.4
+                    checkFuckingWhat();
+                }
+                Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+            }
+        };
+        HttpMethods.getInstance().checkInputCode(subscriber, map);
+    }
+
+    private void checkFuckingWhat() {
+        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+        dialog.show();
+        Map<String, Object> map = new HashMap<>();
+        map.put("loginName", MyApplication.getInstance().getUserName());
+        map.put("task_id", task_id);
+
+        Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
+            @Override
+            public void onCompleted() {
+                dialog.cancel();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                dialog.cancel();
+                Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNext(HttpResult.BaseResponse response) {
+                Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                if (response.code == 0) {
+                    sendData();
+                } else if (response.code == -3) {
+                    //Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                    //new dialog
+                    codeString = "";
+                    showDialog();
+                } else if (response.code == -1) {
+                    //Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                    checkFuckingWhat();
+                } else {
+                    //Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        HttpMethods.getInstance().checkFuckingWhat(subscriber, map);
+    }
+
+    Handler handler = new Handler();
 
    /* private Timer timer;
     private int time = 60;

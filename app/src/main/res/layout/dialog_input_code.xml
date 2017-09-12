@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="#969696"
+              android:background="@drawable/shape_white_round"
               android:gravity="center_horizontal"
               android:orientation="vertical"
               android:padding="16dp">
@@ -11,15 +11,16 @@
         android:id="@+id/code"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_white_round"
+        android:background="@drawable/shape_gray_round"
         android:hint="请输入验证码"
         android:inputType="number"
         android:maxLength="6"
+        android:gravity="center"
         android:paddingBottom="14dp"
         android:paddingLeft="14dp"
         android:paddingTop="14dp"
-        android:textColor="@color/text_cyan"
-        android:textColorHint="@color/text_cyan"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:textCursorDrawable="@null"
         android:textSize="@dimen/SecTextSize"/>
 

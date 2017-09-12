@@ -206,6 +206,14 @@ public interface NetworkService {
     @GET("appVersionAct/appVersion.html")
     Observable<HttpResult.VersionReponse> getVersion(@QueryMap Map<String, Object> options);
 
+    //9.3新加的验证验证码
+    @GET("userPhoneService/verify.html")
+    Observable<HttpResult.BaseResponse> checkInputCode(@QueryMap Map<String, Object> options);
+
+    //9.4新加的不晓得什么认证
+    @GET("userPhoneService/result.html")
+    Observable<HttpResult.BaseResponse> checkFuckingWhat(@QueryMap Map<String, Object> options);
+
 
 
 

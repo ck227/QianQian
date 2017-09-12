@@ -365,4 +365,16 @@ public class HttpMethods {
         toSubscribe(observable, subscriber);
     }
 
+    //9.3新加的不知道是什么认证
+    public void checkInputCode(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkInputCode(options);
+        toSubscribe(observable, subscriber);
+    }
+
+    //9.4新加的不知道是什么认证
+    public void checkFuckingWhat(Subscriber<HttpResult.BaseResponse> subscriber, Map<String, Object> options) {
+        Observable observable = networkService.checkFuckingWhat(options);
+        toSubscribe(observable, subscriber);
+    }
+
 }

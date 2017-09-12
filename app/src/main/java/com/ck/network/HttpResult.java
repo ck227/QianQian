@@ -31,6 +31,8 @@ public class HttpResult {
      * 添加手机认证、添加身份证认证／银行卡认证/通讯录认证/个人信息认证
      * 反馈
      * 申请贷款/首页判断/取消申请／续期的回调/支付宝认证添加/淘宝认证添加／取消续期的
+     *
+     * 9.3新加的一个认证
      */
     public static class BaseResponse {
         public int code;
@@ -144,6 +146,8 @@ public class HttpResult {
     public static class CheckSth2Response extends BaseResponse{
         public String task_id;
     }
+
+
 
 
 }
