@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.ck.qianqian.R;
 
@@ -13,12 +14,20 @@ import com.ck.qianqian.R;
 
 public class LoadingDialog extends ProgressDialog {
 
+    private String title = "";
+    TextView titleText;
+
     public LoadingDialog(Context context) {
         super(context);
     }
 
     public LoadingDialog(Context context, int theme) {
         super(context, theme);
+    }
+
+    public LoadingDialog(Context context, int theme, String title) {
+        super(context, theme);
+        this.title = title;
     }
 
     @Override
@@ -34,6 +43,11 @@ public class LoadingDialog extends ProgressDialog {
         setCanceledOnTouchOutside(false);
 
         setContentView(R.layout.layout_loading_dialog);
+        titleText = (TextView) findViewById(R.id.tv_load_dialog);
+        if (!title.equals("")) {
+            titleText.setText(title);
+        }
+
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -48,5 +62,9 @@ public class LoadingDialog extends ProgressDialog {
     @Override
     public void cancel() {
         super.cancel();
+    }
+
+    public void changeText(String text){
+        titleText.setText(text);
     }
 }

@@ -130,46 +130,56 @@ public class CheckPhoneActivity extends BaseActivity {
 
     private int count;
 
+    private String dialogText = "";
+
+    private LoadingDialog newLoadingDialog;
 
     /**
      * 下面的是验证码的
      */
     private void sendCode2() {
-//        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
-//        dialog.show();
+//        if(dialogText.equals("")){
+//            dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+//            dialog.show();
+//        }else{
+//            dialog = new LoadingDialog(this, R.style.MyCustomDialog,dialogText);
+//            dialog.show();
+//        }
+        if (newLoadingDialog == null) {
+            newLoadingDialog = new LoadingDialog(this, R.style.MyCustomDialog);
+            newLoadingDialog.show();
+        }
+
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", MyApplication.getInstance().getUserName());
         map.put("task_id", task_id);
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-//                dialog.cancel();
+//                newLoadingDialog.cancel();
             }
 
             @Override
             public void onError(Throwable e) {
-//                dialog.cancel();
+//                newLoadingDialog.cancel();
                 Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNext(HttpResult.BaseResponse response) {
-//                if (count % 3 == 0)
                 Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+//                dialog.cancel();
+//                dialogText = response.msg;
+                newLoadingDialog.changeText(response.msg);
                 if (response.code == 0) {
-//                    timerStart();
-//                    noCode = true;
+                    newLoadingDialog.cancel();
                     showDialog();
                 } else if (response.code == -7) {
-
+                    newLoadingDialog.cancel();
+//                    finish();
                 } else if (response.code == -8) {
                     count++;
                     if (count < 51) {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         sendCode2();
                     } else {
 
@@ -177,11 +187,6 @@ public class CheckPhoneActivity extends BaseActivity {
                 } else if (response.code == -9) {
                     count++;
                     if (count < 51) {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         sendCode2();
                     } else {
 
@@ -189,6 +194,7 @@ public class CheckPhoneActivity extends BaseActivity {
                 } else if (response.code == -10) {
                     unNeedCode = true;
 //                    sendData();
+                    newLoadingDialog.cancel();
                     checkFuckingWhat();
                 }
             }
@@ -248,9 +254,23 @@ public class CheckPhoneActivity extends BaseActivity {
         HttpMethods.getInstance().checkInputCode(subscriber, map);
     }
 
+//    private String theText = "";
+
+    private LoadingDialog checkDialog;
+
     private void checkFuckingWhat() {
-        dialog = new LoadingDialog(this, R.style.MyCustomDialog);
-        dialog.show();
+//        if (theText.equals("")) {
+//            dialog = new LoadingDialog(this, R.style.MyCustomDialog);
+//            dialog.show();
+//        } else {
+//            dialog = new LoadingDialog(this, R.style.MyCustomDialog, theText);
+//            dialog.show();
+//        }
+
+        if (checkDialog == null) {
+            checkDialog = new LoadingDialog(this, R.style.MyCustomDialog);
+            checkDialog.show();
+        }
         Map<String, Object> map = new HashMap<>();
         map.put("loginName", MyApplication.getInstance().getUserName());
         map.put("task_id", task_id);
@@ -258,23 +278,27 @@ public class CheckPhoneActivity extends BaseActivity {
         Subscriber subscriber = new Subscriber<HttpResult.BaseResponse>() {
             @Override
             public void onCompleted() {
-                dialog.cancel();
+//                dialog.cancel();
             }
 
             @Override
             public void onError(Throwable e) {
-                dialog.cancel();
+//                dialog.cancel();
                 Toast.makeText(getApplicationContext(), R.string.plz_try_later, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNext(HttpResult.BaseResponse response) {
-                Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                checkDialog.changeText(response.msg);
                 if (response.code == 0) {
+                    Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                    checkDialog.cancel();
                     sendData();
                 } else if (response.code == -3) {
-                    //Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), response.msg, Toast.LENGTH_SHORT).show();
                     //new dialog
+                    checkDialog.cancel();
                     codeString = "";
                     showDialog();
                 } else if (response.code == -1) {
