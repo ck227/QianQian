@@ -21,6 +21,7 @@ public class GetCreditDetail {
     private String interestFee;
     private String trialFee;
     private String serviceFee;
+    private String overdueSpot;
 
     public String getAccountFee() {
         return accountFee;
@@ -68,5 +69,13 @@ public class GetCreditDetail {
 
     public void setTrialFee(String trialFee) {
         this.trialFee = trialFee;
+    }
+
+    public String getOverdueSpot() {
+        return overdueSpot;
+    }
+
+    public void setOverdueSpot(String overdueSpot) {
+        this.overdueSpot = overdueSpot;
     }
 }

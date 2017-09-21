@@ -30,6 +30,8 @@ public class PayLater {
 
     private String renewalNumber;//续期期数
 
+    private String renewalFee;//续期金额
+
     public int getId() {
         return id;
     }
@@ -108,5 +110,13 @@ public class PayLater {
 
     public void setRenewalNumber(String renewalNumber) {
         this.renewalNumber = renewalNumber;
+    }
+
+    public String getRenewalFee() {
+        return renewalFee;
+    }
+
+    public void setRenewalFee(String renewalFee) {
+        this.renewalFee = renewalFee;
     }
 }

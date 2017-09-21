@@ -106,30 +106,46 @@
                                 android:textSize="@dimen/ThiTextSize" />
                         </RelativeLayout>
 
-
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp">
 
                             <TextView
+                                android:id="@+id/overdueSpot"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="续期金额："
+                                android:text="逾期费用：0.0元"
                                 android:textColor="@color/second_text_color"
                                 android:textSize="@dimen/ThiTextSize" />
 
-                            <TextView
-                                android:id="@+id/arrivalFee"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0.0元"
-                                android:textColor="@color/text_blue"
-                                android:textSize="@dimen/ThiTextSize" />
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="续期金额："
+                                    android:textColor="@color/second_text_color"
+                                    android:textSize="@dimen/ThiTextSize" />
+
+                                <TextView
+                                    android:id="@+id/arrivalFee"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0.0元"
+                                    android:textColor="@color/text_blue"
+                                    android:textSize="@dimen/ThiTextSize" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
 
 
                     </LinearLayout>
@@ -261,29 +277,44 @@
                                 android:textSize="@dimen/ThiTextSize" />
                         </RelativeLayout>
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp">
 
                             <TextView
+                                android:id="@+id/renewalFee"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="续期期数："
+                                android:text="续期金额"
                                 android:textColor="@color/second_text_color"
                                 android:textSize="@dimen/ThiTextSize" />
 
-                            <TextView
-                                android:id="@+id/renewalNumber"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textColor="@color/text_blue"
-                                android:textSize="@dimen/ThiTextSize" />
+                                android:layout_alignParentRight="true"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
 
-                        </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="续期期数："
+                                    android:textColor="@color/second_text_color"
+                                    android:textSize="@dimen/ThiTextSize" />
+
+                                <TextView
+                                    android:id="@+id/renewalNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textColor="@color/text_blue"
+                                    android:textSize="@dimen/ThiTextSize" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
 
 
                     </LinearLayout>

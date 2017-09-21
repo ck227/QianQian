@@ -158,9 +158,10 @@ public interface NetworkService {
     @GET("repaymentRecord/userRepayment.html")
     Observable<HttpResult.GetPayDetailResponse> getPayDetail(@QueryMap Map<String, Object> options);
 
-    //获取续贷的详细信息
-    @GET("loanRenewal/renewal.html")
+    //获取续贷的详细信息  20170921
+    @GET("loanRenewal/renewalTwo.html")
     Observable<HttpResult.GetCreditDetailResponse> getLaterPayDetail(@QueryMap Map<String, Object> options);
+
 
     //转账还款
     @GET("repaymentRecord/add.html")
@@ -195,7 +196,7 @@ public interface NetworkService {
     Observable<HttpResult.CityResponse> getCity(@QueryMap Map<String, Object> options);
 
     //获取续期转改
-    @GET("loanRenewal/details.html")
+    @GET("loanRenewal/detailsTwo.html")
     Observable<HttpResult.PayLaterState> getPayLaterState(@QueryMap Map<String, Object> options);
 
     //获取续期转改

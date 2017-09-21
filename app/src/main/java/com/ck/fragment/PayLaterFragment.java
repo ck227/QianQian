@@ -85,9 +85,14 @@ public class PayLaterFragment extends Fragment {
     TextView amountFee;
     @BindView(R.id.serviceFee2)
     TextView serviceFee2;
+    @BindView(R.id.overdueSpot)
+    TextView overdueSpot;
 
     @BindView(R.id.renewalNumber)
     TextView renewalNumber;
+
+    @BindView(R.id.renewalFee)
+    TextView renewalFee;
 
     @BindView(R.id.cardView)
     CardView cardView;
@@ -261,17 +266,20 @@ public class PayLaterFragment extends Fragment {
                         //下面的内容显示出来
                         PayLater payLater = response.obj;
                         recordId = payLater.getId();
-                        dayNumber.setText("续期天数：" + payLater.getDayNumber()+"天");
+                        dayNumber.setText("续期天数：" + payLater.getDayNumber() + "天");
                         applyRenewalTime.setText("续期申请时间：" + payLater.getApplyRenewalTime());
-                        state.setText("续期状态：" +"申请中");
-                        trialFee2.setText("快速信审费：" + payLater.getTrialFee()+"元");
+                        state.setText("续期状态：" + "申请中");
+                        trialFee2.setText("快速信审费：" + payLater.getTrialFee() + "元");
 
-                        interestFee2.setText("利息：" + payLater.getInterestFee()+"元");
-                        accountFee2.setText("账户管理费：" + payLater.getAccountFee()+"元");
-                        amountFee.setText("贷款金额：" + payLater.getAmountFee()+"元");
-                        serviceFee2.setText("服务费：" + payLater.getServiceFee()+"元");
 
-                        renewalNumber.setText(payLater.getRenewalNumber()+"期");
+                        interestFee2.setText("利息：" + payLater.getInterestFee() + "元");
+                        accountFee2.setText("账户管理费：" + payLater.getAccountFee() + "元");
+                        amountFee.setText("贷款金额：" + payLater.getAmountFee() + "元");
+                        serviceFee2.setText("服务费：" + payLater.getServiceFee() + "元");
+
+                        renewalFee.setText("续期金额：" + payLater.getRenewalFee() + "元");
+
+                        renewalNumber.setText(payLater.getRenewalNumber() + "期");
                     }
                 } else {
 //                    Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
@@ -309,6 +317,7 @@ public class PayLaterFragment extends Fragment {
                     accountFee.setText("账户管理费：" + getCreditDetail.getAccountFee() + "元");
                     serviceFee.setText("服务费：" + getCreditDetail.getServiceFee() + "元");
                     arrivalFee.setText(getCreditDetail.getArrivalFee() + "元");
+                    overdueSpot.setText("逾期费用：" + getCreditDetail.getOverdueSpot() + "元");
                 } else {
                     Toast.makeText(getActivity(), response.msg, Toast.LENGTH_SHORT).show();
                 }
@@ -358,7 +367,7 @@ public class PayLaterFragment extends Fragment {
     private void showDialog2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("提示");
-        builder.setMessage("请将最终还款金额【" + getCreditDetail.getArrivalFee() + "元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
+        builder.setMessage("请将最终还款金额【" + (Double.valueOf(getCreditDetail.getArrivalFee())+Double.valueOf(getCreditDetail.getOverdueSpot())) + "元】转入还款专用指定支付宝账号，转账请备注本APP 登录账号，如已成功转账还款则点击'已转账'按钮即可提交还款申请，后台进行自动审核" +
                 "\n" +
                 "收款人：李佳" + "\n" +
                 "支付宝账号：13628691614");
