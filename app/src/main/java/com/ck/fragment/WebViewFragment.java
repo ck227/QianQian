@@ -102,7 +102,7 @@ public class WebViewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             try {
-                if (url.startsWith("taobao://") || url.startsWith("alipays://")) {
+                if (url.startsWith("taobao://") || url.startsWith("alipays://")|| url.startsWith("tbopen://")) {
                     ((WebViewActivity) getActivity()).finishRecord();
                     //不跳转
 //                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
