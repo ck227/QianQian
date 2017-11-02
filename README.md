@@ -6,10 +6,4 @@ Q：android API 19 错误信息：Caused by: android.content.res.Resources$NotFo
 gradle.properties中添加android.enableAapt2=false
 https://stackoverflow.com/questions/45028246/android-studio-3-0-canary-6-android-content-res-resourcesnotfoundexception
 
-3.wx
-lizhixinxt@163.com
-lizhixin881013
-
-应用市场：
-lizhixinxt@163.com : lizhixin881013
 
