@@ -173,7 +173,7 @@ public class RegisterActivity extends BaseActivity {
                 handler.sendMessage(message);
             }
         };
-        timer.schedule(timerTask, 100, 1000);
+        timer.schedule(timerTask, 100L, 1000);
     }
 
     Handler handler = new Handler() {

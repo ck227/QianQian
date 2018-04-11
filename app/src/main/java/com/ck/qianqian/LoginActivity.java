@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Base64;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -24,8 +25,21 @@ import com.ck.widget.LoadingDialog;
 import com.tbruyelle.rxpermissions.Permission;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
+import javax.crypto.spec.IvParameterSpec;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private RxPermissions rxPermissions;
 
+    private String s = "90u7V+xpjuE6geqHrmlfkD2jkc8ycy5Izdg4ImCBb66OZrNrYk3dJWz0AtkFjrxGmIkgZJHOzACTumF1PmCgjtzDpdAvNYTQjIsjO2Cz1f4dEPqcTaFQ9GGnbQKu/ym+DNu41pODKCMpRQxl7lAUcDcX2+lBSvXaFXTyWspH1FZ91R/ta8LUPErPeC8HzRIMTlddPe0zjw/5W5r0Wb7B+oYEiqIBJhmkOZioDkWsB0bTKQatUbh8kFghAkTEa8VcYC1yHWWX6/3s45epHDJHJa1PpqczoDLAJCED80cugi40SBwN1UipyZUqECEBd2qBSS3ScPa/sK0UC7+Q6eAe3oMJtADNDYwmf1ojlsmr74/x4Lj6iUVFpiIcGzN9cZ2cVgkFq351yRwoVaNVAZG4J8+wU9YdJKaecd15KQvBTYHEMS+VAzuoRTTtdZBCZCxfg3dePPZ6R9hLLUTg8MFC8TCdLS1WsVCe2Wp/vef7xLcFVOvHUICuRKFiv4yyTTpj8sJkX2tqFCH7YBjrs17YT5r1W54PNJM+D56f6OlQ7UmSFU5l2a/It1aUh2mvzekImt1cDdPrK+W3cwxCD3ceuiZsXgfy0bz+4Na/cN63n1tLpVHAO9m3skEjmjKUdz1n"
+;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +80,46 @@ public class LoginActivity extends AppCompatActivity {
         rxPermissions = new RxPermissions(this);
 
 //        account.setSelection(account.getText().toString().length());
+
+//        test("g3!|H^y,C%v-#n2u1R<naXEk","d074b21c",s);
     }
+
+   /* private String test(String key, String keyiv, String data){
+        byte[] bOut = new byte[0];
+        try {
+            Key deskey = null;
+
+//            String keybase64 = Base64.encodeToString(key.getBytes(),0);
+//            String keyivbase64 = Base64.encodeToString(keyiv.getBytes(),0);
+//            String database64 = Base64.encodeToString(data.getBytes());
+
+            DESedeKeySpec spec = new DESedeKeySpec(key.getBytes());
+            SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
+            deskey = keyfactory.generateSecret(spec);
+            Cipher cipher = Cipher.getInstance("desede/CBC/PKCS5Padding");
+            IvParameterSpec ips = new IvParameterSpec(keyiv.getBytes());
+            cipher.init(Cipher.DECRYPT_MODE, deskey, ips);
+
+            bOut = cipher.doFinal(data.getBytes());
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+
+        return bOut.toString();
+
+    }*/
 
     @OnClick({R.id.login, R.id.register, R.id.findPwd})
     public void onViewClicked(View view) {
@@ -74,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (checkValue()) {
                     showDialog();
                 }
+//                test("g3!|H^y,C%v-#n2u1R<naXEk","d074b21c",s);
                 break;
             case R.id.register:
                 intent = new Intent(LoginActivity.this, RegisterActivity.class);

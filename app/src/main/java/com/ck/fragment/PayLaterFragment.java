@@ -114,6 +114,7 @@ public class PayLaterFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     public static PayLaterFragment newInstance() {
 
         Bundle args = new Bundle();

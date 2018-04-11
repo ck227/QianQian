@@ -120,6 +120,8 @@ public class CheckContactActivity extends BaseActivity {
     }
 
 
+
+
     private void getContacts() {
 //        ContentResolver cr = getContentResolver();
 //        //取得电话本中开始一项的光标

@@ -45,4 +45,8 @@ public class PayAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+//    public PayLaterFragment getFragment(){
+//        return  payLaterFragment;
+//    }
 }
